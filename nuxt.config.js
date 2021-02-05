@@ -11,7 +11,7 @@ export default {
   target: 'static',
 
   /**
-   * Global Environment and 
+   * Global Environment Values.
    */
   env: {
     application_name: application_name,
