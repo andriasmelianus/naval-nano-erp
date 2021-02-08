@@ -1,7 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 
-let application_name = 'Naval Nano ERP',
-  application_description = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + application_name + ' merupakan satu kesatuan dari sistem Rekanpintar.'
+const APPLICATION_NAME = 'Naval Nano ERP',
+  APPLICATION_DESCRIPTION = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + APPLICATION_NAME + ' merupakan satu kesatuan dari sistem Rekanpintar.',
+  APPLICATION_API_URL = 'http://rekanpintar.local'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -14,13 +15,14 @@ export default {
    * Global Environment Values.
    */
   env: {
-    application_name: application_name,
-    application_description: application_description
+    APPLICATION_NAME: APPLICATION_NAME,
+    APPLICATION_DESCRIPTION: APPLICATION_DESCRIPTION,
+    APPLICATION_API_URL: APPLICATION_API_URL
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - ' + application_name,
+    titleTemplate: '%s - ' + APPLICATION_NAME,
     title: process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
@@ -62,11 +64,31 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+  },
+  proxy: {
+    '/api': {
+      target: APPLICATION_API_URL,
+      pathRewrite: { '^/api': '/' }
+    }
+  },
 
   // Zero-boilerplate authentication support for Nuxt.js!
   auth: {
-
+    strategies: {
+      'laravelJWT': {
+        provider: 'laravel/jwt',
+        url: APPLICATION_API_URL,
+        token: {
+          property: 'token',
+          maxAge: 60 * 60
+        },
+        refreshToken: {
+          maxAge: 20160 * 60
+        }
+      }
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

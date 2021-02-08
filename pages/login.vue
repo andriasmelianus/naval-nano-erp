@@ -7,7 +7,7 @@
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title
-                  >Login - {{ this.application_name }}</v-toolbar-title
+                  >Login - {{ this.APPLICATION_NAME }}</v-toolbar-title
                 >
                 <v-spacer></v-spacer>
               </v-toolbar>
@@ -15,10 +15,10 @@
               <v-form @submit.prevent="submitLogin">
                 <v-card-text>
                   <v-text-field
-                    v-model="username"
-                    :error-messages="invalidUsernameMessage"
-                    label="Username"
-                    name="username"
+                    v-model="email"
+                    :error-messages="invalidEmailMessage"
+                    label="Email"
+                    name="email"
                     prepend-icon="mdi-account-lock"
                     type="text"
                   ></v-text-field>
@@ -71,14 +71,14 @@ export default {
   },
 
   data: () => ({
-    application_name: process.env.application_name,
-    username: "",
+    APPLICATION_NAME: process.env.APPLICATION_NAME,
+    email: "",
     password: "",
 
     remember: false,
 
     loginFail: false,
-    invalidUsernameMessage: "",
+    invalidEmailMessage: "",
     invalidPasswordMessage: "",
     otherErrorMessage: "",
   }),
@@ -87,9 +87,9 @@ export default {
     submitLogin: function () {
       let vm = this;
       vm.$auth
-        .loginWith("local", {
+        .loginWith("laravelJWT", {
           data: {
-            username: vm.username,
+            email: vm.email,
             password: vm.password,
             remember: vm.remember,
           },
@@ -100,7 +100,7 @@ export default {
             console.log(err.response.data);
 
             vm.loginFail = true;
-            vm.invalidUsernameMessage = err.response.data.error.username;
+            vm.invalidEmailMessage = err.response.data.error.email;
             vm.invalidPasswordMessage = err.response.data.error.password;
           } else {
             vm.loginFail = true;
