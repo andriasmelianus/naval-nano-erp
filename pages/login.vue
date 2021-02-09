@@ -16,7 +16,7 @@
                 <v-card-text>
                   <v-text-field
                     v-model="email"
-                    :error-messages="invalidEmailMessage"
+                    :error-messages="emailErrorMessage"
                     label="Email"
                     name="email"
                     prepend-icon="mdi-account-lock"
@@ -25,7 +25,7 @@
 
                   <v-text-field
                     v-model="password"
-                    :error-messages="invalidPasswordMessage"
+                    :error-messages="passwordErrorMessage"
                     label="Password"
                     name="password"
                     prepend-icon="mdi-lock"
@@ -78,8 +78,8 @@ export default {
     remember: false,
 
     loginFail: false,
-    invalidEmailMessage: "",
-    invalidPasswordMessage: "",
+    emailErrorMessage: "",
+    passwordErrorMessage: "",
     otherErrorMessage: "",
   }),
 
@@ -100,8 +100,8 @@ export default {
             console.log(err.response.data);
 
             vm.loginFail = true;
-            vm.invalidEmailMessage = err.response.data.error.email;
-            vm.invalidPasswordMessage = err.response.data.error.password;
+            vm.emailErrorMessage = err.response.data.error.email;
+            vm.passwordErrorMessage = err.response.data.error.password;
           } else {
             vm.loginFail = true;
             vm.otherErrorMessage = err.message;
