@@ -94,7 +94,9 @@ export default {
             remember: vm.remember,
           },
         })
-        .then(function (result) {})
+        .then(function (result) {
+          vm.$router.push("/");
+        })
         .catch((err) => {
           if (err.response) {
             console.log(err.response.data);
