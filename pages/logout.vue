@@ -1,9 +1,14 @@
-<template></template>
+<template>
+  <div>Proses logout...</div>
+</template>
 
 <script>
 export default {
   beforeMount() {
-    this.$auth.logout();
+    let vm = this;
+    vm.$auth.logout().then(function (result) {
+      vm.$router.push("/login");
+    });
   },
 };
 </script>
