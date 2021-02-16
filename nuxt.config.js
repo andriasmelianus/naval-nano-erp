@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 const APPLICATION_NAME = 'Naval Nano ERP',
   APPLICATION_DESCRIPTION = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + APPLICATION_NAME + ' merupakan satu kesatuan dari sistem Rekanpintar.',
+  APPLICATION_YEAR = 2021,
   APPLICATION_API_URL = 'http://rekanpintar.local'
 
 export default {
@@ -17,6 +18,7 @@ export default {
   env: {
     APPLICATION_NAME: APPLICATION_NAME,
     APPLICATION_DESCRIPTION: APPLICATION_DESCRIPTION,
+    APPLICATION_YEAR: APPLICATION_YEAR,
     APPLICATION_API_URL: APPLICATION_API_URL
   },
 

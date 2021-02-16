@@ -86,6 +86,11 @@ import VuetifyLogo from "~/components/VuetifyLogo.vue";
 
 export default {
   layout: "dashboard",
+  head() {
+    return {
+      title: "Dashboard",
+    };
+  },
   components: {
     Logo,
     VuetifyLogo,

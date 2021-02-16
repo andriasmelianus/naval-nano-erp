@@ -11,10 +11,14 @@
     ></application-bar>
 
     <v-main>
-      <v-container>
+      <v-container class="fill-height" fluid>
         <nuxt />
       </v-container>
+
+      <footer-section></footer-section>
     </v-main>
+
+    <notification></notification>
 
     <!-- Right Drawer -->
     <!-- <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -28,17 +32,22 @@
       </v-list>
     </v-navigation-drawer> -->
     <!-- END OF Right Drawer -->
-
-    <footer></footer>
   </v-app>
 </template>
 
 <script>
 import ApplicationBar from "~/components/_dashboard/application-bar";
 import NavigationDrawer from "~/components/_dashboard/navigation-drawer";
-import Footer from "~/components/_dashboard/footer";
+import FooterSection from "~/components/_dashboard/footer";
+
+import Notification from "~/components/_support/notification";
 export default {
-  components: { ApplicationBar, NavigationDrawer, Footer },
+  components: {
+    ApplicationBar,
+    NavigationDrawer,
+    FooterSection,
+    Notification,
+  },
   data() {
     return {
       drawerIsShown: true,

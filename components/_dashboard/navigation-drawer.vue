@@ -21,26 +21,56 @@
 
     <v-divider></v-divider>
 
-    <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
-        router
-        exact
-      >
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-        </v-list-item-content>
-      </v-list-item>
+    <v-list dense nav>
+      <template v-for="item in items">
+        <v-list-group
+          v-if="item.children"
+          :key="item.title"
+          :prepend-icon="item.icon"
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item
+            v-for="child in item.children"
+            :key="child.title"
+            nuxt
+            :to="child.to"
+            exact
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ child.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-item v-else :key="item.title" nuxt :to="item.to" exact>
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
     </v-list>
+
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn block nuxt to="/logout" color="red lighten-1" class="white--text"
+          >Logout</v-btn
+        >
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { items } from "./data/navigation-drawer-default";
 export default {
   props: {
     value: {
@@ -51,23 +81,7 @@ export default {
   data() {
     return {
       isShown: true,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
-        },
-        {
-          icon: "mdi-exit-to-app",
-          title: "Logout",
-          to: "/logout",
-        },
-      ],
+      items: items,
     };
   },
 
