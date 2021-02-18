@@ -16,11 +16,16 @@
     <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn> -->
+    <user-menu></user-menu>
   </v-app-bar>
 </template>
 
 <script>
+import UserMenu from "~/components/_dashboard/user-menu";
 export default {
+  components: {
+    UserMenu,
+  },
   props: {
     drawerIsShownProp: {
       type: Boolean,
@@ -46,6 +51,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
