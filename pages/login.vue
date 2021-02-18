@@ -96,6 +96,11 @@ export default {
         })
         .then(function (result) {
           vm.$router.push("/");
+          vm.$store.commit("notification/show", {
+            message:
+              "Selamat datang! Anda dapat menekan tombol F11 kapan saja untuk beralih ke tampilan penuh (fullscreen).",
+            color: "success",
+          });
         })
         .catch((err) => {
           if (err.response) {
