@@ -82,7 +82,6 @@ export default {
     loginFail: false,
     emailErrorMessage: "",
     passwordErrorMessage: "",
-    otherErrorMessage: "",
   }),
 
   methods: {

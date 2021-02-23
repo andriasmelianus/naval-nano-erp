@@ -12,13 +12,12 @@ export const messagesHandler = {
     }),
     methods: {
         /**
-         * Return the ready-to-display messages.
+         * Sets the ready-to-display messages to corresponding data.
          * @param {array} response response returned by the API
          */
         extractMessages(response) {
             let vm = this
 
-            // return response.response.data[messageType]
             vm.infoMessage = response.response.data[vm.infoMessageJsonIndex];
             vm.warningMessage = response.response.data[vm.warningMessageJsonIndex];
             vm.errorMessage = response.response.data[vm.errorMessageJsonIndex];
