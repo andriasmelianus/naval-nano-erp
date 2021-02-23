@@ -56,12 +56,13 @@
     <v-snackbar v-model="loginFail" color="error" :top="true">
       Login gagal
       <br />
-      {{ otherErrorMessage }}
+      {{ errorMessage }}
     </v-snackbar>
   </v-app>
 </template>
 
 <script>
+import { messagesHandler } from "~/components/_mixins/messages-handler";
 export default {
   auth: "guest",
   head() {
@@ -69,6 +70,7 @@ export default {
       title: "Login",
     };
   },
+  mixins: [messagesHandler],
 
   data: () => ({
     APPLICATION_NAME: process.env.APPLICATION_NAME,
@@ -103,15 +105,20 @@ export default {
           });
         })
         .catch((err) => {
-          if (err.response) {
-            console.log(err.response.data);
+          vm.loginFail = true;
+          vm.emailErrorMessage = "";
+          vm.passwordErrorMessage = "";
 
-            vm.loginFail = true;
-            vm.emailErrorMessage = err.response.data.error.email;
-            vm.passwordErrorMessage = err.response.data.error.password;
-          } else {
-            vm.loginFail = true;
-            vm.otherErrorMessage = err.message;
+          vm.extractMessages(err);
+          if (vm.invalidInputMessage != undefined) {
+            vm.emailErrorMessage =
+              vm.invalidInputMessage.email != undefined
+                ? vm.invalidInputMessage.email[0]
+                : "";
+            vm.passwordErrorMessage =
+              vm.invalidInputMessage.password != undefined
+                ? vm.invalidInputMessage.password[0]
+                : "";
           }
         });
     },
