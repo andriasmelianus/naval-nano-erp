@@ -1,89 +1,89 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
+  <v-row class="fill-height">
+    <v-col cols="12" md="3">
+      <company-dashboard-card></company-dashboard-card>
     </v-col>
+    <v-col cols="12" md="3">
+      <asset-dashboard-card></asset-dashboard-card>
+    </v-col>
+    <v-col cols="12" md="3">
+      <product-dashboard-card></product-dashboard-card>
+    </v-col>
+    <v-col cols="12" md="3">
+      <auth-dashboard-card></auth-dashboard-card>
+    </v-col>
+
+    <v-col cols="12" md="8"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Reprehenderit, non! Quam eius quo consequatur voluptatem, qui laboriosam
+      aperiam laborum enim officia ut? Amet necessitatibus dolore numquam nihil
+      excepturi minus dignissimos! lorme
+    </v-col>
+    <v-col cols="12" md="4"
+      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos iure
+      consequatur architecto inventore unde consectetur ex. Quibusdam ipsum vel
+      quos dolore voluptatibus, aperiam eaque in, architecto facere, ea
+      veritatis voluptatem?</v-col
+    >
+
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-col
+    >
+
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-col
+    >
+
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
+      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
+      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
+      cumque fuga.</v-col
+    >
+    <v-col cols="12" md="4"
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit.</v-col
+    >
   </v-row>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
-import VuetifyLogo from "~/components/VuetifyLogo.vue";
-
+import CompanyDashboardCard from "~/components/company/_card/dashboard";
+import AssetDashboardCard from "~/components/asset/_card/dashboard";
+import ProductDashboardCard from "~/components/product/_card/dashboard";
+import AuthDashboardCard from "~/components/auth/_card/dashboard";
 export default {
   layout: "dashboard",
   head() {
@@ -92,8 +92,10 @@ export default {
     };
   },
   components: {
-    Logo,
-    VuetifyLogo,
+    CompanyDashboardCard,
+    AssetDashboardCard,
+    ProductDashboardCard,
+    AuthDashboardCard,
   },
 };
 </script>
