@@ -1,9 +1,28 @@
 export const state = () => ({
-    counter: 0
+    apiUrl: undefined
 });
 
 export const mutations = {
-    increment(state) {
-        state.counter++;
+    /**
+     * Set the global API URL.
+     * @param {Object} state Store state
+     * @param {String} url The API URL
+     */
+    setApiUrl(state, url) {
+        state.apiUrl = url;
+    }
+}
+
+export const getters = {
+    /**
+     * Get the full API URL to the resource.
+     * @param {Object} state Store state
+     * @param {Object} getters Store getters
+     * @param {Object} rootState Store root state
+     */
+    apiUrl(state, getters, rootState) {
+        return function (resourceUrl = "") {
+            return state.apiUrl + resourceUrl;
+        };
     }
 }
