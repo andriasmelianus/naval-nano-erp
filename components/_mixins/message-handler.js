@@ -1,9 +1,10 @@
-export const messagesHandler = {
+export const MessageHandler = {
     data: () => ({
         infoMessage: '',
         warningMessage: '',
         errorMessage: '',
-        invalidInputMessage: undefined,
+        defaultInvalidInputMessage: {},
+        invalidInputMessage: {},
 
         infoMessageJsonIndex: 'info_message',
         warningMessageJsonIndex: 'warning_message',
@@ -11,6 +12,18 @@ export const messagesHandler = {
         invalidInputMessageJsonIndex: 'invalid_input_message',
     }),
     methods: {
+        /**
+         * Clear the messages and reset to the default state.
+         */
+        clearMessages() {
+            let vm = this
+
+            vm.infoMessage = '';
+            vm.warningMessage = '';
+            vm.errorMessage = '';
+
+            vm.invalidInputMessage = Object.assign({}, vm.defaultInvalidInputMessage);
+        },
         /**
          * Sets the ready-to-display messages to corresponding data.
          * @param {array} response response returned by the API
@@ -22,7 +35,8 @@ export const messagesHandler = {
             vm.warningMessage = response.response.data[vm.warningMessageJsonIndex];
             vm.errorMessage = response.response.data[vm.errorMessageJsonIndex];
 
-            vm.invalidInputMessage = response.response.data[vm.invalidInputMessageJsonIndex];
+            // Object message for input need to be set with Object.assign().
+            vm.invalidInputMessage = Object.assign({}, vm.invalidInputMessage, response.response.data[vm.invalidInputMessageJsonIndex]);
         },
     }
 }

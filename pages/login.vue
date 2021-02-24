@@ -16,7 +16,7 @@
                 <v-card-text>
                   <v-text-field
                     v-model="email"
-                    :error-messages="emailErrorMessage"
+                    :error-messages="invalidInputMessage.email[0]"
                     label="Email"
                     name="email"
                     prepend-icon="mdi-account-lock"
@@ -25,7 +25,7 @@
 
                   <v-text-field
                     v-model="password"
-                    :error-messages="passwordErrorMessage"
+                    :error-messages="invalidInputMessage.password[0]"
                     label="Password"
                     name="password"
                     prepend-icon="mdi-lock"
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { messagesHandler } from "~/components/_mixins/messages-handler";
+import { MessageHandler } from "~/components/_mixins/message-handler";
 export default {
   auth: "guest",
   head() {
@@ -70,23 +70,29 @@ export default {
       title: "Login",
     };
   },
-  mixins: [messagesHandler],
+  mixins: [MessageHandler],
 
   data: () => ({
     APPLICATION_NAME: process.env.APPLICATION_NAME,
     email: "",
     password: "",
-
     remember: false,
 
     loginFail: false,
-    emailErrorMessage: "",
-    passwordErrorMessage: "",
+    defaultInvalidInputMessage: {
+      email: [],
+      password: [],
+    },
+    invalidInputMessage: {
+      email: [],
+      password: [],
+    },
   }),
 
   methods: {
     submitLogin: function () {
       let vm = this;
+      vm.clearMessages();
       vm.$auth
         .loginWith("laravelJWT", {
           data: {
@@ -96,7 +102,11 @@ export default {
           },
         })
         .then(function (result) {
+          // Set the API URL within the store. Because store cannot read environment variables.
+          vm.$store.commit("setApiUrl", process.env.APPLICATION_API_URL);
+          // Redirect the user to dashboard page.
           vm.$router.push("/");
+          // Show a success notification.
           vm.$store.commit("notification/show", {
             message:
               "Selamat datang! Anda dapat menekan tombol F11 kapan saja untuk beralih ke tampilan penuh (fullscreen).",
@@ -105,20 +115,7 @@ export default {
         })
         .catch((err) => {
           vm.loginFail = true;
-          vm.emailErrorMessage = "";
-          vm.passwordErrorMessage = "";
-
           vm.extractMessages(err);
-          if (vm.invalidInputMessage != undefined) {
-            vm.emailErrorMessage =
-              vm.invalidInputMessage.email != undefined
-                ? vm.invalidInputMessage.email[0]
-                : "";
-            vm.passwordErrorMessage =
-              vm.invalidInputMessage.password != undefined
-                ? vm.invalidInputMessage.password[0]
-                : "";
-          }
         });
     },
   },
