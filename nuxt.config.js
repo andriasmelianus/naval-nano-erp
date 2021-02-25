@@ -74,7 +74,7 @@ export default {
   proxy: {
     '/api': {
       target: APPLICATION_API_URL,
-      pathRewrite: { '^/api': '/' }
+      pathRewrite: { '^/api': '/api' },
     }
   },
 
