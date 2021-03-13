@@ -10,12 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nuxt/content": "^1.13.1",
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/auth-next": "5.0.0-1613647907.37b1156",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.9.0",
+    "core-js": "^3.9.1",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {
