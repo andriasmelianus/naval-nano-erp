@@ -102,8 +102,6 @@ export default {
           },
         })
         .then(function (result) {
-          // Set the API URL within the store. Because store cannot read environment variables.
-          vm.$store.commit("setApiUrl", process.env.APPLICATION_API_URL);
           // Redirect the user to dashboard page.
           vm.$router.push("/");
           // Show a success notification.

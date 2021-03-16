@@ -1,5 +1,5 @@
 export const state = () => ({
-    apiUrl: undefined
+    apiUrl: './api'
 });
 
 export const mutations = {
