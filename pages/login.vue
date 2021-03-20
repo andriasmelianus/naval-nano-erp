@@ -102,8 +102,6 @@ export default {
           },
         })
         .then(function (result) {
-          // Redirect the user to dashboard page.
-          vm.$router.push("/");
           // Show a success notification.
           vm.$store.commit("notification/show", {
             message:
