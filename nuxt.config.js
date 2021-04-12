@@ -86,7 +86,7 @@ export default {
     strategies: {
       'laravelJWT': {
         provider: 'laravel/jwt',
-        url: APPLICATION_API_URL,
+        url: '.',
         token: {
           property: 'token',
           maxAge: 60 * 60
