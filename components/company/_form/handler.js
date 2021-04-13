@@ -15,6 +15,6 @@ export const handler = {
     data: () => ({
         defaultInvalidInputMessage: defaultInvalidInputMessage,
 
-        resourceUrl: '/company'
+        resourceUri: '/company'
     })
 }
