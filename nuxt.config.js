@@ -3,7 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 const APPLICATION_NAME = 'Naval Nano ERP',
   APPLICATION_DESCRIPTION = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + APPLICATION_NAME + ' merupakan satu kesatuan dari sistem Rekanpintar.',
   APPLICATION_YEAR = 2021,
-  APPLICATION_API_URL = 'http://rekanpintar.local'
+  APPLICATION_API_URL = 'http://rekanpintar.local',
+  TOKEN_MAX_AGE = 60 * 60 * 8
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -89,10 +90,10 @@ export default {
         url: '.',
         token: {
           property: 'token',
-          maxAge: 60 * 60
+          maxAge: TOKEN_MAX_AGE
         },
         refreshToken: {
-          maxAge: 20160 * 60
+          maxAge: TOKEN_MAX_AGE
         }
       }
     }
