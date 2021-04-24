@@ -45,9 +45,7 @@ export default {
   methods: {
     companyUpdated(result) {
       let vm = this;
-      vm.$store.commit("notification/show", {
-        message: result.info_message,
-      });
+      vm.$store.commit("notification/show", vm.generateNotification(result));
     },
   },
 };
