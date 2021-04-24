@@ -9,7 +9,7 @@
     ></v-text-field>
 
     <v-text-field
-      label="Nama Legalitas"
+      label="Nama Sesuai Legalitas"
       v-model="record.legal_name"
       :error-messages="invalidInputMessage.legal_name"
     ></v-text-field>
@@ -20,11 +20,17 @@
       :error-messages="invalidInputMessage.phone"
     ></v-text-field>
 
-    <v-textarea
+    <v-text-field
       label="Deskripsi Singkat Perusahaan"
+      v-model="record.short_description"
+      :error-messages="invalidInputMessage.short_description"
+    ></v-text-field>
+
+    <v-textarea
+      label="Deskripsi Perusahaan"
       v-model="record.description"
       :error-messages="invalidInputMessage.description"
-      rows="2"
+      rows="3"
     ></v-textarea>
 
     <v-btn color="success" type="submit">Simpan</v-btn>
