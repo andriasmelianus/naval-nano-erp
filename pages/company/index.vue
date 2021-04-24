@@ -1,8 +1,12 @@
 <template>
   <v-row class="fill-height">
-    <v-col cols="12" md="8">
+    <v-col cols="12" md="6">
       <v-card>
-        <company-form :record="companyData"></company-form>
+        <company-form
+          :record="companyData"
+          edit-mode
+          @recordUpdated="companyUpdated"
+        ></company-form>
       </v-card>
     </v-col>
   </v-row>
@@ -29,15 +33,22 @@ export default {
   mounted() {
     let vm = this;
     vm.$axios
-      .$get(vm.$store.getters.apiUrl("/company/mine"))
+      .$get("/company/mine")
       .then(function (result) {
-        vm.companyData = Object.assign(
-          {},
-          vm.companyData,
-          result.response.data
-        );
+        vm.companyData = Object.assign({}, result);
       })
-      .catch(function (result) {});
+      .catch(function (result) {
+        console.log(result);
+      });
+  },
+
+  methods: {
+    companyUpdated(result) {
+      let vm = this;
+      vm.$store.commit("notification/show", {
+        message: result.info_message,
+      });
+    },
   },
 };
 </script>
