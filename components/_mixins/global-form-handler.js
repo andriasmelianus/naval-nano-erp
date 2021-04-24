@@ -81,7 +81,7 @@ export const GlobalFormHandler = {
         createRecord(newRecord) {
             let vm = this
             vm.$axios
-                .$post(vm.$apiUrl(vm.resourceUri), newRecord)
+                .$post(vm.resourceUri, newRecord)
                 .then(function (result) {
                     vm.$emit('recordCreated', result);
                 })
@@ -97,7 +97,7 @@ export const GlobalFormHandler = {
         updateRecord(updatedRecord) {
             let vm = this
             vm.$axios
-                .$put(vm.$apiUrl(vm.resourceUri), updatedRecord)
+                .$put(vm.resourceUri + '/' + updatedRecord.id, updatedRecord)
                 .then(function (result) {
                     vm.$emit('recordUpdated', result);
                 })
