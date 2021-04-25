@@ -1,6 +1,9 @@
-import { MessageHandler } from '~/components/_mixins/message-handler'
+/**
+ * Provide standard form handler. Including POST and PUT/PATCH operation.
+ */
+import { InvalidInputMessageHandler } from './form/invalid-input-message-handler'
 export const GlobalFormHandler = {
-    mixins: [MessageHandler],
+    mixins: [InvalidInputMessageHandler],
 
     props: {
         /**
@@ -27,11 +30,6 @@ export const GlobalFormHandler = {
 
     data: () => ({
         /**
-         * Default invalid input message.
-         * Must be initiated with sub-module's mixin or manually.
-         */
-        defaultInvalidInputMessage: {},
-        /**
          * Resource url to perform RESTful operation.
          * A value must be set for this data!
          */
@@ -44,29 +42,17 @@ export const GlobalFormHandler = {
          * @param {Object} newRecord newly record from reactivity.
          */
         record(newRecord) {
-            this.setInvalidInputMessage(this.defaultInvalidInputMessage);
+            this.invalidInputMessageClear();
         }
     },
 
     methods: {
         /**
-         * Set invalid input message.
-         * This method to reduce the code repetition.
-         * @param {Object} newInvalidInputMessage New invalid input message value to set.
-         */
-        setInvalidInputMessage(newInvalidInputMessage) {
-            this.invalidInputMessage = Object.assign(
-                {},
-                this.invalidInputMessage,
-                newInvalidInputMessage
-            );
-        },
-
-        /**
          * Submit the form.
          */
         submitForm() {
-            this.setInvalidInputMessage(this.defaultInvalidInputMessage);
+            this.invalidInputMessageClear();
+
             if (!this.editMode) {
                 this.createRecord(this.record);
             } else {
@@ -86,7 +72,7 @@ export const GlobalFormHandler = {
                     vm.$emit('recordCreated', result);
                 })
                 .catch(function (result) {
-                    vm.extractMessages(result);
+                    vm.invalidInputMessageExtract(result);
                 })
         },
 
@@ -102,7 +88,7 @@ export const GlobalFormHandler = {
                     vm.$emit('recordUpdated', result);
                 })
                 .catch(function (result) {
-                    vm.extractMessages(result);
+                    vm.invalidInputMessageExtract(result);
                 })
         }
     }

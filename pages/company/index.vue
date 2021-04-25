@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { MessageHandler } from "~/components/_mixins/message-handler";
+import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/_forms/default";
 export default {
   layout: "dashboard",
@@ -22,7 +22,7 @@ export default {
       title: "Perusahaan",
     };
   },
-  mixins: [MessageHandler],
+  mixins: [MessageExtractor],
   components: {
     CompanyForm,
   },
@@ -45,7 +45,10 @@ export default {
   methods: {
     companyUpdated(result) {
       let vm = this;
-      vm.$store.commit("notification/show", vm.generateNotification(result));
+      vm.$store.commit("global-snackbar/show", {
+        message: vm.messageSuccessExtract(result),
+        color: "success",
+      });
     },
   },
 };
