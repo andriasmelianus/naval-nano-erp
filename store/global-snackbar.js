@@ -2,12 +2,29 @@ export const state = () => ({
     isShown: false,
     color: 'success',
     timeout: 5000,
+    title: undefined,
     message: undefined
 });
 
 export const getters = {
     isShown: (state) => {
         return state.isShown;
+    },
+
+    color: (state) => {
+        return state.color;
+    },
+
+    timeout: (state) => {
+        return state.timeout;
+    },
+
+    title: (state) => {
+        return state.title;
+    },
+
+    message: (state) => {
+        return state.message;
     }
 }
 
@@ -16,10 +33,10 @@ export const mutations = {
         state.isShown = false;
     },
 
-    show(state, notification) {
+    show(state, snackbarSpecification) {
         state.isShown = true;
         // Modify the default color state.
-        switch (notification.color) {
+        switch (snackbarSpecification.color) {
             case 'info':
                 state.color = 'light-blue';
                 break;
@@ -33,12 +50,13 @@ export const mutations = {
                 state.color = 'red lighten-2';
                 break;
             default:
-                state.color = notification.color;
+                state.color = snackbarSpecification.color;
                 break;
         }
-        state.color = notification.color;
-        state.timeout = notification.timeout ? notification.timeout : 5000;
+        state.color = snackbarSpecification.color;
+        state.timeout = snackbarSpecification.timeout ? snackbarSpecification.timeout : 5000;
 
-        state.message = notification.message;
+        state.title = snackbarSpecification.title;
+        state.message = snackbarSpecification.message;
     }
 }

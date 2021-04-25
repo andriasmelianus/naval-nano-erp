@@ -8,6 +8,7 @@
     dark
     multi-line
   >
+    <div v-if="title" class="text-h6">{{ title }}</div>
     {{ message }}
 
     <template v-slot:action="{ attrs }">
@@ -23,29 +24,33 @@ export default {
   computed: {
     isShown: {
       get() {
-        return this.$store.state.notification.isShown;
+        return this.$store.getters["global-snackbar/isShown"];
       },
       set(isShown) {
-        this.$store.commit("notification/hide");
+        this.$store.commit("global-snackbar/hide");
       },
     },
 
     color() {
-      return this.$store.state.notification.color;
+      return this.$store.getters["global-snackbar/color"];
     },
 
     timeout() {
-      return this.$store.state.notification.timeout;
+      return this.$store.getters["global-snackbar/timeout"];
+    },
+
+    title() {
+      return this.$store.getters["global-snackbar/title"];
     },
 
     message() {
-      return this.$store.state.notification.message;
+      return this.$store.getters["global-snackbar/message"];
     },
   },
 
   methods: {
     hide() {
-      this.$store.commit("notification/hide");
+      this.$store.commit("global-snackbar/hide");
     },
   },
 };

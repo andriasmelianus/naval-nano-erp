@@ -48,17 +48,12 @@
         </v-card>
       </v-col>
     </v-row>
-
-    <v-snackbar v-model="loginFail" color="error" :top="true">
-      Login gagal
-      <br />
-      {{ errorMessage }}
-    </v-snackbar>
   </v-container>
 </template>
 
 <script>
-import { MessageHandler } from "~/components/_mixins/message-handler";
+import { InvalidInputMessageHandler } from "~/components/_mixins/form/invalid-input-message-handler";
+import { MessageExtractor } from "~/components/_mixins/message-extractor";
 export default {
   layout: "default",
   auth: "guest",
@@ -67,7 +62,7 @@ export default {
       title: "Login",
     };
   },
-  mixins: [MessageHandler],
+  mixins: [InvalidInputMessageHandler, MessageExtractor],
 
   data: () => ({
     APPLICATION_NAME: process.env.APPLICATION_NAME,
@@ -75,7 +70,6 @@ export default {
     password: "",
     remember: false,
 
-    loginFail: false,
     defaultInvalidInputMessage: {
       email: [],
       password: [],
@@ -89,7 +83,8 @@ export default {
   methods: {
     submitLogin: function () {
       let vm = this;
-      vm.clearMessages();
+      vm.invalidInputMessageClear();
+
       vm.$auth
         .loginWith("laravelJWT", {
           data: {
@@ -100,15 +95,19 @@ export default {
         })
         .then(function (result) {
           // Show a success notification.
-          vm.$store.commit("notification/show", {
+          vm.$store.commit("global-snackbar/show", {
             message:
               "Selamat datang! Anda dapat menekan tombol F11 kapan saja untuk beralih ke tampilan penuh (fullscreen).",
             color: "success",
           });
         })
-        .catch((err) => {
-          vm.loginFail = true;
-          vm.extractMessages(err);
+        .catch(function (error) {
+          vm.$store.commit("global-snackbar/show", {
+            title: "Login Gagal",
+            message: vm.messageErrorExtract(error),
+            color: "error",
+          });
+          vm.invalidInputMessageExtract(error);
         });
     },
   },
