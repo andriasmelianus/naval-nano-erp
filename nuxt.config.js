@@ -45,6 +45,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/api-url',
     '~/plugins/axios',
   ],
 
@@ -74,7 +75,17 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    credentials: true
+    credentials: true,
+    /**
+     * host & prefix sets the default host and prefix for every request using this.$axios!
+     * So that the other components or pages only provide the URI to fetch the API resource.
+     */
+    host: 'localhost',
+    prefix: '/api',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
   },
   proxy: {
     '/api': {
@@ -88,7 +99,12 @@ export default {
     strategies: {
       'laravelJWT': {
         provider: 'laravel/jwt',
-        url: '.',
+        /**
+         * @nuxtjs/auth-next automatically sets the default url to "./api".
+         * In the name of Single Responsibility Principle of Axios API URL generation,
+         * we will omit the api level with double dots notation: "..".
+         */
+        url: '..',
         token: {
           property: 'token',
           maxAge: TOKEN_MAX_AGE

@@ -12,7 +12,7 @@
         >Menu {{ n }}</v-list-item
       >
 
-      <v-list-item nuxt to="logout">Logout</v-list-item>
+      <v-list-item nuxt to="/logout">Logout</v-list-item>
     </v-list>
   </v-menu>
 </template>

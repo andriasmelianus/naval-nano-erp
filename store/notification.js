@@ -19,7 +19,6 @@ export const mutations = {
     show(state, notification) {
         state.isShown = true;
         // Modify the default color state.
-        /*
         switch (notification.color) {
             case 'info':
                 state.color = 'light-blue';
@@ -37,7 +36,6 @@ export const mutations = {
                 state.color = notification.color;
                 break;
         }
-        */
         state.color = notification.color;
         state.timeout = notification.timeout ? notification.timeout : 5000;
 

@@ -80,10 +80,10 @@
 </template>
 
 <script>
-import CompanyDashboardCard from "~/components/company/_card/dashboard";
-import AssetDashboardCard from "~/components/asset/_card/dashboard";
-import ProductDashboardCard from "~/components/product/_card/dashboard";
-import AuthDashboardCard from "~/components/auth/_card/dashboard";
+import CompanyDashboardCard from "~/components/company/_cards/dashboard";
+import AssetDashboardCard from "~/components/asset/_cards/dashboard";
+import ProductDashboardCard from "~/components/product/_cards/dashboard";
+import AuthDashboardCard from "~/components/auth/_cards/dashboard";
 export default {
   layout: "dashboard",
   head() {

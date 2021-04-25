@@ -33,6 +33,7 @@ export const GlobalFormHandler = {
         defaultInvalidInputMessage: {},
         /**
          * Resource url to perform RESTful operation.
+         * A value must be set for this data!
          */
         resourceUri: ''
     }),
@@ -48,18 +49,6 @@ export const GlobalFormHandler = {
     },
 
     methods: {
-        /**
-         * Return the full path of API resource URL
-         * @param {string} stringResourceUrl
-         */
-        resourceUrl: function (stringResourceUrl) {
-            if (stringResourceUrl == null) {
-                return this.$store.getters.apiUrl(this.resourceUri);
-            } else {
-                return this.$store.getters.apiUrl(stringResourceUrl);
-            }
-        },
-
         /**
          * Set invalid input message.
          * This method to reduce the code repetition.
@@ -92,7 +81,7 @@ export const GlobalFormHandler = {
         createRecord(newRecord) {
             let vm = this
             vm.$axios
-                .$post(vm.resourceUrl, newRecord)
+                .$post(vm.resourceUri, newRecord)
                 .then(function (result) {
                     vm.$emit('recordCreated', result);
                 })
@@ -108,7 +97,7 @@ export const GlobalFormHandler = {
         updateRecord(updatedRecord) {
             let vm = this
             vm.$axios
-                .$put(vm.resourceUrl, updatedRecord)
+                .$put(vm.resourceUri + '/' + updatedRecord.id, updatedRecord)
                 .then(function (result) {
                     vm.$emit('recordUpdated', result);
                 })

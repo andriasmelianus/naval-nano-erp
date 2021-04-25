@@ -3,6 +3,7 @@ export const defaultRecord = {
     legal_name: '',
     email: '',
     phone: '',
+    short_description: '',
     description: '',
 }
 
@@ -11,5 +12,6 @@ export const defaultInvalidInputMessage = {
     legal_name: [],
     email: [],
     phone: [],
+    short_description: [],
     description: [],
 }
