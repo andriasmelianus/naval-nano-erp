@@ -14,7 +14,7 @@
 
 <script>
 import { MessageHandler } from "~/components/_mixins/message-handler";
-import CompanyForm from "~/components/company/_form/default";
+import CompanyForm from "~/components/company/_forms/default";
 export default {
   layout: "dashboard",
   head() {
