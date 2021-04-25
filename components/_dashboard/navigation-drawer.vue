@@ -61,6 +61,15 @@
 
     <template v-slot:append>
       <div class="pa-2">
+        <v-btn
+          block
+          nuxt
+          to="/test"
+          class="mb-2"
+          v-if="environment != 'production'"
+          color="yellow"
+          >.: Test :.</v-btn
+        >
         <v-btn block nuxt to="/logout" color="red lighten-1" class="white--text"
           >Logout</v-btn
         >
@@ -82,6 +91,8 @@ export default {
     return {
       isShown: true,
       items: items,
+
+      environment: process.env.NODE_ENV,
     };
   },
 
