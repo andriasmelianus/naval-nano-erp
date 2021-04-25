@@ -1,5 +1,5 @@
 <template>
-  <v-app id="naval-nano-erp">
+  <v-app :id="applicationId">
     <navigation-drawer
       v-model="drawerIsShown"
       @isShownChanged="changeNavigationDrawerShown"
@@ -18,7 +18,7 @@
       <footer-section></footer-section>
     </v-main>
 
-    <notification></notification>
+    <global-snackbar></global-snackbar>
 
     <!-- Right Drawer -->
     <!-- <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -40,17 +40,20 @@ import ApplicationBar from "~/components/_dashboard/application-bar";
 import NavigationDrawer from "~/components/_dashboard/navigation-drawer";
 import FooterSection from "~/components/_dashboard/footer";
 
-import Notification from "~/components/_support/notification";
+import GlobalSnackbar from "~/components/_support/global-snackbar";
 export default {
   components: {
     ApplicationBar,
     NavigationDrawer,
     FooterSection,
-    Notification,
+
+    GlobalSnackbar,
   },
   data() {
     return {
       drawerIsShown: true,
+
+      applicationId: process.env.APPLICATION_ID,
     };
   },
   methods: {

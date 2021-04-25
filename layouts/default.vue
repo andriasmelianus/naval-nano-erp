@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :id="applicationId">
     <v-main>
       <nuxt />
     </v-main>
