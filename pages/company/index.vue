@@ -35,7 +35,7 @@ export default {
     vm.$axios
       .$get("/company/mine")
       .then(function (result) {
-        vm.companyData = Object.assign({}, result);
+        vm.companyData = Object.assign({}, vm.companyData, result);
       })
       .catch(function (result) {
         console.log(result);
