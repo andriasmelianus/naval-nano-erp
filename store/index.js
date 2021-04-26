@@ -31,15 +31,28 @@ export const mutations = {
 
 export const actions = {
     fetchCompany(context) {
-        $axios.$get('/company/mine')
+        this.$axios.$get('/company/mine')
             .then(function (result) {
                 context.commit('setCompany', result);
             })
             .catch(function (result) {
-                context.commit('notification/show', result);
+                context.commit('global-snackbar/show', {
+                    message: 'Gagal mengambil data.',
+                    color: 'error'
+                });
             });
     },
     fetchBranch(context) {
+        this.$axios.$get('/branch/mine')
+            .then(function (result) {
+                context.commit('setBranch', result);
+            })
+            .catch(function (result) {
+                context.commit('global-snackbar/show', {
+                    message: 'Gagal mengambil data.',
+                    color: 'error'
+                })
+            })
     }
 }
 
