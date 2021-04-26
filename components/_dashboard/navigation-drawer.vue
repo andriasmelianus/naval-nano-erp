@@ -11,10 +11,10 @@
 
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title">Company Name</v-list-item-title>
-          <v-list-item-subtitle
-            >Company brief description.</v-list-item-subtitle
-          >
+          <v-list-item-title class="title">{{ companyName }}</v-list-item-title>
+          <v-list-item-subtitle>{{
+            companyShortDescription
+          }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -87,6 +87,7 @@ export default {
       default: true,
     },
   },
+
   data() {
     return {
       isShown: true,
@@ -94,6 +95,16 @@ export default {
 
       environment: process.env.NODE_ENV,
     };
+  },
+
+  computed: {
+    companyName() {
+      return this.$store.state.company.name;
+    },
+
+    companyShortDescription() {
+      return this.$store.state.company.short_description;
+    },
   },
 
   watch: {
