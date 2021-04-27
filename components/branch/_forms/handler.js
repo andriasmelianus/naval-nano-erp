@@ -1,19 +1,19 @@
 import { GlobalFormHandler } from '~/components/_mixins/global-form-handler'
-import { defaultRecord, defaultInvalidInputMessage } from './record'
-export const handler = {
+import { DefaultRecord, DefaultInvalidInputMessage } from '~/components/branch/record'
+export const Handler = {
     mixins: [GlobalFormHandler],
 
     props: {
         record: {
             type: Object,
             default: function () {
-                return defaultRecord;
+                return DefaultRecord;
             }
         }
     },
 
     data: () => ({
-        defaultInvalidInputMessage: defaultInvalidInputMessage,
+        defaultInvalidInputMessage: DefaultInvalidInputMessage,
 
         resourceUri: '/branch'
     })
