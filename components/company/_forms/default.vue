@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import { handler } from "./handler";
+import { Handler } from "./handler";
 export default {
-  mixins: [handler],
+  mixins: [Handler],
 };
 </script>
