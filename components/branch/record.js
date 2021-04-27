@@ -1,4 +1,4 @@
-export const defaultRecord = {
+export const DefaultRecord = {
     code: '',
     name: '',
     address: '',
@@ -7,7 +7,7 @@ export const defaultRecord = {
     postal_code: '',
 }
 
-export const defaultInvalidInputMessage = {
+export const DefaultInvalidInputMessage = {
     code: [],
     name: [],
     address: [],
