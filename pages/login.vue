@@ -56,12 +56,15 @@ import { InvalidInputMessageHandler } from "~/components/_mixins/form/invalid-in
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 export default {
   layout: "default",
+
   auth: "guest",
+
   head() {
     return {
       title: "Login",
     };
   },
+
   mixins: [InvalidInputMessageHandler, MessageExtractor],
 
   data: () => ({

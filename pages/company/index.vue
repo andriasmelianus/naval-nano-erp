@@ -17,12 +17,15 @@ import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/_forms/default";
 export default {
   layout: "dashboard",
+
   head() {
     return {
       title: "Perusahaan",
     };
   },
+
   mixins: [MessageExtractor],
+
   components: {
     CompanyForm,
   },
@@ -30,6 +33,7 @@ export default {
   data: () => ({
     companyData: {},
   }),
+
   mounted() {
     let vm = this;
     vm.$axios

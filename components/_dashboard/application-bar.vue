@@ -26,17 +26,20 @@ export default {
   components: {
     UserMenu,
   },
+
   props: {
     drawerIsShownProp: {
       type: Boolean,
     },
   },
+
   data() {
     return {
       drawerIsShown: true,
       title: process.env.APPLICATION_NAME,
     };
   },
+
   watch: {
     drawerIsShownProp(newValue) {
       this.drawerIsShown = newValue;

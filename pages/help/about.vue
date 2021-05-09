@@ -13,6 +13,7 @@
 <script>
 export default {
   layout: "dashboard",
+
   head() {
     return {
       title: "Tentang",

@@ -86,11 +86,13 @@ import ProductDashboardCard from "~/components/product/_cards/dashboard";
 import AuthDashboardCard from "~/components/auth/_cards/dashboard";
 export default {
   layout: "dashboard",
+
   head() {
     return {
       title: "Dashboard",
     };
   },
+
   components: {
     CompanyDashboardCard,
     AssetDashboardCard,

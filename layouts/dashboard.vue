@@ -49,6 +49,7 @@ export default {
 
     GlobalSnackbar,
   },
+
   data() {
     return {
       drawerIsShown: true,
@@ -56,6 +57,7 @@ export default {
       applicationId: process.env.APPLICATION_ID,
     };
   },
+
   methods: {
     changeNavigationDrawerShown(isShown) {
       this.drawerIsShown = isShown;

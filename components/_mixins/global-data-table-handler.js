@@ -2,6 +2,7 @@ export const GlobalDataTableHandler = {
     props: {
         filter: Object
     },
+
     data: () => ({
         // Table headers.
         headers: [],
@@ -74,6 +75,7 @@ export const GlobalDataTableHandler = {
             }
         }
     },
+
     methods: {
         /**
          * Fetch data from API.
