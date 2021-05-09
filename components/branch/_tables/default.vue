@@ -5,7 +5,7 @@
     show-select
     single-select
     v-model="selectedRecords"
-    :search="search"
+    :search="searchKeywords"
     @item-selected="handleRecordSelected"
   ></v-data-table>
 </template>
