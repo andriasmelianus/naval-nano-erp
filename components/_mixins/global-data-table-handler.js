@@ -90,10 +90,10 @@ export const GlobalDataTableHandler = {
                 .then(function (result) {
                     vm.records = result;
                 })
-                .catch(function (error) {
+                .catch(function (result) {
                     vm.$store.commit("global-snackbar/show", {
                         color: "error",
-                        message: error
+                        message: result
                     });
                 });
         },
@@ -165,10 +165,10 @@ export const GlobalDataTableHandler = {
 
                         vm.$emit("recordSelected", []);
                     })
-                    .catch(function (error) {
+                    .catch(function (result) {
                         vm.$store.commit("global-snackbar/show", {
                             color: "error",
-                            message: error
+                            message: result
                         });
                     });
 
@@ -202,10 +202,10 @@ export const GlobalDataTableHandler = {
 
                         vm.$emit("recordSelected", []);
                     })
-                    .catch(function (error) {
+                    .catch(function (result) {
                         vm.$store.commit("globalNotification/show", {
                             color: "error",
-                            message: error
+                            message: result
                         });
                     });
 
