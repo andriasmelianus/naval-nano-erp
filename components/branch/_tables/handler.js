@@ -1,7 +1,7 @@
-import { GlobalDataTableHandler } from "~/components/_mixins/global-data-table-handler";
+import { GlobalServerSideDataTableHandler } from "~/components/_mixins/global-server-side-data-table-handler";
 import { DefaultRecord } from '~/components/branch/record'
 export const Handler = {
-    mixins: [GlobalDataTableHandler],
+    mixins: [GlobalServerSideDataTableHandler],
 
     data: () => ({
         headers: [

@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    :headers="headers"
+    :headers="smallHeaders"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
