@@ -1,6 +1,6 @@
-import GlobalServerSideDataTableHandler from './global-data-table-handler';
-export const GlobalDataTableHandler = {
-    mixins: [GlobalServerSideDataTableHandler],
+import { GlobalDataTableHandler } from './global-data-table-handler';
+export const GlobalServerSideDataTableHandler = {
+    mixins: [GlobalDataTableHandler],
 
     data: () => ({
         // Stores the total record fetched from API
