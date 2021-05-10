@@ -11,9 +11,9 @@ export const GlobalServerSideDataTableHandler = {
         otherServerParams: {},
 
         // Other supporting data
-        _timerId: undefined,
-        _timerDelay: 300,
-        _isLoading: false
+        dataFetchTimerId: undefined,
+        dataFetchTimerDelay: 300,
+        isLoading: false
     }),
 
     watch: {
@@ -28,12 +28,12 @@ export const GlobalServerSideDataTableHandler = {
             /**
              * Give delay before actually perform otherServerParams object assigment.
              */
-            clearTimeout(vm._timerId);
-            vm._timerId = setTimeout(function () {
+            clearTimeout(vm.dataFetchTimerId);
+            vm.dataFetchTimerId = setTimeout(function () {
                 vm.otherServerParams = Object.assign({}, vm.otherServerParams, {
                     searchKeywords: newSearchKeywords
                 });
-            }, vm._timerDelay);
+            }, vm.dataFetchTimerDelay);
         },
 
         /**
@@ -65,12 +65,12 @@ export const GlobalServerSideDataTableHandler = {
             let vm = this,
                 allParams = Object.assign({}, this.serverParams, this.otherServerParams);
 
-            vm._isLoading = true
+            vm.isLoading = true
             vm.$axios.$get(vm.resourceUri, { params: allParams })
                 .then(function (result) {
-                    vm.records = result.data;
-                    vm.recordsTotal = result.total;
-                    vm._isLoading = false;
+                    vm.records = result;
+                    vm.recordsTotal = result.length;
+                    vm.isLoading = false;
                 })
                 .catch(function (result) {
                     vm.$store.commit('global-snackbar/show', {
