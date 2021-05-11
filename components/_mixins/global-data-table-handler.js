@@ -154,11 +154,7 @@ export const GlobalDataTableHandler = {
             if (confirm("Anda yakin akan menghapus data tersebut?")) {
                 let vm = this;
                 vm.$axios
-                    .$delete(vm.resourceUri, {
-                        params: {
-                            id: vm.selectedRecord.id
-                        }
-                    })
+                    .$delete(vm.resourceUri + '/' + vm.selectedRecord.id)
                     .then(function (result) {
                         vm.records.splice(vm.selectedRecordIndex, 1);
                         vm.selectedRecords = [];

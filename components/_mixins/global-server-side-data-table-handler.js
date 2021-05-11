@@ -116,7 +116,8 @@ export const GlobalServerSideDataTableHandler = {
             if (confirm('Anda yakin akan menghapus data tersebut?')) {
                 let vm = this
 
-                vm.$axios.$delete(vm.resourceUri, { params: { id: vm.selectedRecord.id } })
+                vm.$axios
+                    .$delete(vm.resourceUri + '/' + vm.selectedRecord.id)
                     .then(function (result) {
                         vm.readRecords();
                         vm.selectedRecords = [];
