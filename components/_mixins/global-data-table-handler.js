@@ -23,7 +23,7 @@ export const GlobalDataTableHandler = {
 
         // To support operation related to form.
         formIsShown: false,
-        formIsEditMode: false,
+        formIsInEditMode: false,
 
         // If true, table will reload data after a row is modified.
         reloadAfterModification: false
@@ -69,7 +69,7 @@ export const GlobalDataTableHandler = {
          * @param {Object} newStatus 
          * @param {Object} oldStatus 
          */
-        formShown(newStatus, oldStatus) {
+        formIsShown(newStatus, oldStatus) {
             if (!newStatus) {
                 this.closeForm();
             }
@@ -225,16 +225,16 @@ export const GlobalDataTableHandler = {
             } else {
                 this.setEditedRecord(this.defaultRecord);
             }
-            this.formEditMode = editMode;
-            this.formShown = true;
+            this.formIsInEditMode = editMode;
+            this.formIsShown = true;
         },
 
         /**
          * Close the form.
          */
         closeForm() {
-            this.formEditMode = false;
-            this.formShown = false;
+            this.formIsInEditMode = false;
+            this.formIsShown = false;
         }
     }
 };
