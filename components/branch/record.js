@@ -1,6 +1,7 @@
 export const DefaultRecord = {
     code: '',
     name: '',
+    phone: '',
     address: '',
     city: '',
     country: '',
@@ -10,6 +11,7 @@ export const DefaultRecord = {
 export const DefaultInvalidInputMessage = {
     code: [],
     name: [],
+    phone: [],
     address: [],
     city: [],
     country: [],
