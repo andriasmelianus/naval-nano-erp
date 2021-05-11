@@ -16,6 +16,12 @@ export const GlobalServerSideDataTableHandler = {
         isLoading: false
     }),
 
+    computed: {
+        resourceUriForVuetifyServerSideDataTable() {
+            return this.resourceUri + '/vuetify-data-table';
+        }
+    },
+
     watch: {
         /**
          * Perform API data fetch when searchKeywords is changed.
@@ -66,10 +72,10 @@ export const GlobalServerSideDataTableHandler = {
                 allParams = Object.assign({}, this.serverParams, this.otherServerParams);
 
             vm.isLoading = true
-            vm.$axios.$get(vm.resourceUri, { params: allParams })
+            vm.$axios.$get(vm.resourceUriForVuetifyServerSideDataTable, { params: allParams })
                 .then(function (result) {
-                    vm.records = result;
-                    vm.recordsTotal = result.length;
+                    vm.records = result.data;
+                    vm.recordsTotal = result.total;
                     vm.isLoading = false;
                 })
                 .catch(function (result) {
