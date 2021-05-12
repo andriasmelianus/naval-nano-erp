@@ -1,9 +1,10 @@
 /**
  * Provide standard form handler. Including POST and PUT/PATCH operation.
  */
+import { MessageExtractor } from '~/components/_mixins/message-extractor'
 import { InvalidInputMessageHandler } from './form/invalid-input-message-handler'
 export const GlobalFormHandler = {
-    mixins: [InvalidInputMessageHandler],
+    mixins: [MessageExtractor, InvalidInputMessageHandler],
 
     props: {
         /**
@@ -70,6 +71,11 @@ export const GlobalFormHandler = {
                 .$post(vm.resourceUri, newRecord)
                 .then(function (result) {
                     vm.$emit('recordCreated', result);
+
+                    vm.$store.commit('global-snackbar/show', {
+                        color: 'success',
+                        message: vm.messageSuccessExtract(result)
+                    });
                 })
                 .catch(function (result) {
                     vm.invalidInputMessageExtract(result);
@@ -86,6 +92,11 @@ export const GlobalFormHandler = {
                 .$put(vm.resourceUri + '/' + updatedRecord.id, updatedRecord)
                 .then(function (result) {
                     vm.$emit('recordUpdated', result);
+
+                    vm.$store.commit('global-snackbar/show', {
+                        color: 'success',
+                        message: vm.messageSuccessExtract(result)
+                    });
                 })
                 .catch(function (result) {
                     vm.invalidInputMessageExtract(result);
