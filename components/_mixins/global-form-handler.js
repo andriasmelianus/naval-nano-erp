@@ -28,7 +28,6 @@ export const GlobalFormHandler = {
         }
     },
 
-
     data: () => ({
         /**
          * Resource url to perform RESTful operation.
