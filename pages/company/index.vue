@@ -9,12 +9,20 @@
         ></company-form>
       </v-card>
     </v-col>
+
+    <v-col cols="12" md="6">
+      <v-card>
+        <v-card-title>Data Cabang</v-card-title>
+        <branch-small-table></branch-small-table>
+      </v-card>
+    </v-col>
   </v-row>
 </template>
 
 <script>
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/_forms/default";
+import BranchSmallTable from "~/components/branch/_tables/default-small";
 export default {
   layout: "dashboard",
 
@@ -28,6 +36,7 @@ export default {
 
   components: {
     CompanyForm,
+    BranchSmallTable,
   },
 
   data: () => ({
