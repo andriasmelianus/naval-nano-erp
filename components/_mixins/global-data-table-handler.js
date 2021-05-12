@@ -84,9 +84,7 @@ export const GlobalDataTableHandler = {
             let vm = this;
 
             vm.$axios
-                .$get(vm.resourceUri, {
-                    params: vm.filter
-                })
+                .$get(vm.resourceUri, { params: vm.filter })
                 .then(function (result) {
                     vm.records = result;
                 })
