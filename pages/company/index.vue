@@ -58,6 +58,9 @@ export default {
   methods: {
     companyUpdated(result) {
       let vm = this;
+
+      vm.$store.commit("setCompany", result.data);
+
       vm.$store.commit("global-snackbar/show", {
         message: vm.messageSuccessExtract(result),
         color: "success",
