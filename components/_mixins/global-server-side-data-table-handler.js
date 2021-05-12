@@ -72,7 +72,8 @@ export const GlobalServerSideDataTableHandler = {
                 allParams = Object.assign({}, this.serverParams, this.otherServerParams);
 
             vm.isLoading = true
-            vm.$axios.$get(vm.resourceUriForVuetifyServerSideDataTable, { params: allParams })
+            vm.$axios
+                .$get(vm.resourceUriForVuetifyServerSideDataTable, { params: allParams })
                 .then(function (result) {
                     vm.records = result.data;
                     vm.recordsTotal = result.total;
@@ -103,9 +104,12 @@ export const GlobalServerSideDataTableHandler = {
             this.selectedRecord = Object.assign(
                 {},
                 this.selectedRecord,
-                updatedRecord
+                updatedRecord.data
             );
-            this.readRecords();
+            this.records.splice(this.selectedRecordIndex, 1, updatedRecord.data);
+            if (this.reloadAfterModification) {
+                this.readRecords();
+            }
             this.closeForm();
         },
 
