@@ -127,6 +127,11 @@ export const GlobalServerSideDataTableHandler = {
                         vm.selectedRecords = [];
 
                         vm.$emit('recordSelected', []);
+
+                        vm.$store.commit('global-snackbar/show', {
+                            color: 'success',
+                            message: vm.messageSuccessExtract(result)
+                        });
                     })
                     .catch(function (result) {
                         vm.$store.commit('global-snackbar/show', {

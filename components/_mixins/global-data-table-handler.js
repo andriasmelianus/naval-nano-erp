@@ -1,4 +1,7 @@
+import { MessageExtractor } from '~/components/_mixins/message-extractor'
 export const GlobalDataTableHandler = {
+    mixins: [MessageExtractor],
+
     props: {
         filter: Object
     },
@@ -158,6 +161,11 @@ export const GlobalDataTableHandler = {
                         vm.selectedRecords = [];
 
                         vm.$emit("recordSelected", []);
+
+                        vm.$store.commit('global-snackbar/show', {
+                            color: 'success',
+                            message: vm.messageSuccessExtract(result)
+                        });
                     })
                     .catch(function (result) {
                         vm.$store.commit("global-snackbar/show", {
@@ -195,6 +203,11 @@ export const GlobalDataTableHandler = {
                         vm.selectedRecords = [];
 
                         vm.$emit("recordSelected", []);
+
+                        vm.$store.commit('global-snackbar/show', {
+                            color: 'success',
+                            message: vm.messageSuccessExtract(result)
+                        });
                     })
                     .catch(function (result) {
                         vm.$store.commit("globalNotification/show", {
