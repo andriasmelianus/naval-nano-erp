@@ -13,16 +13,19 @@
       <auth-dashboard-card></auth-dashboard-card>
     </v-col>
 
-    <v-col cols="12" md="8"
-      >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
-      eius provident asperiores voluptatem, aliquam libero voluptatum laboriosam
-      fugit autem quis sed, neque obcaecati? Accusamus iure ipsam nisi odio
-      cumque fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Reprehenderit, non! Quam eius quo consequatur voluptatem, qui laboriosam
-      aperiam laborum enim officia ut? Amet necessitatibus dolore numquam nihil
-      excepturi minus dignissimos! lorme
+    <v-col cols="12" md="3">
+      <company-default-card
+        title="Perusahaan Aktif"
+        :record="companyData"
+      ></company-default-card>
     </v-col>
-    <v-col cols="12" md="4"
+    <v-col cols="12" md="3">
+      <branch-default-card
+        title="Cabang Aktif"
+        :record="branchData"
+      ></branch-default-card>
+    </v-col>
+    <v-col cols="12" md="6"
       >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos iure
       consequatur architecto inventore unde consectetur ex. Quibusdam ipsum vel
       quos dolore voluptatibus, aperiam eaque in, architecto facere, ea
@@ -80,10 +83,14 @@
 </template>
 
 <script>
+import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyDashboardCard from "~/components/company/_cards/dashboard";
 import AssetDashboardCard from "~/components/asset/_cards/dashboard";
 import ProductDashboardCard from "~/components/product/_cards/dashboard";
 import AuthDashboardCard from "~/components/auth/_cards/dashboard";
+
+import CompanyDefaultCard from "~/components/company/_cards/default";
+import BranchDefaultCard from "~/components/branch/_cards/default";
 export default {
   layout: "dashboard",
 
@@ -93,11 +100,51 @@ export default {
     };
   },
 
+  mixins: [MessageExtractor],
+
   components: {
     CompanyDashboardCard,
     AssetDashboardCard,
     ProductDashboardCard,
     AuthDashboardCard,
+
+    CompanyDefaultCard,
+    BranchDefaultCard,
+  },
+
+  data: () => ({
+    companyData: {},
+    branchData: {},
+  }),
+
+  mounted() {
+    let vm = this;
+
+    // Fetch current company data.
+    vm.$axios
+      .$get("/company/mine")
+      .then(function (result) {
+        vm.companyData = Object.assign({}, vm.companyData, result);
+      })
+      .catch(function (result) {
+        vm.$store.commit("global-snackbar/show", {
+          color: "error",
+          message: vm.messageErrorExtract(result),
+        });
+      });
+
+    // Fetch current branch data.
+    vm.$axios
+      .$get("/branch/mine")
+      .then(function (result) {
+        vm.branchData = Object.assign({}, vm.branchData, result);
+      })
+      .catch(function (result) {
+        vm.$store.commit("global-snackbar/show", {
+          color: "error",
+          message: vm.messageErrorExtract(result),
+        });
+      });
   },
 };
 </script>
