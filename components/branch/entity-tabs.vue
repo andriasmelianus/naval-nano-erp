@@ -16,12 +16,7 @@
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text
-            >Pengguna <br />Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Id enim voluptas alias vero nostrum, voluptatum molestiae quo
-            odio at officia et, quisquam repellendus, beatae explicabo aut!
-            Culpa iste nihil sunt.</v-card-text
-          >
+          <user-default-small-table></user-default-small-table>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -49,7 +44,12 @@
 </template>
 
 <script>
-export default {};
+import UserDefaultSmallTable from "~/components/user/_tables/default-small";
+export default {
+  components: {
+    UserDefaultSmallTable,
+  },
+};
 </script>
 
 <style>
