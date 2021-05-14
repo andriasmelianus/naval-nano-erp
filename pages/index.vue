@@ -25,12 +25,9 @@
         :record="branchData"
       ></branch-default-card>
     </v-col>
-    <v-col cols="12" md="6"
-      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos iure
-      consequatur architecto inventore unde consectetur ex. Quibusdam ipsum vel
-      quos dolore voluptatibus, aperiam eaque in, architecto facere, ea
-      veritatis voluptatem?</v-col
-    >
+    <v-col cols="12" md="6">
+      <branch-entity-tabs></branch-entity-tabs>
+    </v-col>
 
     <v-col cols="12" md="4"
       >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur,
@@ -91,6 +88,7 @@ import AuthDashboardCard from "~/components/auth/_cards/dashboard";
 
 import CompanyDefaultCard from "~/components/company/_cards/default";
 import BranchDefaultCard from "~/components/branch/_cards/default";
+import BranchEntityTabs from "~/components/branch/entity-tabs";
 export default {
   layout: "dashboard",
 
@@ -110,6 +108,7 @@ export default {
 
     CompanyDefaultCard,
     BranchDefaultCard,
+    BranchEntityTabs,
   },
 
   data: () => ({
