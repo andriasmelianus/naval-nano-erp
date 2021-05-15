@@ -5,11 +5,11 @@
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
+    :search="searchKeywords"
+    v-model="selectedRecords"
+    @item-selected="handleRecordSelected"
     show-select
     single-select
-    v-model="selectedRecords"
-    :search="searchKeywords"
-    @item-selected="handleRecordSelected"
   >
     <template v-slot:header.data-table-select>
       <v-menu offset-y open-on-hover>
