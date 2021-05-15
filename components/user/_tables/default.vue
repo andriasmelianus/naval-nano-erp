@@ -19,6 +19,12 @@
           </v-btn>
         </template>
         <v-list>
+          <v-list-item @click="readRecords()">
+            <v-list-item-title>Refresh</v-list-item-title>
+          </v-list-item>
+
+          <v-divider></v-divider>
+
           <v-list-item @click="showForm(false)">
             <v-list-item-title>Baru</v-list-item-title>
           </v-list-item>
