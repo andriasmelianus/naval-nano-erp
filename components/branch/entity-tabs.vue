@@ -11,7 +11,7 @@
       </v-tab>
       <v-tab>
         <v-icon left>mdi-broom</v-icon>
-        Produk
+        Karyawan
       </v-tab>
 
       <v-tab-item>
@@ -26,12 +26,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text
-            >Produk <br />Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Ipsum, dolorum sequi! Saepe, ut, explicabo pariatur fuga, unde
-            placeat a et ullam laborum architecto maxime optio veniam inventore.
-            Vero, a ex.</v-card-text
-          >
+          <employee-default-small-table></employee-default-small-table>
         </v-card>
       </v-tab-item>
     </v-tabs>
@@ -41,10 +36,12 @@
 <script>
 import UserDefaultSmallTable from "~/components/user/_tables/default-small";
 import RoomDefaultSmallTable from "~/components/room/_tables/default-small";
+import EmployeeDefaultSmallTable from "~/components/employee/_tables/default-small";
 export default {
   components: {
     UserDefaultSmallTable,
     RoomDefaultSmallTable,
+    EmployeeDefaultSmallTable,
   },
 };
 </script>
