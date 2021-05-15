@@ -50,12 +50,7 @@
 
     <v-list-item dense>
       <v-list-item-subtitle>Deskripsi</v-list-item-subtitle>
-      <v-list-item-title
-        >Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-        laudantium harum illo, expedita soluta voluptate quae labore repudiandae
-        fugiat quod corrupti qui eveniet inventore aut voluptas eius itaque
-        earum odit!</v-list-item-title
-      >
+      <v-list-item-title v-text="record.description"></v-list-item-title>
     </v-list-item>
 
     <v-divider></v-divider>
