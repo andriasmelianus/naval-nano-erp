@@ -14,12 +14,24 @@
       :error-messages="invalidInputMessage.email"
     ></v-text-field>
 
-    <v-text-field
-      label="Password"
-      type="password"
-      v-model="record.password"
-      :error-messages="invalidInputMessage.password"
-    ></v-text-field>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-text-field
+          label="Password"
+          type="password"
+          v-model="record.password"
+          :error-messages="invalidInputMessage.password"
+        ></v-text-field>
+      </v-col>
+      <v-col cols="12" md="6">
+        <v-text-field
+          label="Konfirmasi Password"
+          type="password"
+          v-model="record.password_confirmation"
+          :error-messages="invalidInputMessage.password_confirmation"
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
     <v-text-field
       label="Telepon"
