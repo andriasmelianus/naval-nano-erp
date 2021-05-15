@@ -15,6 +15,6 @@ export const Handler = {
     data: () => ({
         defaultInvalidInputMessage: DefaultInvalidInputMessage,
 
-        resourceUri: '/branch'
+        resourceUri: '/user'
     })
 }
