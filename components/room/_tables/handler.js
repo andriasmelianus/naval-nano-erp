@@ -14,6 +14,7 @@ export const Handler = {
         smallHeaders: [
             { text: 'Kode', value: 'code' },
             { text: "Nama", value: "name", align: "left" },
+            { text: "Lantai", value: "floor" },
         ],
         singleColumnHeader: [{ text: "Nama", value: "name", align: "left" }],
 
