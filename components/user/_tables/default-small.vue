@@ -6,6 +6,7 @@
     :options.sync="serverParams"
     :loading="isLoading"
     :search="searchKeywords"
+    :items-per-page="5"
     v-model="selectedRecords"
     @item-selected="handleRecordSelected"
     show-select
