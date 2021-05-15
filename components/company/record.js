@@ -3,6 +3,7 @@ export const DefaultRecord = {
     legal_name: '',
     email: '',
     phone: '',
+    website: '',
     short_description: '',
     description: '',
 }
@@ -12,6 +13,7 @@ export const DefaultInvalidInputMessage = {
     legal_name: [],
     email: [],
     phone: [],
+    website: [],
     short_description: [],
     description: [],
 }

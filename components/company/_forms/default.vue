@@ -15,6 +15,12 @@
     ></v-text-field>
 
     <v-text-field
+      label="Alamat Website"
+      v-model="record.website"
+      :error-messages="invalidInputMessage.website"
+    ></v-text-field>
+
+    <v-text-field
       label="Telepon"
       v-model="record.phone"
       :error-messages="invalidInputMessage.phone"

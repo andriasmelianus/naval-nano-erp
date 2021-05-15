@@ -30,6 +30,15 @@
     </v-list-item>
 
     <v-list-item dense>
+      <v-list-item-subtitle>Website</v-list-item-subtitle>
+      <v-list-item-title>
+        <a :href="record.website" target="_blank" rel="noopener noreferrer">{{
+          record.website
+        }}</a>
+      </v-list-item-title>
+    </v-list-item>
+
+    <v-list-item dense>
       <v-list-item-subtitle>Telepon</v-list-item-subtitle>
       <v-list-item-title>{{ record.phone }}</v-list-item-title>
     </v-list-item>
