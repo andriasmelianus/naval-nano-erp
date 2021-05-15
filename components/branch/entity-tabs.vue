@@ -21,12 +21,7 @@
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text
-            >Ruangan <br />Lorem ipsum dolor, sit amet consectetur adipisicing
-            elit. Magni voluptatum, voluptas fugit beatae temporibus impedit
-            excepturi provident esse ab quasi! Amet, fuga suscipit? Autem nemo
-            facilis cumque provident numquam asperiores.</v-card-text
-          >
+          <room-default-small-table></room-default-small-table>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -45,9 +40,11 @@
 
 <script>
 import UserDefaultSmallTable from "~/components/user/_tables/default-small";
+import RoomDefaultSmallTable from "~/components/room/_tables/default-small";
 export default {
   components: {
     UserDefaultSmallTable,
+    RoomDefaultSmallTable,
   },
 };
 </script>
