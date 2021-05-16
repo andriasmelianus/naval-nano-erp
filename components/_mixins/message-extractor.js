@@ -16,7 +16,7 @@ export const MessageExtractor = {
          * @returns string
          */
         messageInfoExtract(result) {
-            return extractFromAxiosError(result)[this.messageInfoJsonIndex];
+            return extractMessage(result, this.messageInfoJsonIndex);
         },
 
         /**
@@ -25,7 +25,7 @@ export const MessageExtractor = {
          * @returns string
          */
         messageSuccessExtract(result) {
-            return extractFromAxiosError(result)[this.messageSuccessJsonIndex];
+            return extractMessage(result, this.messageSuccessJsonIndex);
         },
 
         /**
@@ -34,7 +34,7 @@ export const MessageExtractor = {
          * @returns string
          */
         messageWarningExtract(result) {
-            return extractFromAxiosError(result)[this.messageWarningJsonIndex];
+            return extractMessage(result, this.messageWarningJsonIndex);
         },
 
         /**
@@ -43,7 +43,7 @@ export const MessageExtractor = {
          * @returns string
          */
         messageErrorExtract(result) {
-            return extractFromAxiosError(result)[this.messageErrorJsonIndex];
+            return extractMessage(result, this.messageErrorJsonIndex);
         },
     }
 }
@@ -53,7 +53,7 @@ export const MessageExtractor = {
  * @param {*} result Error object returned from Axios.
  * @returns Object
  */
-function extractFromAxiosError(result) {
+function extractApiMessage(result) {
     if (result.hasOwnProperty('response')) {
         if (result.response.hasOwnProperty('data')) {
             return result.response.data;
@@ -63,4 +63,28 @@ function extractFromAxiosError(result) {
     } else {
         return result;
     }
+}
+
+/**
+ * Extract the real message whether from object or array or plain text.
+ * @param {*} result result returned from API server.
+ * @param {String} jsonIndex JSON index to be extracted.
+ * @returns String
+ */
+function extractMessageFromMixed(result, jsonIndex) {
+    let apiMessage = extractApiMessage(result);
+    if (typeof apiMessage == 'object' || typeof apiMessage == 'array') {
+        return apiMessage[jsonIndex];
+    } else {
+        return result;
+    }
+}
+
+function extractMessage(result, jsonIndex) {
+    let extractedMessage = extractMessageFromMixed(result, jsonIndex);
+    if (extractedMessage == '' || extractedMessage == null || extractedMessage == undefined) {
+        extractedMessage = extractMessageFromMixed(result, 'message');
+    }
+
+    return extractedMessage;
 }
