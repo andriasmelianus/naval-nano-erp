@@ -80,6 +80,13 @@ function extractMessageFromMixed(result, jsonIndex) {
     }
 }
 
+/**
+ * Extract message returned from extractMessageFromMixed.
+ * If it's empty, extract from alternative JSON index: message.
+ * @param {*} result result returned from API server.
+ * @param {*} jsonIndex Json index to be extracted.
+ * @returns String
+ */
 function extractMessage(result, jsonIndex) {
     let extractedMessage = extractMessageFromMixed(result, jsonIndex);
     if (extractedMessage == '' || extractedMessage == null || extractedMessage == undefined) {
