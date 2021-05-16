@@ -82,8 +82,8 @@ export const GlobalServerSideDataTableHandler = {
                 .catch(function (result) {
                     vm.$store.commit('global-snackbar/show', {
                         color: 'error',
-                        message: result
-                    })
+                        message: vm.messageErrorExtract(result)
+                    });
                 })
         },
 
@@ -136,7 +136,7 @@ export const GlobalServerSideDataTableHandler = {
                     .catch(function (result) {
                         vm.$store.commit('global-snackbar/show', {
                             color: 'error',
-                            message: result
+                            message: vm.messageErrorExtract(result)
                         })
                     })
             }

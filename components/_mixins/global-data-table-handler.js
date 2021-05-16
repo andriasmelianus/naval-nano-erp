@@ -94,7 +94,7 @@ export const GlobalDataTableHandler = {
                 .catch(function (result) {
                     vm.$store.commit("global-snackbar/show", {
                         color: "error",
-                        message: result
+                        message: vm.messageErrorExtract(result)
                     });
                 });
         },
@@ -170,7 +170,7 @@ export const GlobalDataTableHandler = {
                     .catch(function (result) {
                         vm.$store.commit("global-snackbar/show", {
                             color: "error",
-                            message: result
+                            message: vm.messageErrorExtract(result)
                         });
                     });
 
@@ -212,7 +212,7 @@ export const GlobalDataTableHandler = {
                     .catch(function (result) {
                         vm.$store.commit("globalNotification/show", {
                             color: "error",
-                            message: result
+                            message: vm.messageErrorExtract(result)
                         });
                     });
 
