@@ -21,6 +21,7 @@
       </template>
     </v-data-iterator>
 
+    <!-- Confirmation Dialog -->
     <v-dialog max-width="300" v-model="isConfirmationDialogShown">
       <v-card>
         <v-card-title>Konfirmasi</v-card-title>
@@ -41,6 +42,7 @@
       </v-card>
     </v-dialog>
 
+    <!-- Invalid Action Dialog -->
     <v-dialog max-width="300" v-model="isInvalidDialogShown">
       <v-card>
         <v-card-title>Invalid</v-card-title>
@@ -51,6 +53,22 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text @click="isInvalidDialogShown = false">OK</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Success Dialog -->
+    <v-dialog persistent max-width="300" v-model="isSuccessDialogShown">
+      <v-card>
+        <v-card-title>Berhasil</v-card-title>
+        <v-card-text>
+          Perusahaan yang aktif telah diubah. <br />
+          Silahkan login kembali atau tunggu beberapa saat sistem akan
+          mengantarkan Anda ke halaman login.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn nuxt to="/logout" color="success">Login</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -72,6 +90,7 @@ export default {
 
     isConfirmationDialogShown: false,
     isInvalidDialogShown: false,
+    isSuccessDialogShown: false,
   }),
 
   methods: {
@@ -94,12 +113,12 @@ export default {
       vm.$axios
         .$post("/company/activate/" + vm.selectedCompany.id)
         .then(function (result) {
+          vm.isConfirmationDialogShown = false;
+          vm.isSuccessDialogShown = true;
+
           setTimeout(function () {
-            vm.$store.commit("global-snackbar/show", {
-              color: "error",
-              message: vm.messageSuccessExtract(result),
-            });
-          }, 2000);
+            vm.$router.push("/logout");
+          }, 5000);
         })
         .catch(function (result) {
           vm.$store.commit("global-snackbar/show", {
