@@ -14,16 +14,18 @@
     </v-col>
 
     <v-col cols="12" md="3">
-      <company-default-card
-        title="Perusahaan Aktif"
-        :record="companyData"
-      ></company-default-card>
+      <company-default-card title="Perusahaan Aktif" :record="companyData">
+        <template v-slot:actions>
+          <v-btn text nuxt to="/company/select">Ganti</v-btn>
+        </template>
+      </company-default-card>
     </v-col>
     <v-col cols="12" md="3">
-      <branch-default-card
-        title="Cabang Aktif"
-        :record="branchData"
-      ></branch-default-card>
+      <branch-default-card title="Cabang Aktif" :record="branchData">
+        <template v-slot:actions>
+          <v-btn text nuxt to="/branch/select">Ganti</v-btn>
+        </template>
+      </branch-default-card>
     </v-col>
     <v-col cols="12" md="6">
       <branch-entity-tabs></branch-entity-tabs>
