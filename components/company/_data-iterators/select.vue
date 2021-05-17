@@ -63,13 +63,9 @@
         <v-card-title>Berhasil</v-card-title>
         <v-card-text>
           Perusahaan yang aktif telah diubah. <br />
-          Silahkan login kembali atau tunggu beberapa saat sistem akan
-          mengantarkan Anda ke halaman login.
+          Mohon tunggu beberapa saat sistem akan mengantarkan Anda ke halaman
+          login.
         </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn nuxt to="/logout" color="success">Login</v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -118,7 +114,7 @@ export default {
 
           setTimeout(function () {
             vm.$router.push("/logout");
-          }, 5000);
+          }, 2000);
         })
         .catch(function (result) {
           vm.$store.commit("global-snackbar/show", {
