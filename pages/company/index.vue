@@ -51,7 +51,10 @@ export default {
         vm.companyData = Object.assign({}, vm.companyData, result);
       })
       .catch(function (result) {
-        console.log(result);
+        vm.$store.commit("global-snackbar/show", {
+          color: "error",
+          message: vm.messageErrorExtract(result),
+        });
       });
   },
 
