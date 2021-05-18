@@ -3,27 +3,25 @@
     <v-row align="center" justify="center">
       <div style="max-width: 700px" class="text-center">
         <div class="text-h3 font-weight-thin">Upss..!</div>
-        <div class="text-h5">
+        <p class="text-h5">
           {{ errorMessage }}
-        </div>
-        <div class="text-subtitle-1">
+        </p>
+
+        <p class="text-sm-caption text--disabled">
           (Kode: <b style="color: #f00">{{ error.statusCode }}</b
           >)
-        </div>
-
-        <br />
-
-        <div class="text-body-2">
-          Untuk keterangan lebih lanjut, silahkan
-          <a href="mailto:andriasmelianus@gmail.com">hubungi administrator</a>
-          {{ APPLICATION_NAME }}.
-        </div>
-
-        <br />
+        </p>
 
         <v-btn rounded block outlined nuxt to="/" color="primary"
           >Kembali ke Beranda</v-btn
         >
+
+        <br />
+        <p class="text-caption font-weight-thin">
+          Untuk keterangan lebih lanjut, silahkan
+          <a href="mailto:andriasmelianus@gmail.com">hubungi administrator</a>
+          {{ APPLICATION_NAME }}.
+        </p>
       </div>
     </v-row>
   </v-app>
