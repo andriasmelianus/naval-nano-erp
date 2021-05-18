@@ -1,18 +1,44 @@
 <template>
   <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/"> Home page </NuxtLink>
+    <v-row align="center" justify="center">
+      <div style="max-width: 700px" class="text-center">
+        <div class="text-h3 font-weight-thin">Upss..!</div>
+        <div class="text-h5">
+          {{ errorMessage }}
+        </div>
+        <div class="text-subtitle-1">
+          (Kode: <b style="color: #f00">{{ error.statusCode }}</b
+          >)
+        </div>
+
+        <br />
+
+        <div class="text-body-2">
+          Untuk keterangan lebih lanjut, silahkan
+          <a href="mailto:andriasmelianus@gmail.com">hubungi administrator</a>
+          {{ APPLICATION_NAME }}.
+        </div>
+
+        <br />
+
+        <v-btn rounded block outlined nuxt to="/" color="primary"
+          >Kembali ke Beranda</v-btn
+        >
+      </div>
+    </v-row>
   </v-app>
 </template>
 
 <script>
 export default {
   layout: "empty",
+
+  head() {
+    const title = this.error.statusCode;
+    return {
+      title: title,
+    };
+  },
 
   props: {
     error: {
@@ -21,19 +47,19 @@ export default {
     },
   },
 
-  data() {
-    return {
-      pageNotFound: "404 Not Found",
-      otherError: "An error occurred",
-    };
-  },
+  data: () => ({
+    APPLICATION_NAME: process.env.APPLICATION_NAME,
+  }),
 
-  head() {
-    const title =
-      this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
-    return {
-      title,
-    };
+  computed: {
+    errorMessage() {
+      let vm = this;
+      if (vm.error.statusCode === 404) {
+        return "Halaman yang Anda tuju tidak ditemukan.";
+      } else {
+        return "Terjadi kesalahan pada halaman ini.";
+      }
+    },
   },
 };
 </script>
