@@ -14,7 +14,7 @@
 
 <script>
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
-import BranchForm from "~/components/branch/_forms/default";
+import BranchForm from "~/components/branch/forms/default";
 export default {
   layout: "dashboard",
 

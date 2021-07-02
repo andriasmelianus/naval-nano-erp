@@ -60,7 +60,7 @@
 
 <script>
 import { Handler } from "./handler";
-import RoomDefaultForm from "~/components/room/_forms/default";
+import RoomDefaultForm from "~/components/room/forms/default";
 export default {
   mixins: [Handler],
 

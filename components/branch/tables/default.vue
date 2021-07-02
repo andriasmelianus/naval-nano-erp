@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    :headers="smallHeaders"
+    :headers="headers"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
@@ -54,14 +54,13 @@
             @recordUpdated="handleRecordUpdated($event)"
           ></branch-form>
         </v-card>
-      </v-dialog>
-    </template>
-  </v-data-table>
+      </v-dialog> </template
+  ></v-data-table>
 </template>
 
 <script>
-import { Handler } from "~/components/branch/_tables/handler";
-import BranchForm from "~/components/branch/_forms/default";
+import { Handler } from "~/components/branch/tables/handler";
+import BranchForm from "~/components/branch/forms/default";
 export default {
   mixins: [Handler],
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import CompanySelectDataIterator from "~/components/company/_data-iterators/select";
+import CompanySelectDataIterator from "~/components/company/data-iterators/select";
 export default {
   layout: "dashboard",
 

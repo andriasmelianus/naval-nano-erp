@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import UserDefaultSmallTable from "~/components/user/_tables/default-small";
-import RoomDefaultSmallTable from "~/components/room/_tables/default-small";
-import EmployeeDefaultSmallTable from "~/components/employee/_tables/default-small";
+import UserDefaultSmallTable from "~/components/user/tables/default-small";
+import RoomDefaultSmallTable from "~/components/room/tables/default-small";
+import EmployeeDefaultSmallTable from "~/components/employee/tables/default-small";
 export default {
   components: {
     UserDefaultSmallTable,

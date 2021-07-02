@@ -21,8 +21,8 @@
 
 <script>
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
-import CompanyForm from "~/components/company/_forms/default";
-import BranchSmallTable from "~/components/branch/_tables/default-small";
+import CompanyForm from "~/components/company/forms/default";
+import BranchSmallTable from "~/components/branch/tables/default-small";
 export default {
   layout: "dashboard",
 

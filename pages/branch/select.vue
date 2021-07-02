@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BranchSelectDataIterator from "~/components/branch/_data-iterators/select";
+import BranchSelectDataIterator from "~/components/branch/data-iterators/select";
 export default {
   layout: "dashboard",
 

@@ -83,13 +83,13 @@
 
 <script>
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
-import CompanyDashboardCard from "~/components/company/_cards/dashboard";
-import AssetDashboardCard from "~/components/asset/_cards/dashboard";
-import ProductDashboardCard from "~/components/product/_cards/dashboard";
-import AuthDashboardCard from "~/components/auth/_cards/dashboard";
+import CompanyDashboardCard from "~/components/company/cards/dashboard";
+import AssetDashboardCard from "~/components/asset/cards/dashboard";
+import ProductDashboardCard from "~/components/product/cards/dashboard";
+import AuthDashboardCard from "~/components/auth/cards/dashboard";
 
-import CompanyDefaultCard from "~/components/company/_cards/default";
-import BranchDefaultCard from "~/components/branch/_cards/default";
+import CompanyDefaultCard from "~/components/company/cards/default";
+import BranchDefaultCard from "~/components/branch/cards/default";
 import BranchEntityTabs from "~/components/branch/entity-tabs";
 export default {
   layout: "dashboard",

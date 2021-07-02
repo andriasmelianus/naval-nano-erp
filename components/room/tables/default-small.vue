@@ -1,15 +1,16 @@
 <template>
   <v-data-table
-    :headers="headers"
+    :headers="smallHeaders"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
+    :search="searchKeywords"
+    :items-per-page="5"
+    v-model="selectedRecords"
+    @item-selected="handleRecordSelected"
     show-select
     single-select
-    v-model="selectedRecords"
-    :search="searchKeywords"
-    @item-selected="handleRecordSelected"
   >
     <template v-slot:header.data-table-select>
       <v-menu offset-y open-on-hover>
@@ -36,7 +37,10 @@
             <v-list-item-title>Ubah</v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="deleteSingleRecord" disabled>
+          <v-list-item
+            @click="deleteSingleRecord"
+            :disabled="!selectedRecordExists"
+          >
             <v-list-item-title>Hapus</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -44,12 +48,12 @@
 
       <v-dialog v-model="formIsShown" max-width="500px" ref="formDialog">
         <v-card>
-          <employee-default-form
+          <room-default-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
             @recordCreated="handleRecordCreated($event)"
             @recordUpdated="handleRecordUpdated($event)"
-          ></employee-default-form>
+          ></room-default-form>
         </v-card>
       </v-dialog> </template
   ></v-data-table>
@@ -57,12 +61,12 @@
 
 <script>
 import { Handler } from "./handler";
-import EmployeeDefaultForm from "~/components/employee/_forms/default";
+import RoomDefaultForm from "~/components/room/forms/default";
 export default {
   mixins: [Handler],
 
   components: {
-    EmployeeDefaultForm,
+    RoomDefaultForm,
   },
 };
 </script>
