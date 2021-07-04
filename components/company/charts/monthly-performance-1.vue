@@ -1,5 +1,5 @@
 <template>
-  <div id="amcharts4div" :style="divStyle"></div>
+  <div id="amcharts4div" :style="chartDivStyle"></div>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
     vm.chart.legend.position = "left";
 
     // Chart data configuration
-    vm.data = [
+    vm.chartData = [
       {
         category: "Consumer Goods",
         value: 89,
@@ -37,7 +37,7 @@ export default {
         value: 64,
       },
     ];
-    vm.chart.data = vm.data;
+    vm.chart.data = vm.chartData;
   },
 };
 </script>
