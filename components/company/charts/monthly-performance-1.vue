@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { amcharts4 } from "~/components/_mixins/amcharts4";
+import { amcharts4 } from "~/components/_mixins/chart/amcharts4";
 export default {
   mixins: [amcharts4],
 
