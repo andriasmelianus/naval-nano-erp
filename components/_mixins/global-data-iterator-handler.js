@@ -1,7 +1,7 @@
 /**
  * Global Data Iterator Handler.
- * Mixin ini dapat digunakan untuk semua penggunaan komponen v-data-iterator.
- * Mixin ini selalu bersifat server-side.
+ * This mixin can be used by all v-data-iterator components.
+ * This mixin always be server-side pagination and sorting.
  */
 import { MessageExtractor } from '~/components/_mixins/message-extractor'
 export const GlobalDataIteratorHandler = {
