@@ -19,13 +19,19 @@ export const GlobalChart = {
 
     data: () => ({
         chart: undefined,
+        chartCategoryAxis: undefined,
+        chartValueAxis: undefined,
         chartSeries: undefined,
         chartData: []
     }),
 
     computed: {
+        /**
+         * To generate style for chart div.
+         * @returns {String}
+         */
         chartDivStyle: function () {
-            return `width: '${this.width}'; height: '${this.height}';`;
-        }
+            return `width: ${this.width}; height: ${this.height};`;
+        },
     },
 }
