@@ -1,17 +1,17 @@
 <template>
-  <div id="amcharts4div" :style="chartDivStyle"></div>
+  <div id="am4chartsdiv" :style="chartDivStyle"></div>
 </template>
 
 <script>
-import { amcharts4 } from "~/components/_mixins/chart/amcharts4";
+import { am4charts } from "~/components/_mixins/chart/am4charts";
 export default {
-  mixins: [amcharts4],
+  mixins: [am4charts],
 
   mounted() {
     let vm = this;
 
     // Chart configuration
-    vm.chart = vm.am4core.create("amcharts4div", vm.am4charts.PieChart);
+    vm.chart = vm.am4core.create("am4chartsdiv", vm.am4charts.PieChart);
     vm.chart.innerRadius = vm.am4core.percent(50);
     // Chart series configuration
     vm.chartSeries = vm.chart.series.push(new vm.am4charts.PieSeries());
