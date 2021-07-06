@@ -19,6 +19,7 @@ export const GlobalChart = {
 
     data: () => ({
         chart: undefined,
+        chartTitle: undefined,
         chartCategoryAxis: undefined,
         chartValueAxis: undefined,
         chartSeries: undefined,
