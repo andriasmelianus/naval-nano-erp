@@ -28,6 +28,11 @@ export default {
 
     // Chart configuration.
     vm.chart = vm.am4core.create("am4chartsdiv", vm.am4charts.XYChart);
+    // Chart title configuration
+    vm.chartTitle = vm.chart.titles.create();
+    vm.chartTitle.text = "World Population";
+    vm.chartTitle.fontSize = 32;
+    vm.chartTitle.marginBottom = 30;
 
     // Chart data configuration.
     vm.chartData = vm.countries;
@@ -57,6 +62,7 @@ export default {
     vm.chartSeries2.dataFields.categoryX = "country";
     vm.chartSeries2.dataFields.valueY = "adult";
     vm.chartSeries2.name = "Adult";
+    vm.chartSeries2.tooltipText = "{name}: [bold]{valueY}[/]";
     vm.chartSeries2.stacked = true;
 
     // Add cursor.
