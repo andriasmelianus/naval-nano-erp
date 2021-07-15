@@ -1,15 +1,17 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12" md="12">
-        <div class="text-h5 pb-4">Ganti Perusahaan Aktif</div>
-        <company-select-data-iterator></company-select-data-iterator>
-      </v-col>
-    </v-row>
-  </v-container>
+  <page-content>
+    <template v-slot:title>{{ $metaInfo.title }}</template>
+    <template v-slot:subtitle
+      >Pilih salah satu untuk mengelola data yang ada di dalam perusahaan
+      tersebut.</template
+    >
+
+    <company-select-data-iterator></company-select-data-iterator>
+  </page-content>
 </template>
 
 <script>
+import PageContent from "~/components/_support/page-content.vue";
 import CompanySelectDataIterator from "~/components/company/data-iterators/select";
 export default {
   layout: "dashboard",
@@ -21,6 +23,7 @@ export default {
   },
 
   components: {
+    PageContent,
     CompanySelectDataIterator,
   },
 };

@@ -1,24 +1,17 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12" md="12">
-        <div class="text-center text-h4">{{ $metaInfo.title }}</div>
-        <div class="text-center text-subtitle-1">
-          Mengelola data role, termasuk di dalamnya menambahkan permission yang
-          diperlukan.
-        </div>
-      </v-col>
-    </v-row>
+  <page-content>
+    <template v-slot:title>{{ $metaInfo.title }}</template>
+    <template v-slot:subtitle
+      >Mengelola data role, termasuk di dalamnya menambahkan permission yang
+      diperlukan.</template
+    >
 
-    <v-row>
-      <v-col cols="12" md="12">
-        <role-manager></role-manager>
-      </v-col>
-    </v-row>
-  </v-container>
+    <role-manager></role-manager>
+  </page-content>
 </template>
 
 <script>
+import PageContent from "~/components/_support/page-content.vue";
 import RoleManager from "~/components/role/manager.vue";
 export default {
   layout: "dashboard",
@@ -30,6 +23,7 @@ export default {
   },
 
   components: {
+    PageContent,
     RoleManager,
   },
 };

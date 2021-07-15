@@ -1,5 +1,10 @@
 <template>
-  <v-container fluid>
+  <page-content>
+    <template v-slot:title>{{ $metaInfo.title }}</template>
+    <template v-slot:subtitle>
+      Mengubah data perusahaan. Cabang dapat ditambahkan melalui halaman ini.
+    </template>
+
     <v-row>
       <v-col cols="12" md="6">
         <v-card>
@@ -18,10 +23,11 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </page-content>
 </template>
 
 <script>
+import PageContent from "~/components/_support/page-content.vue";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/forms/default";
 import BranchSmallTable from "~/components/branch/tables/default-small";
@@ -37,6 +43,7 @@ export default {
   mixins: [MessageExtractor],
 
   components: {
+    PageContent,
     CompanyForm,
     BranchSmallTable,
   },
