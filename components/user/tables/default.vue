@@ -1,12 +1,11 @@
 <template>
   <v-data-table
-    :headers="smallHeaders"
+    :headers="headers"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
     :search="searchKeywords"
-    :items-per-page="5"
     v-model="selectedRecords"
     @item-selected="handleRecordSelected"
     show-select
@@ -48,25 +47,26 @@
 
       <v-dialog v-model="formIsShown" max-width="500px" ref="formDialog">
         <v-card>
-          <room-default-form
+          <user-default-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
             @recordCreated="handleRecordCreated($event)"
             @recordUpdated="handleRecordUpdated($event)"
-          ></room-default-form>
+          ></user-default-form>
         </v-card>
-      </v-dialog> </template
-  ></v-data-table>
+      </v-dialog>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
+import UserDefaultForm from "~/components/user/forms/default";
 import { Handler } from "./handler";
-import RoomDefaultForm from "~/components/room/_forms/default";
 export default {
   mixins: [Handler],
 
   components: {
-    RoomDefaultForm,
+    UserDefaultForm,
   },
 };
 </script>

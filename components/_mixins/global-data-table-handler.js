@@ -108,11 +108,11 @@ export const GlobalDataTableHandler = {
         },
 
         /**
-         * Emit a "recordSelected" event when a record is selected.
+         * Emit a "record-selected" event when a record is selected.
          * @param {Object} context
          */
         handleRecordSelected(context) {
-            this.$emit("recordSelected", context);
+            this.$emit("record-selected", context);
         },
 
         /**
@@ -160,7 +160,7 @@ export const GlobalDataTableHandler = {
                         vm.records.splice(vm.selectedRecordIndex, 1);
                         vm.selectedRecords = [];
 
-                        vm.$emit("recordSelected", []);
+                        vm.$emit("record-selected", []);
 
                         vm.$store.commit('global-snackbar/show', {
                             color: 'success',
@@ -202,7 +202,7 @@ export const GlobalDataTableHandler = {
                         vm.readRecords();
                         vm.selectedRecords = [];
 
-                        vm.$emit("recordSelected", []);
+                        vm.$emit("record-selected", []);
 
                         vm.$store.commit('global-snackbar/show', {
                             color: 'success',

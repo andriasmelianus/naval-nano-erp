@@ -90,7 +90,7 @@ export default {
   mounted() {
     let vm = this;
     vm.$axios
-      .$get("/employee/id-types")
+      .$get(vm.resourceUri + "/id-types")
       .then(function (result) {
         vm.id_types = result;
       })

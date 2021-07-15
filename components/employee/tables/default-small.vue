@@ -5,8 +5,8 @@
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
-    :search="searchKeywords"
     :items-per-page="5"
+    :search="searchKeywords"
     v-model="selectedRecords"
     @item-selected="handleRecordSelected"
     show-select
@@ -37,10 +37,7 @@
             <v-list-item-title>Ubah</v-list-item-title>
           </v-list-item>
 
-          <v-list-item
-            @click="deleteSingleRecord"
-            :disabled="!selectedRecordExists"
-          >
+          <v-list-item @click="deleteSingleRecord" disabled>
             <v-list-item-title>Hapus</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -48,26 +45,25 @@
 
       <v-dialog v-model="formIsShown" max-width="500px" ref="formDialog">
         <v-card>
-          <user-default-form
+          <employee-default-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
             @recordCreated="handleRecordCreated($event)"
             @recordUpdated="handleRecordUpdated($event)"
-          ></user-default-form>
+          ></employee-default-form>
         </v-card>
-      </v-dialog>
-    </template>
-  </v-data-table>
+      </v-dialog> </template
+  ></v-data-table>
 </template>
 
 <script>
-import UserDefaultForm from "~/components/user/_forms/default";
 import { Handler } from "./handler";
+import EmployeeDefaultForm from "~/components/employee/forms/default";
 export default {
   mixins: [Handler],
 
   components: {
-    UserDefaultForm,
+    EmployeeDefaultForm,
   },
 };
 </script>

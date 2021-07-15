@@ -1,11 +1,12 @@
 <template>
   <v-data-table
-    :headers="headers"
+    :headers="smallHeaders"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
     :search="searchKeywords"
+    :items-per-page="5"
     v-model="selectedRecords"
     @item-selected="handleRecordSelected"
     show-select
@@ -60,7 +61,7 @@
 </template>
 
 <script>
-import UserDefaultForm from "~/components/user/_forms/default";
+import UserDefaultForm from "~/components/user/forms/default";
 import { Handler } from "./handler";
 export default {
   mixins: [Handler],
