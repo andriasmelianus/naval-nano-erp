@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row no-gutters>
+    <v-row>
       <v-col cols="12" md="8">
-        <v-card class="mr-2">
+        <v-card>
           <role-default-table
             @record-selected="handleRecordSelected"
           ></role-default-table>
@@ -10,7 +10,7 @@
       </v-col>
 
       <v-col cols="12" md="4">
-        <v-card class="ml-2">
+        <v-card>
           <permission-default-table :role="role"></permission-default-table>
         </v-card>
       </v-col>
