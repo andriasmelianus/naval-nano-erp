@@ -1,10 +1,12 @@
 <template>
-  <v-row class="fill-height">
-    <v-col cols="12" md="12">
-      <div class="text-h5 pb-4">Ganti Cabang Aktif</div>
-      <branch-select-data-iterator></branch-select-data-iterator>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" md="12">
+        <div class="text-h5 pb-4">Ganti Cabang Aktif</div>
+        <branch-select-data-iterator></branch-select-data-iterator>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

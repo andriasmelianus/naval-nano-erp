@@ -13,6 +13,7 @@
   >
     <template v-slot:top>
       <v-toolbar short flat>
+        <v-toolbar-title class="text-h6">Permission</v-toolbar-title>
         <v-btn
           color="primary"
           icon
@@ -34,9 +35,7 @@
           append-icon="mdi-magnify"
           single-line
           hide-details
-          class="mr-3"
         ></v-text-field>
-        <v-toolbar-title class="text-h6">Permission</v-toolbar-title>
       </v-toolbar>
 
       <v-dialog v-model="formIsShown" max-width="600px" ref="formDialog">

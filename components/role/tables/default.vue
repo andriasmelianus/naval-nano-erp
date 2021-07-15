@@ -13,16 +13,16 @@
   >
     <template v-slot:top>
       <v-toolbar short flat>
-        <v-btn icon class="mr-3" @click="readRecords"
+        <v-toolbar-title class="text-h6">Data Role</v-toolbar-title>
+        <v-btn color="success" icon @click="readRecords"
           ><v-icon>mdi-refresh</v-icon></v-btn
         >
-        <v-btn color="primary" icon class="mr-3" @click="showForm(false)"
+        <v-btn color="primary" icon @click="showForm(false)"
           ><v-icon>mdi-plus</v-icon></v-btn
         >
         <v-btn
           color="warning"
           icon
-          class="mr-3"
           :disabled="!selectedRecordExists"
           @click="showForm(true)"
           ><v-icon>mdi-pencil</v-icon></v-btn
@@ -30,7 +30,6 @@
         <v-btn
           color="error"
           icon
-          class="mr-3"
           :disabled="!selectedRecordExists"
           @click="deleteSingleRecord"
           ><v-icon>mdi-minus</v-icon></v-btn
@@ -41,9 +40,7 @@
           append-icon="mdi-magnify"
           single-line
           hide-details
-          class="mr-3"
         ></v-text-field>
-        <v-toolbar-title class="text-h6">Data Role</v-toolbar-title>
       </v-toolbar>
     </template>
 

@@ -1,12 +1,21 @@
 <template>
-  <v-row align="start">
-    <v-col cols="12" md="12">
-      <div class="text-h4">{{ $metaInfo.title }}</div>
-    </v-col>
-    <v-col cols="12" md="12">
-      <role-manager></role-manager>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" md="12">
+        <div class="text-center text-h4">{{ $metaInfo.title }}</div>
+        <div class="text-center text-subtitle-1">
+          Mengelola data role, termasuk di dalamnya menambahkan permission yang
+          diperlukan.
+        </div>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12" md="12">
+        <role-manager></role-manager>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -16,7 +25,7 @@ export default {
 
   head() {
     return {
-      title: "Role/Hak Akses",
+      title: "Role & Permission (Hak Akses)",
     };
   },
 

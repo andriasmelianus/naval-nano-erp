@@ -1,22 +1,24 @@
 <template>
-  <v-row class="fill-height">
-    <v-col cols="12" md="6">
-      <v-card>
-        <company-form
-          :record="companyData"
-          edit-mode
-          @recordUpdated="companyUpdated"
-        ></company-form>
-      </v-card>
-    </v-col>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card>
+          <company-form
+            :record="companyData"
+            edit-mode
+            @recordUpdated="companyUpdated"
+          ></company-form>
+        </v-card>
+      </v-col>
 
-    <v-col cols="12" md="6">
-      <v-card>
-        <v-card-title>Data Cabang</v-card-title>
-        <branch-small-table></branch-small-table>
-      </v-card>
-    </v-col>
-  </v-row>
+      <v-col cols="12" md="6">
+        <v-card>
+          <v-card-title>Data Cabang</v-card-title>
+          <branch-small-table></branch-small-table>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

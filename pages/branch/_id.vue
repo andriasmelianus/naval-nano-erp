@@ -1,15 +1,17 @@
 <template>
-  <v-row class="fill-height">
-    <v-col cols="12" md="6">
-      <v-card>
-        <branch-form
-          :record="branchData"
-          edit-mode
-          @recordUpdated="branchUpdated"
-        ></branch-form>
-      </v-card>
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card>
+          <branch-form
+            :record="branchData"
+            edit-mode
+            @recordUpdated="branchUpdated"
+          ></branch-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

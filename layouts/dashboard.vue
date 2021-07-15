@@ -11,12 +11,10 @@
     ></application-bar>
 
     <v-main>
-      <v-container class="fill-height" fluid>
-        <nuxt />
-      </v-container>
-
-      <footer-section></footer-section>
+      <nuxt />
     </v-main>
+
+    <footer-section></footer-section>
 
     <global-snackbar></global-snackbar>
 
