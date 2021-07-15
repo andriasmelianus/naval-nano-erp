@@ -12,10 +12,10 @@
       <template v-slot:default="{ items }">
         <v-row>
           <v-col v-for="item in items" :key="item.id" cols="12" sm="6" md="3">
-            <branch-activation-card
+            <company-activation-card
               :record="item"
-              @choosen="branchChoosen"
-            ></branch-activation-card>
+              @choosen="companyChoosen"
+            ></company-activation-card>
           </v-col>
         </v-row>
       </template>
@@ -26,14 +26,15 @@
       <v-card>
         <v-card-title>Konfirmasi</v-card-title>
         <v-card-text
-          >Penggantian cabang yang aktif mengharuskan Anda untuk login kembali.
+          >Penggantian perusahaan yang aktif mengharuskan Anda untuk login
+          kembali.
           <br />
           <br />
           Anda yakin?</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text color="green" @click="changeActiveBranch">OK</v-btn>
+          <v-btn text color="green" @click="changeActiveCompany">OK</v-btn>
           <v-btn text color="red" @click="isConfirmationDialogShown = false"
             >Batal</v-btn
           >
@@ -46,8 +47,8 @@
       <v-card>
         <v-card-title>Invalid</v-card-title>
         <v-card-text
-          >Tidak dapat memilih cabang yang sedang aktif. Mohon pilih cabang yang
-          lainnya.</v-card-text
+          >Tidak dapat memilih perusahaan yang sedang aktif. Mohon pilih
+          perusahaan yang lainnya.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -61,7 +62,7 @@
       <v-card>
         <v-card-title>Berhasil</v-card-title>
         <v-card-text>
-          Cabang yang aktif telah diubah. <br />
+          Perusahaan yang aktif telah diubah. <br />
           Mohon tunggu beberapa saat sistem akan mengantarkan Anda ke halaman
           login.
         </v-card-text>
@@ -72,16 +73,16 @@
 
 <script>
 import { Handler } from "./handler";
-import BranchActivationCard from "~/components/branch/_cards/activation";
+import CompanyActivationCard from "~/components/company/cards/activation";
 export default {
   mixins: [Handler],
 
   components: {
-    BranchActivationCard,
+    CompanyActivationCard,
   },
 
   data: () => ({
-    selectedBranch: {},
+    selectedCompany: {},
 
     isConfirmationDialogShown: false,
     isInvalidDialogShown: false,
@@ -89,24 +90,24 @@ export default {
   }),
 
   methods: {
-    isTheChoosenEqualWithCurrentlyActive(choosenBranchId) {
-      return this.$auth.user.active_branch_id == choosenBranchId;
+    isTheChoosenEqualWithCurrentlyActive(choosenCompanyId) {
+      return this.$auth.user.active_company_id == choosenCompanyId;
     },
 
-    branchChoosen(branch) {
+    companyChoosen(company) {
       let vm = this;
-      if (vm.isTheChoosenEqualWithCurrentlyActive(branch.id)) {
+      if (vm.isTheChoosenEqualWithCurrentlyActive(company.id)) {
         vm.isInvalidDialogShown = true;
       } else {
         vm.isConfirmationDialogShown = true;
-        vm.selectedBranch = Object.assign({}, vm.selectedBranch, branch);
+        vm.selectedCompany = Object.assign({}, vm.selectedCompany, company);
       }
     },
 
-    changeActiveBranch() {
+    changeActiveCompany() {
       let vm = this;
       vm.$axios
-        .$post("/branch/activate/" + vm.selectedBranch.id)
+        .$post("/company/activate/" + vm.selectedCompany.id)
         .then(function (result) {
           vm.isConfirmationDialogShown = false;
           vm.isSuccessDialogShown = true;

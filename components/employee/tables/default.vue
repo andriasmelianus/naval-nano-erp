@@ -1,16 +1,15 @@
 <template>
   <v-data-table
-    :headers="smallHeaders"
+    :headers="headers"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
-    :items-per-page="5"
-    :search="searchKeywords"
-    v-model="selectedRecords"
-    @item-selected="handleRecordSelected"
     show-select
     single-select
+    v-model="selectedRecords"
+    :search="searchKeywords"
+    @item-selected="handleRecordSelected"
   >
     <template v-slot:header.data-table-select>
       <v-menu offset-y open-on-hover>
@@ -58,7 +57,7 @@
 
 <script>
 import { Handler } from "./handler";
-import EmployeeDefaultForm from "~/components/employee/_forms/default";
+import EmployeeDefaultForm from "~/components/employee/forms/default";
 export default {
   mixins: [Handler],
 

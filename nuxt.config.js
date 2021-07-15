@@ -4,7 +4,7 @@ const APPLICATION_ID = 'naval-nano-erp',
   APPLICATION_NAME = 'Naval Nano ERP',
   APPLICATION_DESCRIPTION = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + APPLICATION_NAME + ' merupakan satu kesatuan dari sistem Rekanpintar.',
   APPLICATION_YEAR = 2021,
-  APPLICATION_API_URL = 'http://rekanpintar.local',
+  APPLICATION_API_URL = 'http://rekanpintar.test',
   TOKEN_MAX_AGE = 60 * 60 * 8
 
 export default {
