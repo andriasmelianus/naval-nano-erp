@@ -1,25 +1,33 @@
 <template>
-  <v-row class="fill-height">
-    <v-col cols="12" md="6">
-      <v-card>
-        <company-form
-          :record="companyData"
-          edit-mode
-          @recordUpdated="companyUpdated"
-        ></company-form>
-      </v-card>
-    </v-col>
+  <page-content>
+    <template v-slot:title>{{ $metaInfo.title }}</template>
+    <template v-slot:subtitle>
+      Mengubah data perusahaan. Cabang dapat ditambahkan melalui halaman ini.
+    </template>
 
-    <v-col cols="12" md="6">
-      <v-card>
-        <v-card-title>Data Cabang</v-card-title>
-        <branch-small-table></branch-small-table>
-      </v-card>
-    </v-col>
-  </v-row>
+    <v-row>
+      <v-col cols="12" md="6">
+        <v-card>
+          <company-form
+            :record="companyData"
+            edit-mode
+            @recordUpdated="companyUpdated"
+          ></company-form>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="6">
+        <v-card>
+          <v-card-title>Data Cabang</v-card-title>
+          <branch-small-table></branch-small-table>
+        </v-card>
+      </v-col>
+    </v-row>
+  </page-content>
 </template>
 
 <script>
+import PageContent from "~/components/_support/page-content.vue";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/forms/default";
 import BranchSmallTable from "~/components/branch/tables/default-small";
@@ -35,6 +43,7 @@ export default {
   mixins: [MessageExtractor],
 
   components: {
+    PageContent,
     CompanyForm,
     BranchSmallTable,
   },

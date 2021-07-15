@@ -126,7 +126,7 @@ export const GlobalServerSideDataTableHandler = {
                         vm.readRecords();
                         vm.selectedRecords = [];
 
-                        vm.$emit('recordSelected', []);
+                        vm.$emit('record-selected', []);
 
                         vm.$store.commit('global-snackbar/show', {
                             color: 'success',
