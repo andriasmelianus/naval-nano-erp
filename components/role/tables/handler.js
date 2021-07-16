@@ -8,7 +8,6 @@ export const Handler = {
             { text: "Nama", value: "name", align: "left" },
             { text: "Hak Khusus", value: "special" },
             { text: "Deskripsi", value: "description" },
-            { text: "Diinput", value: "created_at" },
             { text: "Diupdate", value: "updated_at" }
         ],
         smallHeaders: [
