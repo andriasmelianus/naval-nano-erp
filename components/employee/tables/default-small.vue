@@ -14,7 +14,7 @@
   >
     <template v-slot:top>
       <v-toolbar short flat>
-        <v-toolbar-title class="text-h6 mr-3">Data Pengguna</v-toolbar-title>
+        <v-toolbar-title class="text-h6 mr-3">Data Karyawan</v-toolbar-title>
 
         <v-text-field
           label="Cari"
