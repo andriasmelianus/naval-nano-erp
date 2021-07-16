@@ -153,7 +153,6 @@ export default {
 
     /**
      * Send the selected permissions to be detached from selected role.
-     * @param {Array} permissions
      * @return void
      */
     deassignPermissions() {
