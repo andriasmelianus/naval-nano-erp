@@ -12,6 +12,20 @@
     show-select
     single-select
   >
+    <template v-slot:top>
+      <v-toolbar short flat>
+        <v-toolbar-title class="text-h6 mr-3">Data Pengguna</v-toolbar-title>
+
+        <v-text-field
+          label="Cari"
+          v-model="searchKeywords"
+          append-icon="mdi-magnify"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-toolbar>
+    </template>
+
     <template v-slot:header.data-table-select>
       <v-menu offset-y open-on-hover>
         <template v-slot:activator="{ on }">
