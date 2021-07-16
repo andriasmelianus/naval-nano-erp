@@ -5,24 +5,20 @@
       Mengubah data perusahaan. Cabang dapat ditambahkan melalui halaman ini.
     </template>
 
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-card>
+    <v-card>
+      <v-row>
+        <v-col cols="12" md="6">
           <company-form
             :record="companyData"
             edit-mode
             @recordUpdated="companyUpdated"
           ></company-form>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="6">
-        <v-card>
-          <v-card-title>Data Cabang</v-card-title>
+        </v-col>
+        <v-col cols="12" md="6">
           <branch-small-table></branch-small-table>
-        </v-card>
-      </v-col>
-    </v-row>
+        </v-col>
+      </v-row>
+    </v-card>
   </page-content>
 </template>
 
