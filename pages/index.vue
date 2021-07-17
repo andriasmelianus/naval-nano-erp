@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row class="pt-3">
       <v-col cols="12" md="3">
         <company-dashboard-card></company-dashboard-card>
