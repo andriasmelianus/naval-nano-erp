@@ -19,6 +19,7 @@
           sit quisquam laborum voluptatibus deserunt enim expedita quam eaque
           placeat, magni ducimus dolore!</slot
         >
+        <br />
       </v-col>
     </v-row>
   </v-container>
