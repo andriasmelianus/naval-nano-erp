@@ -1,19 +1,19 @@
 import { GlobalServerSideDataTableHandler } from "~/components/_mixins/global-server-side-data-table-handler";
-import { DefaultRecord } from '~/components/permission/record'
+import { DefaultRecord } from "~/components/permission/record";
 export const Handler = {
-    mixins: [GlobalServerSideDataTableHandler],
+  mixins: [GlobalServerSideDataTableHandler],
 
-    data: () => ({
-        headers: [
-            { text: "Nama", value: "name", align: "left" },
-            { text: "Deskripsi", value: "description" },
-        ],
-        smallHeaders: [{ text: "Nama", value: "name", align: "left" }],
-        singleColumnHeader: [{ text: "Nama", value: "name", align: "left" }],
+  data: () => ({
+    headers: [
+      { text: "Nama", value: "name", align: "left" },
+      { text: "Deskripsi", value: "description" }
+    ],
+    smallHeaders: [{ text: "Nama", value: "name", align: "left" }],
+    singleColumnHeader: [{ text: "Nama", value: "name", align: "left" }],
 
-        defaultRecord: DefaultRecord,
-        editedRecord: DefaultRecord,
+    defaultRecord: DefaultRecord,
+    editedRecord: DefaultRecord,
 
-        resourceUri: "/permission"
-    })
-}
+    resourceUri: "/permission"
+  })
+};

@@ -1,11 +1,11 @@
 export const DefaultRecord = {
-    name: '',
-    special: '',
-    description: '',
-}
+  name: "",
+  special: "",
+  description: ""
+};
 
 export const DefaultInvalidInputMessage = {
-    name: [],
-    special: [],
-    description: [],
-}
+  name: [],
+  special: [],
+  description: []
+};

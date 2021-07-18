@@ -1,18 +1,21 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from "vuetify/es5/util/colors";
 
-const APPLICATION_ID = 'naval-nano-erp',
-  APPLICATION_NAME = 'Naval Nano ERP',
-  APPLICATION_DESCRIPTION = 'Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. ' + APPLICATION_NAME + ' merupakan satu kesatuan dari sistem Rekanpintar.',
+const APPLICATION_ID = "naval-nano-erp",
+  APPLICATION_NAME = "Naval Nano ERP",
+  APPLICATION_DESCRIPTION =
+    "Aplikasi ERP skala nano yang dibangun dengan memperhatikan kecepatan dan kemudahan dalam penggunaannya. " +
+    APPLICATION_NAME +
+    " merupakan satu kesatuan dari sistem Rekanpintar.",
   APPLICATION_YEAR = 2021,
-  APPLICATION_API_URL = 'http://rekanpintar.test',
-  TOKEN_MAX_AGE = 60 * 60 * 8
+  APPLICATION_API_URL = "http://rekanpintar.test",
+  TOKEN_MAX_AGE = 60 * 60 * 8;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
+  target: "static",
 
   /**
    * Global Environment Values.
@@ -27,28 +30,21 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - ' + APPLICATION_NAME,
+    titleTemplate: "%s - " + APPLICATION_NAME,
     title: process.env.npm_package_name,
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@/assets/main.css',
-    '@mdi/font/css/materialdesignicons.min.css'
-  ],
+  css: ["@/assets/main.css", "@mdi/font/css/materialdesignicons.min.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/axios',
-  ],
+  plugins: ["~/plugins/axios"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -56,21 +52,21 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    ['@nuxtjs/vuetify', { iconfont: 'mdi' }]
+    ["@nuxtjs/vuetify", { iconfont: "mdi" }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    "@nuxtjs/axios",
     // https://github.com/nuxt-community/proxy-module
-    '@nuxtjs/proxy',
+    "@nuxtjs/proxy",
     // https://auth.nuxtjs.org/
-    '@nuxtjs/auth-next',
+    "@nuxtjs/auth-next",
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    "@nuxtjs/pwa",
     // https://go.nuxtjs.dev/content
-    '@nuxt/content',
+    "@nuxt/content"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -81,33 +77,33 @@ export default {
      * host & prefix sets the default host and prefix for every request using this.$axios!
      * So that the other components or pages only provide the URI to fetch the API resource.
      */
-    host: 'localhost',
-    prefix: '/api',
+    host: "localhost",
+    prefix: "/api",
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json"
     }
   },
   proxy: {
-    '/api': {
+    "/api": {
       target: APPLICATION_API_URL,
-      pathRewrite: { '^/api': '/api/v1' },
+      pathRewrite: { "^/api": "/api/v1" }
     }
   },
 
   // Zero-boilerplate authentication support for Nuxt.js!
   auth: {
     strategies: {
-      'laravelJWT': {
-        provider: 'laravel/jwt',
+      laravelJWT: {
+        provider: "laravel/jwt",
         /**
          * @nuxtjs/auth-next automatically sets the default url to "./api".
          * In the name of Single Responsibility Principle of Axios API URL generation,
          * we will omit the api level with double dots notation: "..".
          */
-        url: '..',
+        url: "..",
         token: {
-          property: 'token',
+          property: "token",
           maxAge: TOKEN_MAX_AGE
         },
         refreshToken: {
@@ -120,7 +116,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: "en"
     }
   },
 
@@ -129,7 +125,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ["~/assets/variables.scss"],
     defaultAssets: false,
     theme: {
       dark: false,
@@ -148,13 +144,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
+  build: {},
 
   /**
    * !!! Application Router !!!
    */
   router: {
-    middleware: ['auth']
+    middleware: ["auth"]
   }
-}
+};

@@ -1,20 +1,23 @@
-import { GlobalFormHandler } from "~/components/_mixins/global-form-handler"
-import { DefaultRecord, DefaultInvalidInputMessage } from '~/components/room/record'
+import { GlobalFormHandler } from "~/components/_mixins/global-form-handler";
+import {
+  DefaultRecord,
+  DefaultInvalidInputMessage
+} from "~/components/room/record";
 export const Handler = {
-    mixins: [GlobalFormHandler],
+  mixins: [GlobalFormHandler],
 
-    props: {
-        record: {
-            type: Object,
-            default: function () {
-                return DefaultRecord;
-            }
-        }
-    },
+  props: {
+    record: {
+      type: Object,
+      default: function() {
+        return DefaultRecord;
+      }
+    }
+  },
 
-    data: () => ({
-        defaultInvalidInputMessage: DefaultInvalidInputMessage,
+  data: () => ({
+    defaultInvalidInputMessage: DefaultInvalidInputMessage,
 
-        resourceUri: '/room'
-    })
-}
+    resourceUri: "/room"
+  })
+};
