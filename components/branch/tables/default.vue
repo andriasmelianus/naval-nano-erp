@@ -85,8 +85,8 @@
           <branch-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
-            @recordCreated="handleRecordCreated($event)"
-            @recordUpdated="handleRecordUpdated($event)"
+            @record-created="handleRecordCreated($event)"
+            @record-updated="handleRecordUpdated($event)"
           ></branch-form>
         </v-card>
       </v-dialog> </template

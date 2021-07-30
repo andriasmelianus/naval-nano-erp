@@ -65,8 +65,8 @@
           <room-default-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
-            @recordCreated="handleRecordCreated($event)"
-            @recordUpdated="handleRecordUpdated($event)"
+            @record-created="handleRecordCreated($event)"
+            @record-updated="handleRecordUpdated($event)"
           ></room-default-form>
         </v-card>
       </v-dialog> </template

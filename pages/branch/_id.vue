@@ -6,7 +6,7 @@
           <branch-form
             :record="branchData"
             edit-mode
-            @recordUpdated="branchUpdated"
+            @record-updated="branchUpdated"
           ></branch-form>
         </v-card>
       </v-col>

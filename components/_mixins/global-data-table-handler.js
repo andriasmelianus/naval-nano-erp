@@ -116,7 +116,7 @@ export const GlobalDataTableHandler = {
     },
 
     /**
-     * Handle the recordCreated event fired from a form.
+     * Handle the record-created event fired from a form.
      * @param {Object} createdRecord
      */
     handleRecordCreated(createdRecord) {
@@ -131,7 +131,7 @@ export const GlobalDataTableHandler = {
     },
 
     /**
-     * Handle the recordUpdated event fired from a form.
+     * Handle the record-updated event fired from a form.
      * @param {Object} updatedRecord
      */
     handleRecordUpdated(updatedRecord) {

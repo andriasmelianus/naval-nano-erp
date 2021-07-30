@@ -11,7 +11,7 @@
           <company-form
             :record="companyData"
             edit-mode
-            @recordUpdated="companyUpdated"
+            @record-updated="companyUpdated"
           ></company-form>
         </v-col>
         <v-col cols="12" md="6">

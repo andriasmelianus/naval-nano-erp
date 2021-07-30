@@ -69,7 +69,7 @@ export const GlobalFormHandler = {
       vm.$axios
         .$post(vm.resourceUri, newRecord)
         .then(function(result) {
-          vm.$emit("recordCreated", result);
+          vm.$emit("record-created", result);
 
           vm.$store.commit("global-snackbar/show", {
             color: "success",
@@ -90,7 +90,7 @@ export const GlobalFormHandler = {
       vm.$axios
         .$put(vm.resourceUri + "/" + updatedRecord.id, updatedRecord)
         .then(function(result) {
-          vm.$emit("recordUpdated", result);
+          vm.$emit("record-updated", result);
 
           vm.$store.commit("global-snackbar/show", {
             color: "success",

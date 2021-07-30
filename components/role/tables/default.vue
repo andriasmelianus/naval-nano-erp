@@ -83,8 +83,8 @@
           <role-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
-            @recordCreated="handleRecordCreated($event)"
-            @recordUpdated="handleRecordUpdated($event)"
+            @record-created="handleRecordCreated($event)"
+            @record-updated="handleRecordUpdated($event)"
           ></role-form>
         </v-card>
       </v-dialog> </template
