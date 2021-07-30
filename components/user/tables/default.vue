@@ -80,12 +80,27 @@
 
       <v-dialog v-model="formIsShown" max-width="500px" ref="formDialog">
         <v-card>
-          <user-default-form
-            :record="editedRecord"
-            :edit-mode="formIsInEditMode"
-            @recordCreated="handleRecordCreated($event)"
-            @recordUpdated="handleRecordUpdated($event)"
-          ></user-default-form>
+          <v-tabs v-model="tabPosition" centered>
+            <v-tab href="#new-user">Baru</v-tab>
+            <v-tab href="#existing-user">Terdaftar</v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="tabPosition">
+            <v-tab-item value="new-user">
+              <user-default-form
+                :record="editedRecord"
+                :edit-mode="formIsInEditMode"
+                @recordCreated="handleRecordCreated($event)"
+                @recordUpdated="handleRecordUpdated($event)"
+              ></user-default-form>
+            </v-tab-item>
+
+            <v-tab-item value="existing-user">
+              <user-existing-finder
+                @record-selected="handleRecordCreated"
+              ></user-existing-finder>
+            </v-tab-item>
+          </v-tabs-items>
         </v-card>
       </v-dialog>
     </template>
@@ -93,13 +108,19 @@
 </template>
 
 <script>
-import UserDefaultForm from "~/components/user/forms/default";
+import UserDefaultForm from "~/components/user/forms/default.vue";
+import UserExistingFinder from "~/components/user/forms/existing-finder.vue";
 import { Handler } from "./handler";
 export default {
   mixins: [Handler],
 
   components: {
     UserDefaultForm,
+    UserExistingFinder,
   },
+
+  data: () => ({
+    tabPosition: null,
+  }),
 };
 </script>
