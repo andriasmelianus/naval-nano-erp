@@ -100,5 +100,9 @@ export default {
     UserDefaultForm,
     UserExistingFinder,
   },
+
+  data: () => ({
+    tabPosition: null,
+  }),
 };
 </script>
