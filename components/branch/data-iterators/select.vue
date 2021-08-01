@@ -9,6 +9,40 @@
       :items-per-page="8"
       :footer-props="{ 'items-per-page-options': [8, 16] }"
     >
+      <!-- Data Iterator Header -->
+      <template v-slot:header>
+        <v-toolbar class="mb-4" flat>
+          <v-toolbar-title class="text-h6 mr-3"
+            >Pilih Perusahaan</v-toolbar-title
+          >
+
+          <v-text-field
+            prepend-icon="mdi-magnify"
+            label="Cari"
+            class="mr-3"
+            v-model="searchKeywords"
+            hide-details
+            single-line
+          ></v-text-field>
+
+          <v-select
+            label="Urutkan"
+            class="mr-3"
+            v-model="sortColumn"
+            :items="sortableColumns"
+            hide-details
+          ></v-select>
+
+          <v-btn-toggle v-model="sortDesc" mandatory>
+            <v-btn icon value="false"
+              ><v-icon>mdi-sort-reverse-variant</v-icon></v-btn
+            >
+            <v-btn icon value="true"><v-icon>mdi-sort-variant</v-icon></v-btn>
+          </v-btn-toggle>
+        </v-toolbar>
+      </template>
+
+      <!-- Data Iterator Content -->
       <template v-slot:default="{ items }">
         <v-row>
           <v-col v-for="item in items" :key="item.id" cols="12" sm="6" md="3">
