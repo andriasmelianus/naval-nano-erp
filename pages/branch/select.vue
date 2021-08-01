@@ -6,13 +6,13 @@
       tersebut.</template
     >
 
-    <branch-select-data-iterator></branch-select-data-iterator>
+    <branch-data-iterator-selector></branch-data-iterator-selector>
   </page-content>
 </template>
 
 <script>
 import PageContent from "~/components/_support/page-content.vue";
-import BranchSelectDataIterator from "~/components/branch/data-iterators/select";
+import BranchDataIteratorSelector from "~/components/branch/data-iterators/selector.vue";
 export default {
   layout: "dashboard",
 
@@ -24,7 +24,7 @@ export default {
 
   components: {
     PageContent,
-    BranchSelectDataIterator,
+    BranchDataIteratorSelector,
   },
 };
 </script>
