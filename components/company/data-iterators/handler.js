@@ -4,6 +4,11 @@ export const Handler = {
   mixins: [GlobalDataIteratorHandler],
 
   data: () => ({
+    sortableColumns: [
+      { text: "Nama", value: "name" },
+      { text: "Legalitas", value: "legal_name" }
+    ],
+
     defaultRecord: DefaultRecord,
     editedRecord: DefaultRecord,
 
