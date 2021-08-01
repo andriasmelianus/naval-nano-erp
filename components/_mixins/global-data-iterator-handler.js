@@ -12,6 +12,11 @@ export const GlobalDataIteratorHandler = {
   },
 
   data: () => ({
+    // Data Iterator Header
+    sortableColumns: [], // Sample value: {text: "Nama", value: "name"}
+    sortColumn: "", // Vue Data Iterator component is recommended only using 1 sorted column.
+    sortDesc: "false",
+
     // Data.
     records: undefined,
     recordsTotal: undefined,
@@ -48,6 +53,32 @@ export const GlobalDataIteratorHandler = {
      */
     filter(newFilter, oldFilter) {
       this.readRecords();
+    },
+
+    /**
+     * Perform readRecords() everytime sortColumn is changed by changing otherServerParams property.
+     * sortColumn is assigned to otherServerParams because Vuetify Data Iterator is unlike the Data Table.
+     * Data Iterator doesn't have built-in column to provide sortBy and sortDesc property to be sent to API server.
+     * @param {String} newSortColumn New selected column to be sort.
+     * @param {String} oldSortColumn Old selected column to be sort.
+     */
+    sortColumn(newSortColumn, oldSortColumn) {
+      this.otherServerParams = Object.assign({}, this.otherServerParams, {
+        sortBy: newSortColumn
+      });
+    },
+
+    /**
+     * Perform readRecords() everytime sortDesc is changed by changing otherServerParams property.
+     * sortDesc is assigned to otherServerParams because Vuetify Data Iterator is unlike the Data Table.
+     * Data Iterator doesn't have built-in column to provide sortBy and sortDesc property to be sent to API server.
+     * @param {String} newSortDescValue New value for sortDesc property.
+     * @param {String} oldSortDescValue Old value for sortDesc property.
+     */
+    sortDesc(newSortDescValue, oldSortDescValue) {
+      this.otherServerParams = Object.assign({}, this.otherServerParams, {
+        sortDesc: newSortDescValue
+      });
     },
 
     /**
@@ -121,7 +152,7 @@ export const GlobalDataIteratorHandler = {
      * Provide custom URI to fetch data for v-data-table or v-data-iterator.
      */
     resourceUriForVuetifyServerSideDataTable() {
-      return this.resourceUri + "/vuetify-data-table";
+      return this.resourceUri + "/vuetify-data-iterator";
     },
 
     /**
@@ -130,6 +161,18 @@ export const GlobalDataIteratorHandler = {
      */
     selectedRecordExists() {
       return this.selectedRecords.length > 0;
+    }
+  },
+
+  mounted() {
+    let vm = this;
+
+    /**
+     * Provide initial sort column if sortableColumns is provided.
+     * Initial sort column is the first [0] object in the sortableColumns.
+     */
+    if (vm.sortableColumns.length > 0) {
+      vm.sortColumn = vm.sortableColumns[0].value;
     }
   },
 
