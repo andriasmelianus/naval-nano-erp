@@ -6,13 +6,13 @@
       tersebut.</template
     >
 
-    <company-select-data-iterator></company-select-data-iterator>
+    <company-data-iterator-selector></company-data-iterator-selector>
   </page-content>
 </template>
 
 <script>
 import PageContent from "~/components/_support/page-content.vue";
-import CompanySelectDataIterator from "~/components/company/data-iterators/select";
+import CompanyDataIteratorSelector from "~/components/company/data-iterators/selector.vue";
 export default {
   layout: "dashboard",
 
@@ -24,7 +24,7 @@ export default {
 
   components: {
     PageContent,
-    CompanySelectDataIterator,
+    CompanyDataIteratorSelector,
   },
 };
 </script>
