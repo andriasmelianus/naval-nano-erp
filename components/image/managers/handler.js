@@ -27,6 +27,14 @@ export const Handler = {
     titlePlaceHolder: {
       type: String,
       default: "Judul Gambar"
+    },
+
+    /**
+     * Image height to be displayed as uploaded images.
+     */
+    height: {
+      type: Number,
+      default: 250
     }
   },
 
