@@ -40,13 +40,12 @@ export const Handler = {
       vm.$axios
         .$get(vm.resourceUri + "/base64/" + vm.id, {
           params: {
-            //   width: vm.width,
+            width: vm.width,
             height: vm.height
           }
         })
         .then(function(result) {
           vm.source = result;
-          //   vm.source = Buffer.from(result, "binary").toString("base64");
         })
         .catch(function(result) {
           console.log(result);
