@@ -16,19 +16,17 @@ export const GlobalUploadHandler = {
     },
 
     /**
-     * Already uploaded file to be shown in the beginning.
-     */
-    initialIds: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    },
-
-    /**
      * File type filter for open file dialog.
      */
     accept: String,
+
+    /**
+     * Field name to hold the file content.
+     */
+    fieldName: {
+      type: String,
+      default: "file"
+    },
 
     /**
      * API URI to accept uploaded files.
@@ -39,11 +37,13 @@ export const GlobalUploadHandler = {
     },
 
     /**
-     * Field name to hold the file content.
+     * Already uploaded file to be shown in the beginning.
      */
-    fieldName: {
-      type: String,
-      default: "file"
+    initialIds: {
+      type: Array,
+      default: function() {
+        return [];
+      }
     },
 
     /**
@@ -66,27 +66,10 @@ export const GlobalUploadHandler = {
 
   data: () => ({
     files: [],
-    uploadedFiles: [],
 
     // Should contains array of objects.
     additionalData: []
   }),
-
-  mounted() {
-    let vm = this;
-    vm.initialIds.forEach(initialId => {
-      vm.$axios
-        .$get(vm.resourceUri, {
-          params: { id: initialId }
-        })
-        .then(function(result) {
-          vm.uploadedFiles.push(result);
-        })
-        .catch(function(result) {
-          console.error(vm.messageErrorExtract(result));
-        });
-    });
-  },
 
   methods: {
     /**
@@ -130,6 +113,11 @@ export const GlobalUploadHandler = {
             vm.$store.commit("global-snackbar/show", {
               color: "success",
               message: vm.uploadSuccessMessage
+            });
+          } else if (vm.files.length == 0) {
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.uploadFailedMessage
             });
           } else {
             vm.$store.commit("global-snackbar/show", {

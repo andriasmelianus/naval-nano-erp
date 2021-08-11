@@ -25,12 +25,27 @@
         <v-btn block color="primary" @click="upload">Upload</v-btn>
       </v-col>
     </v-row>
+
+    <v-row>
+      <v-col cols="12" md="4" v-for="id in initialIds" :key="id">
+        <image-card-default
+          :resource-uri="resourceUri"
+          :id="id"
+          :height="height"
+        ></image-card-default>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import { Handler } from "./handler";
+import ImageCardDefault from "../cards/default.vue";
 export default {
   mixins: [Handler],
+
+  components: {
+    ImageCardDefault,
+  },
 };
 </script>
