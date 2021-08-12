@@ -210,7 +210,7 @@ export const GlobalDataTableHandler = {
             });
           })
           .catch(function(result) {
-            vm.$store.commit("globalNotification/show", {
+            vm.$store.commit("global-snackbar/show", {
               color: "error",
               message: vm.messageErrorExtract(result)
             });
