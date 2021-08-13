@@ -27,11 +27,13 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="4" v-for="id in initialIds" :key="id">
+      <v-col cols="4" v-for="id in initialIds" :key="id">
         <image-card-default
           :resource-uri="resourceUri"
           :id="id"
           :height="height"
+          @delete-button-clicked="handleDeleteButtonClicked"
+          parent-resource-uri="test"
         ></image-card-default>
       </v-col>
     </v-row>
@@ -46,6 +48,27 @@ export default {
 
   components: {
     ImageCardDefault,
+  },
+
+  methods: {
+    /**
+     *
+     */
+    handleDeleteButtonClicked(imageId) {
+      /**
+       * Remove specific item in array.
+       * https://stackoverflow.com/a/5767357/7963686
+       */
+      const initialIdToRemoveIndex = this.initialIds.indexOf(imageId);
+      if (initialIdToRemoveIndex > -1) {
+        this.initialIds.splice(initialIdToRemoveIndex, 1); // Same result.
+        // this.$delete(this.initialIds, initialIdToRemoveIndex); // Deprecated in Vue 3.
+      }
+
+      console.log(this.initialIds);
+
+      // this.$emit("deleted", imageId);
+    },
   },
 };
 </script>

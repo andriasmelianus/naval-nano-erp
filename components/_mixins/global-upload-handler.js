@@ -49,14 +49,10 @@ export const GlobalUploadHandler = {
     },
 
     /**
-     * Already uploaded file to be shown in the beginning.
+     * Enable v-model directive.
+     * This directive accepts ID or array of IDs.
      */
-    initialIds: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    },
+    value,
 
     /**
      * Since the uploader supports multiple files to be uploaded,
