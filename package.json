@@ -10,13 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.20",
+    "@amcharts/amcharts4": "^4.10.21",
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.16.0",
+    "core-js": "^3.16.1",
     "nuxt": "^2.15.8"
   },
   "devDependencies": {

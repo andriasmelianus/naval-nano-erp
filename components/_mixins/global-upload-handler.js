@@ -37,6 +37,18 @@ export const GlobalUploadHandler = {
     },
 
     /**
+     * API URI of the parent component.
+     * This URI needed to form the deletion process.
+     * If this component is used by product component,
+     * then the deletion URI cannot be /image/{image_id},
+     * but it should /product/image/{image_id}.
+     */
+    parentResourceUri: {
+      type: String,
+      required: true
+    },
+
+    /**
      * Already uploaded file to be shown in the beginning.
      */
     initialIds: {
