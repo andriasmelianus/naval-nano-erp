@@ -6,7 +6,9 @@ export const MessageExtractor = {
     messageInfoJsonIndex: "info_message",
     messageSuccessJsonIndex: "success_message",
     messageWarningJsonIndex: "warning_message",
-    messageErrorJsonIndex: "error_message"
+    messageErrorJsonIndex: "error_message",
+
+    invalidInputMessageJsonIndex: "invalid_input_message"
   }),
 
   methods: {
@@ -44,6 +46,22 @@ export const MessageExtractor = {
      */
     messageErrorExtract(result) {
       return extractMessage(result, this.messageErrorJsonIndex);
+    },
+
+    /**
+     * Extract the invalid input message and return it as plain text.
+     * @param {array} result Result returned from API.
+     * @returns string
+     */
+    invalidInputMessageExtractToText(result) {
+      const extractedMessage = extractMessage(
+        result,
+        this.invalidInputMessageJsonIndex
+      );
+      let messageKey = Object.keys(extractedMessage)[0],
+        plainMessage = extractedMessage[messageKey][0];
+
+      return plainMessage;
     }
   }
 };
