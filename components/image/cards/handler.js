@@ -22,7 +22,7 @@ export const Handler = {
     },
 
     id: {
-      type: Number,
+      type: [String, Number],
       required: true
     },
 
@@ -66,6 +66,8 @@ export const Handler = {
         })
         .then(function(result) {
           vm.source = result;
+
+          vm.$emit("image-retrieved", vm.id);
         })
         .catch(function(result) {
           console.error(result);
@@ -83,7 +85,7 @@ export const Handler = {
         .$delete(vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.id)
         .then(function(result) {
           vm.source = undefined;
-          vm.$emit("deleted", vm.id, result);
+          vm.$emit("image-deleted", vm.id, result);
         })
         .catch(function(result) {
           vm.$store.commit("global-snackbar/show", {

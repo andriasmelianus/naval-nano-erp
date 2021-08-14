@@ -25,12 +25,12 @@ export const Uploader = {
 
   methods: {
     /**
-     * Begin transmit the file.
+     * Transmit the file to API server via Axios POST method.
      * @param {File} fileToUpload
      * @param {Array} additionalData Array of objects containing pair of field and data.
      * @return {Axios|Promise}
      */
-    beginUploadFile: async function(fileToUpload, additionalData = []) {
+    upload(fileToUpload, additionalData = []) {
       let vm = this,
         formData = new FormData();
 
@@ -42,7 +42,7 @@ export const Uploader = {
         formData.append(key, data[key]);
       });
 
-      return await vm.$axios.$post(vm.resourceUri, formData, {
+      return vm.$axios.$post(vm.resourceUri, formData, {
         headers: { "X-Requested-With": "XMLHttpRequest" }
       });
     }
