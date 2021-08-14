@@ -26,14 +26,26 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="4" v-for="id in initialIds" :key="id">
+    <v-row v-if="typeof value == 'object'">
+      <v-col cols="4" v-for="id in value" :key="id">
         <image-card-default
+          :parent-resource-uri="parentResourceUri"
           :resource-uri="resourceUri"
           :id="id"
           :height="height"
           @delete-button-clicked="handleDeleteButtonClicked"
-          parent-resource-uri="test"
+        ></image-card-default>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="typeof value == 'string' || typeof value == 'number'">
+      <v-col cols="12">
+        <image-card-default
+          :parent-resource-uri="parentResourceUri"
+          :resource-uri="resourceUri"
+          :id="value"
+          :height="height"
+          @delete-button-clicked="handleDeleteButtonClicked"
         ></image-card-default>
       </v-col>
     </v-row>
@@ -64,8 +76,6 @@ export default {
         this.initialIds.splice(initialIdToRemoveIndex, 1); // Same result.
         // this.$delete(this.initialIds, initialIdToRemoveIndex); // Deprecated in Vue 3.
       }
-
-      console.log(this.initialIds);
 
       // this.$emit("deleted", imageId);
     },

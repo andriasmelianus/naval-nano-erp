@@ -2,11 +2,19 @@
  * Provide the minimal properties for upload control.
  */
 import { MessageExtractor } from "./message-extractor";
+import { Uploader } from "./uploader";
 import { InvalidInputMessageHandler } from "./form/invalid-input-message-handler";
 export const GlobalUploadHandler = {
-  mixins: [MessageExtractor, InvalidInputMessageHandler],
+  mixins: [MessageExtractor, Uploader, InvalidInputMessageHandler],
 
   props: {
+    /**
+     * Enable v-model directive support.
+     */
+    value: {
+      type: [String, Number, Array]
+    },
+
     /**
      * Text to be displayed as label.
      */
@@ -21,22 +29,6 @@ export const GlobalUploadHandler = {
     accept: String,
 
     /**
-     * Field name to hold the file content.
-     */
-    fieldName: {
-      type: String,
-      default: "file"
-    },
-
-    /**
-     * API URI to accept uploaded files.
-     */
-    resourceUri: {
-      type: String,
-      default: "file"
-    },
-
-    /**
      * API URI of the parent component.
      * This URI needed to form the deletion process.
      * If this component is used by product component,
@@ -47,12 +39,6 @@ export const GlobalUploadHandler = {
       type: String,
       required: true
     },
-
-    /**
-     * Enable v-model directive.
-     * This directive accepts ID or array of IDs.
-     */
-    value,
 
     /**
      * Since the uploader supports multiple files to be uploaded,
@@ -76,7 +62,11 @@ export const GlobalUploadHandler = {
     files: [],
 
     // Should contains array of objects.
-    additionalData: []
+    additionalData: [],
+
+    // Supporting data.
+    _uploadedIds: undefined,
+    _successfullyUploadedFilesCount: 0
   }),
 
   methods: {
@@ -85,39 +75,29 @@ export const GlobalUploadHandler = {
      * @return void
      */
     upload() {
-      let vm = this,
-        successfullyUploadedCount = 0;
+      let vm = this;
 
       /**
-       * Multiple file upload.
+       * Multiple upload.
+       * Modification from this article:
        * https://bilalbudhani.com/upload-multiple-files-to-cloudinary-using-react-dropzone-axios/
        */
-      const uploaders = vm.files.map(function(file) {
-        let formData = new FormData();
-        formData.append(vm.fieldName, file);
-
-        // Also append additional data to be sent to API server.
-        vm.additionalData.forEach(data => {
-          let key = Object.keys(data)[0]; // Get the object key.
-          formData.append(key, data[key]); // Append the value pairs to the form data.
-        });
-
-        return vm.$axios
-          .$post(vm.resourceUri, formData, {
-            headers: { "X-Requested-With": "XMLHttpRequest" }
-          })
+      const uploaderStatuses = vm.files.map(function(file) {
+        return vm
+          .beginUploadFile(file, vm.additionalData)
           .then(function(result) {
-            vm.uploadedFiles.push(result);
-            successfullyUploadedCount++;
+            vm._successfullyUploadedFilesCount++;
           })
           .catch(function(result) {
             vm.invalidInputMessageExtract(result);
           });
       });
 
-      Promise.all(uploaders)
-        .then(function() {
-          if (vm.files.length == successfullyUploadedCount) {
+      Promise.all(uploaderStatuses)
+        .then(function(results) {
+          console.log(results);
+
+          if (vm.files.length == vm._successfullyUploadedFilesCount) {
             vm.$store.commit("global-snackbar/show", {
               color: "success",
               message: vm.uploadSuccessMessage
