@@ -5,7 +5,8 @@ export const DefaultRecord = {
   phone: "",
   website: "",
   short_description: "",
-  description: ""
+  description: "",
+  image_id: ""
 };
 
 export const DefaultInvalidInputMessage = {
@@ -15,5 +16,6 @@ export const DefaultInvalidInputMessage = {
   phone: [],
   website: [],
   short_description: [],
-  description: []
+  description: [],
+  image_id: []
 };

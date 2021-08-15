@@ -39,13 +39,27 @@
       rows="3"
     ></v-textarea>
 
+    <image-uploader-single
+      v-model="record.image_id"
+      place-holder="Logo Perusahaan (Upload sebelum simpan)"
+      parent-resource-uri="company"
+      width="300"
+      disable-delete-request
+      @delete-button-clicked="handleImageDeleteButtonClicked"
+    ></image-uploader-single>
+
     <v-btn color="success" type="submit">Simpan</v-btn>
   </v-form>
 </template>
 
 <script>
 import { Handler } from "./handler";
+import ImageUploaderSingle from "~/components/image/uploaders/single.vue";
 export default {
   mixins: [Handler],
+
+  components: {
+    ImageUploaderSingle,
+  },
 };
 </script>
