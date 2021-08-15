@@ -21,7 +21,15 @@ export const Handler = {
       required: true
     },
 
-    id: {
+    /**
+     * If false, clicking the delete button will send DELETE request to API server.
+     */
+    disableDeleteRequest: {
+      type: Boolean,
+      default: false
+    },
+
+    value: {
       type: [String, Number],
       required: true
     },
@@ -41,7 +49,7 @@ export const Handler = {
   }),
 
   watch: {
-    id(newId, oldId) {
+    value(newId, oldId) {
       this.getImage();
     }
   },
@@ -57,21 +65,22 @@ export const Handler = {
      */
     getImage() {
       let vm = this;
-      vm.$axios
-        .$get(vm.resourceUri + "/base64/" + vm.id, {
-          params: {
-            width: vm.width,
-            height: vm.height
-          }
-        })
-        .then(function(result) {
-          vm.source = result;
-
-          vm.$emit("image-retrieved", vm.id);
-        })
-        .catch(function(result) {
-          console.error(result);
-        });
+      if (vm.value != null && vm.value != "") {
+        vm.$axios
+          .$get(vm.resourceUri + "/base64/" + vm.value, {
+            params: {
+              width: vm.width,
+              height: vm.height
+            }
+          })
+          .then(function(result) {
+            vm.source = result;
+            vm.$emit("image-retrieved", vm.value);
+          })
+          .catch(function(result) {
+            console.error(result);
+          });
+      }
     },
 
     /**
@@ -81,18 +90,20 @@ export const Handler = {
     handleDeleteButtonClicked() {
       let vm = this;
       vm.$emit("delete-button-clicked", vm.id);
-      vm.$axios
-        .$delete(vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.id)
-        .then(function(result) {
-          vm.source = undefined;
-          vm.$emit("image-deleted", vm.id, result);
-        })
-        .catch(function(result) {
-          vm.$store.commit("global-snackbar/show", {
-            color: "error",
-            message: vm.messageErrorExtract(result)
+      if (!vm.disableDeleteRequest) {
+        vm.$axios
+          .$delete(vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.id)
+          .then(function(result) {
+            vm.source = undefined;
+            vm.$emit("input", null);
+          })
+          .catch(function(result) {
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.messageErrorExtract(result)
+            });
           });
-        });
+      }
     }
   }
 };

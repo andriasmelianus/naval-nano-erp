@@ -82,21 +82,34 @@ export const GlobalUploadHandler = {
   },
 
   data: () => ({
+    // Single file upload.
+    fileToBeUploaded: null,
+    // Multiple file upload.
     filesToBeUploaded: [],
     // Should contains array of objects.
     additionalData: [],
 
-    // File IDs retrieved from value and successful upload process.
-    existingFileIds: [],
+    // File ID retrieved from value and successful upload process.
+    existingFileId: "", // To support single file.
+    existingFileIds: [], // To support multiple file.
 
     // Supporting data.
-    successfulUploadResults: [],
+    successfulUploadResult: null, // To support single file.
+    successfulUploadResults: [], // To support multiple file.
     errorMessage: ""
   }),
 
   watch: {
     /**
-     * Every successful upload will add the existing file IDs.
+     * Send the uploaded file ID to the parent component.
+     */
+    successfulUploadResult(resultAfter, resultBefore) {
+      let vm = this;
+      vm.$emit("input", resultAfter.id);
+    },
+    /**
+     * Every successful of multiple uploads will add the existing file IDs,
+     * and send it to the parent component.
      */
     successfulUploadResults(resultsAfter, resultsBefore) {
       if (!!resultsAfter.length) {
@@ -113,7 +126,27 @@ export const GlobalUploadHandler = {
 
   methods: {
     /**
-     * Begin transmitting files to API server.
+     * Begin transmitting a file to API server.
+     * @returns void
+     */
+    beginUploadFile() {
+      let vm = this;
+
+      vm.upload(vm.fileToBeUploaded, vm.additionalData)
+        .then(function(result) {
+          vm.successfulUploadResult = result;
+          vm.$emit("file-uploaded", result);
+        })
+        .catch(function(result) {
+          vm.$store.commit("global-snackbar/show", {
+            color: "error",
+            message: vm.invalidInputMessageExtractToText(result)
+          });
+        });
+    },
+
+    /**
+     * Begin transmitting multiple files to API server.
      * @return void
      */
     beginUploadFiles() {

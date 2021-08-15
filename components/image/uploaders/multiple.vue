@@ -6,7 +6,7 @@
           v-model="filesToBeUploaded"
           :label="placeHolder"
           :accept="accept"
-          multiple
+          :multiple="typeof value == 'object'"
           show-size
           prepend-icon="mdi-image"
         >
@@ -28,10 +28,13 @@
     <v-row v-if="typeof value == 'object'">
       <v-col cols="4" v-for="id in value" :key="id">
         <image-card-default
+          :value="id"
           :parent-resource-uri="parentResourceUri"
           :resource-uri="resourceUri"
-          :id="id"
+          :disable-delete-request="disableDeleteRequest"
+          :width="width"
           :height="height"
+          @delete-button-clicked="handleDeleteButtonClicked"
         ></image-card-default>
       </v-col>
     </v-row>
@@ -39,10 +42,13 @@
     <v-row v-if="typeof value == 'string' || typeof value == 'number'">
       <v-col cols="12">
         <image-card-default
+          :value="value"
           :parent-resource-uri="parentResourceUri"
           :resource-uri="resourceUri"
-          :id="value"
+          :disable-delete-request="disableDeleteRequest"
+          :width="width"
           :height="height"
+          @delete-button-clicked="handleDeleteButtonClicked"
         ></image-card-default>
       </v-col>
     </v-row>

@@ -1,5 +1,5 @@
 <template>
-  <v-card hover>
+  <v-card hover :width="width ? width : undefined">
     <v-img :src="source" :width="width ? width : '100%'" :height="height">
       <v-app-bar flat color="rgba(0, 0, 0, 0)">
         <v-spacer></v-spacer>
