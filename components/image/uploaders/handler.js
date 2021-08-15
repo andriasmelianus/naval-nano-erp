@@ -18,6 +18,11 @@ export const Handler = {
       default: "image"
     },
 
+    disableDeleteRequest: {
+      type: Boolean,
+      default: false
+    },
+
     fieldName: {
       type: String,
       default: "image"
@@ -28,6 +33,13 @@ export const Handler = {
       default: "Judul Gambar"
     },
 
+    /**
+     * Image width to be displayed as uploaded images.
+     */
+    width: {
+      type: Number,
+      default: 250
+    },
     /**
      * Image height to be displayed as uploaded images.
      */
@@ -47,6 +59,16 @@ export const Handler = {
      */
     title(newTitle, oldTitle) {
       this.additionalData[0] = { title: newTitle };
+    }
+  },
+
+  methods: {
+    /**
+     * Transfer event fired from image card to the parent component.
+     * @param {Number} idToDelete
+     */
+    handleDeleteButtonClicked(idToDelete) {
+      this.$emit("delete-button-clicked", idToDelete);
     }
   }
 };
