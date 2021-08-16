@@ -97,9 +97,6 @@ export default {
           },
         })
         .then(function (result) {
-          vm.$store.dispatch("fetchCompany");
-          vm.$store.dispatch("fetchBranch");
-
           // Show a success notification.
           vm.$store.commit("global-snackbar/show", {
             message:

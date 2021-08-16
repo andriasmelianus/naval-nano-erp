@@ -56,6 +56,12 @@ export default {
     };
   },
 
+  mounted() {
+    let vm = this;
+    vm.$store.dispatch("fetchCompany");
+    vm.$store.dispatch("fetchBranch");
+  },
+
   methods: {
     changeNavigationDrawerShown(isShown) {
       this.drawerIsShown = isShown;
