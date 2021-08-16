@@ -5,7 +5,6 @@ export const Handler = {
   props: {
     resourceUri: {
       type: String,
-      required: true,
       default: "image"
     },
 
@@ -17,8 +16,7 @@ export const Handler = {
      * but it should /product/image/{image_id}.
      */
     parentResourceUri: {
-      type: String,
-      required: true
+      type: String
     },
 
     /**

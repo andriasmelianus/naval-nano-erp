@@ -2,10 +2,12 @@
   <v-navigation-drawer v-model="isShown" fixed app>
     <v-list>
       <v-list-item class="px-2 justify-center">
-        <v-list-item-avatar size="80" :tile="true">
-          <v-img
-            src="https://cdn.worldvectorlogo.com/logos/viking-aviation.svg"
-          ></v-img>
+        <v-list-item-avatar :size="companyLogoWidthHeight" :tile="true">
+          <image-card-simple
+            :value="companyLogoImageId"
+            :width="companyLogoWidthHeight"
+            :height="companyLogoWidthHeight"
+          ></image-card-simple>
         </v-list-item-avatar>
       </v-list-item>
 
@@ -80,7 +82,12 @@
 
 <script>
 import { items } from "./data/navigation-drawer-default";
+import ImageCardSimple from "~/components/image/cards/simple.vue";
 export default {
+  components: {
+    ImageCardSimple,
+  },
+
   props: {
     value: {
       type: Boolean,
@@ -93,11 +100,17 @@ export default {
       isShown: true,
       items: items,
 
+      companyLogoWidthHeight: 180,
+
       environment: process.env.NODE_ENV,
     };
   },
 
   computed: {
+    companyLogoImageId() {
+      return this.$store.state.company.image_id;
+    },
+
     companyName() {
       return this.$store.state.company.name;
     },
