@@ -28,8 +28,7 @@ export const Handler = {
     },
 
     value: {
-      type: [String, Number],
-      required: true
+      type: [String, Number]
     },
 
     width: {
