@@ -1,5 +1,5 @@
 <template>
-  <v-menu offset-y :close-on-content-click="false">
+  <v-menu offset-y close-on-content-click>
     <template v-slot:activator="{ on, attrs }">
       <v-btn outlined rounded v-bind="attrs" v-on="on">
         <v-icon>mdi-account</v-icon>
@@ -34,7 +34,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn elevation="0" color="white" nuxt to="/user/preference">
+        <v-btn elevation="0" color="white" nuxt to="/user/profile">
           <v-icon>mdi-cogs</v-icon>
           Pengaturan
         </v-btn>
