@@ -42,9 +42,8 @@
     <image-uploader-single
       v-model="record.image_id"
       place-holder="Logo Perusahaan (Upload sebelum simpan)"
-      parent-resource-uri="company"
+      :parent-resource-uri="resourceUri"
       :width="250"
-      :height="250"
       disable-delete-request
       @delete-button-clicked="handleImageDeleteButtonClicked"
     ></image-uploader-single>
