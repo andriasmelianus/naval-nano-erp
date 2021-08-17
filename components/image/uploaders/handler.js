@@ -37,8 +37,7 @@ export const Handler = {
      * Image width to be displayed as uploaded images.
      */
     width: {
-      type: Number,
-      default: 250
+      type: Number
     },
     /**
      * Image height to be displayed as uploaded images.
@@ -68,7 +67,9 @@ export const Handler = {
      * @param {Number} idToDelete
      */
     handleDeleteButtonClicked(idToDelete) {
-      this.$emit("delete-button-clicked", idToDelete);
+      let vm = this,
+        imageId = vm.disableDeleteRequest ? null : idToDelete;
+      this.$emit("delete-button-clicked", imageId);
     }
   }
 };
