@@ -142,6 +142,9 @@ export const GlobalUploadHandler = {
             color: "error",
             message: vm.invalidInputMessageExtractToText(result)
           });
+        })
+        .finally(function() {
+          vm.fileToBeUploaded = null;
         });
     },
 
