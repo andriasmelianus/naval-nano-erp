@@ -144,7 +144,7 @@ export const GlobalUploadHandler = {
           });
         })
         .finally(function() {
-          vm.fileToBeUploaded = null;
+          vm.resetState();
         });
     },
 
@@ -191,8 +191,7 @@ export const GlobalUploadHandler = {
           });
         })
         .finally(function() {
-          vm.filesToBeUploaded = [];
-          vm.successfulUploadResults = [];
+          vm.resetState();
         });
     },
 
@@ -226,6 +225,17 @@ export const GlobalUploadHandler = {
           message: vm.uploadPartiallySuccessMessage + ": " + vm.errorMessage
         });
       }
+    },
+
+    /**
+     * Reset the control state to the begining.
+     * @return {void}
+     */
+    resetState() {
+      vm.fileToBeUploaded = null;
+      vm.filesToBeUploaded = [];
+      vm.additionalData = [];
+      vm.successfulUploadResults = [];
     }
   }
 };
