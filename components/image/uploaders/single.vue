@@ -16,7 +16,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="value != null">
+    <v-row v-if="hasSingleValue">
       <v-col cols="12">
         <image-card-default
           v-model="value"

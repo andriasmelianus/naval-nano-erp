@@ -99,6 +99,44 @@ export const GlobalUploadHandler = {
     errorMessage: ""
   }),
 
+  computed: {
+    /**
+     * Detect whether value is set or not.
+     */
+    isValueSet() {
+      let vm = this;
+      if (typeof vm.value == "object") {
+        return !!vm.value.length;
+      } else if (typeof vm.value == "string" || typeof vm.value == "number") {
+        return !!vm.value;
+      } else {
+        return false;
+      }
+    },
+
+    /**
+     * Detect whether the value is a single value and present.
+     */
+    hasSingleValue() {
+      if (typeof this.value == "string" || typeof this.value == "number") {
+        return !!this.value;
+      } else {
+        return false;
+      }
+    },
+
+    /**
+     * Detect whether the value is multiple and present.
+     */
+    hasMultipleValues() {
+      if (typeof this.value == "object") {
+        return !!this.value.length;
+      } else {
+        return false;
+      }
+    }
+  },
+
   watch: {
     /**
      * Send the uploaded file ID to the parent component.
@@ -232,6 +270,7 @@ export const GlobalUploadHandler = {
      * @return {void}
      */
     resetState() {
+      let vm = this;
       vm.fileToBeUploaded = null;
       vm.filesToBeUploaded = [];
       vm.additionalData = [];

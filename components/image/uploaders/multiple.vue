@@ -25,7 +25,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="typeof value == 'object'">
+    <v-row v-if="hasMultipleValues">
       <v-col cols="4" v-for="id in value" :key="id">
         <image-card-default
           :value="id"
@@ -39,7 +39,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="typeof value == 'string' || typeof value == 'number'">
+    <v-row v-else-if="hasSingleValue">
       <v-col cols="12">
         <image-card-default
           :value="value"
