@@ -12,6 +12,7 @@
       label="Email"
       v-model="record.email"
       :error-messages="invalidInputMessage.email"
+      :disabled="isSelfEdit"
     ></v-text-field>
 
     <v-row>
