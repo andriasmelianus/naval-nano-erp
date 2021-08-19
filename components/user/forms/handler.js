@@ -19,5 +19,11 @@ export const Handler = {
     defaultInvalidInputMessage: DefaultInvalidInputMessage,
 
     resourceUri: "/user"
-  })
+  }),
+
+  methods: {
+    handleImageDeleteButtonClicked() {
+      this.record.image_id = null;
+    }
+  }
 };

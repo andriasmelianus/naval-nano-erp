@@ -68,6 +68,7 @@
       :parent-resource-uri="resourceUri"
       :width="250"
       disable-delete-request
+      @delete-button-clicked="handleImageDeleteButtonClicked"
     ></image-uploader-single>
 
     <v-btn type="submit" color="success">Simpan</v-btn>
