@@ -12,6 +12,7 @@
       label="Email"
       v-model="record.email"
       :error-messages="invalidInputMessage.email"
+      :disabled="isSelfEdit"
     ></v-text-field>
 
     <v-row>
@@ -68,6 +69,7 @@
       :parent-resource-uri="resourceUri"
       :width="250"
       disable-delete-request
+      @delete-button-clicked="handleImageDeleteButtonClicked"
     ></image-uploader-single>
 
     <v-btn type="submit" color="success">Simpan</v-btn>
