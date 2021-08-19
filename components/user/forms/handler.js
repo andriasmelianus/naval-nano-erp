@@ -12,6 +12,15 @@ export const Handler = {
       default: function() {
         return DefaultRecord;
       }
+    },
+
+    /**
+     * To distinguish between administrator and self editing.
+     * This value is useful to, for example, disable email field when user is editing self data.
+     */
+    isSelfEdit: {
+      type: Boolean,
+      default: false
     }
   },
 
