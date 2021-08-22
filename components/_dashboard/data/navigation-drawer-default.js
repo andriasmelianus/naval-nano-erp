@@ -19,6 +19,10 @@ export const items = [
       {
         title: "Pengguna",
         to: "/user"
+      },
+      {
+        title: "Aset & Peralatan",
+        to: "/asset"
       }
     ]
   },
@@ -26,10 +30,6 @@ export const items = [
     icon: "mdi-database",
     title: "Data Induk",
     children: [
-      {
-        title: "Aset",
-        to: "/asset"
-      },
       {
         title: "Produk",
         to: "/product"
