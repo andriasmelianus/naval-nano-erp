@@ -27,7 +27,7 @@ export const GlobalAutocompleteHandler = {
      * The fourth segement or {?} in the given example of URI: /api/v1/user{?}
      * Default is: /autocomplete.
      */
-    apiUri: {
+    componentUri: {
       type: String,
       default: "/autocomplete"
     }
@@ -47,7 +47,7 @@ export const GlobalAutocompleteHandler = {
 
   computed: {
     resourceUriForAutocomplete() {
-      return this.resourceUri + this.apiUri;
+      return this.resourceUri + this.componentUri;
     }
   },
 
