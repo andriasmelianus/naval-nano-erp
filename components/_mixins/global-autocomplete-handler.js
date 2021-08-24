@@ -13,6 +13,14 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * Minimum characters typed to begin search operation.
+     */
+    minimumCharacters: {
+      type: Number,
+      default: 3
+    },
+
+    /**
      * Record to be selected in the begining.
      */
     record: {
@@ -60,10 +68,14 @@ export const GlobalAutocompleteHandler = {
 
       clearTimeout(vm.dataFetchTimerId);
       vm.dataFetchTimerId = setTimeout(function() {
-        vm.serverParams = Object.assign({}, vm.serverParams, {
-          // Request parameter name from variable/dynamic property name.
-          [vm.searchColumn]: newValue
-        });
+        if (newValue != null) {
+          if (newValue.length >= vm.minimumCharacters) {
+            vm.serverParams = Object.assign({}, vm.serverParams, {
+              // Request parameter name from variable/dynamic property name.
+              [vm.searchColumn]: newValue
+            });
+          }
+        }
 
         vm.$emit("keyword-changed", newValue);
       }, vm.dataFetchTimerDelay);
