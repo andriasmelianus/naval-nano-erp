@@ -19,7 +19,7 @@ export const GlobalDataTableHandler = {
     selectedRecordIndex: undefined,
     defaultRecord: {},
     editedRecord: {},
-    searchKeywords: "",
+    searchKeyword: "",
 
     // API Resource URI.
     resourceUri: "",

@@ -7,7 +7,7 @@
     :loading="isLoading"
     show-select
     v-model="selectedRecords"
-    :search="searchKeywords"
+    :search="searchKeyword"
     @item-selected="handleRecordSelected"
     :no-data-text="noDataText"
   >
@@ -31,7 +31,7 @@
         >
         <v-text-field
           label="Cari"
-          v-model="searchKeywords"
+          v-model="searchKeyword"
           append-icon="mdi-magnify"
           single-line
           hide-details
