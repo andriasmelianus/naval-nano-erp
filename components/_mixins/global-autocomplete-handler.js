@@ -5,14 +5,6 @@ export const GlobalAutocompleteHandler = {
 
   props: {
     /**
-     * Column to be displayed on the control.
-     */
-    searchColumn: {
-      type: String,
-      default: "name"
-    },
-
-    /**
      * Minimum characters typed to begin search operation.
      */
     minimumCharacters: {
