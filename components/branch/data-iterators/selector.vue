@@ -20,7 +20,7 @@
             prepend-icon="mdi-magnify"
             label="Cari"
             class="mr-3"
-            v-model="searchKeywords"
+            v-model="searchKeyword"
             hide-details
             single-line
           ></v-text-field>

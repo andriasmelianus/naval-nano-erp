@@ -5,14 +5,6 @@ export const GlobalAutocompleteHandler = {
 
   props: {
     /**
-     * Column to be displayed on the control.
-     */
-    searchColumn: {
-      type: String,
-      default: "name"
-    },
-
-    /**
      * Minimum characters typed to begin search operation.
      */
     minimumCharacters: {
@@ -71,8 +63,7 @@ export const GlobalAutocompleteHandler = {
         if (newValue != null) {
           if (newValue.length >= vm.minimumCharacters) {
             vm.serverParams = Object.assign({}, vm.serverParams, {
-              // Request parameter name from variable/dynamic property name.
-              [vm.searchColumn]: newValue
+              searchKeyword: newValue
             });
           }
         }

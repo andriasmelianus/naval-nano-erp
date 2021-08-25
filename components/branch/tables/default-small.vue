@@ -8,7 +8,7 @@
     show-select
     single-select
     v-model="selectedRecords"
-    :search="searchKeywords"
+    :search="searchKeyword"
     @item-selected="handleRecordSelected"
   >
     <template v-slot:top>
@@ -38,7 +38,7 @@
 
         <v-text-field
           label="Cari"
-          v-model="searchKeywords"
+          v-model="searchKeyword"
           append-icon="mdi-magnify"
           single-line
           hide-details

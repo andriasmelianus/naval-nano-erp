@@ -5,7 +5,7 @@
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
-    :search="searchKeywords"
+    :search="searchKeyword"
     :items-per-page="5"
     v-model="selectedRecords"
     @item-selected="handleRecordSelected"
@@ -20,7 +20,7 @@
 
         <v-text-field
           label="Cari"
-          v-model="searchKeywords"
+          v-model="searchKeyword"
           append-icon="mdi-magnify"
           single-line
           hide-details

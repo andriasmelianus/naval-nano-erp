@@ -25,7 +25,7 @@ export const GlobalDataIteratorHandler = {
     selectedRecordIndex: undefined,
     defaultRecord: {},
     editedRecord: {},
-    searchKeywords: "",
+    searchKeyword: "",
 
     // API Resource URI.
     resourceUri: "",
@@ -108,11 +108,11 @@ export const GlobalDataIteratorHandler = {
     },
 
     /**
-     * Perform API data fetch when searchKeywords is changed.
+     * Perform API data fetch when searchKeyword is changed.
      * @param {String} newSearchKeywords Newly typed search keyword
      * @param {String} oldSearchKeywords Previous typed search keyword
      */
-    searchKeywords(newSearchKeywords, oldSearchKeywords) {
+    searchKeyword(newSearchKeywords, oldSearchKeywords) {
       let vm = this;
 
       /**
@@ -121,7 +121,7 @@ export const GlobalDataIteratorHandler = {
       clearTimeout(vm.dataFetchTimerId);
       vm.dataFetchTimerId = setTimeout(function() {
         vm.otherServerParams = Object.assign({}, vm.otherServerParams, {
-          searchKeywords: newSearchKeywords
+          searchKeyword: newSearchKeywords
         });
       }, vm.dataFetchTimerDelay);
     },
