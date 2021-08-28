@@ -60,7 +60,7 @@
 
 <script>
 import { Handler } from "./handler";
-import EquipmentAutocomplete from "~/components/equipment/autocomplete/default.vue";
+import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 export default {
   mixins: [Handler],
 
