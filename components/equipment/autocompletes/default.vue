@@ -19,7 +19,7 @@
   >
     <template v-slot:item="{ parent, item }">
       <div>
-        {{ item.name }} - ({{ item.code }})
+        {{ item.name }} ({{ item.code }})
         <br />
         <span
           class="text-caption"
