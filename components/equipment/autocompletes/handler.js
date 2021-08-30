@@ -6,15 +6,6 @@ import {
 export const Handler = {
   mixins: [GlobalAutocompleteHandler],
 
-  props: {
-    record: {
-      type: Object,
-      default: function() {
-        return DefaultRecord;
-      }
-    }
-  },
-
   data: () => ({
     defaultInvalidInputMessage: DefaultInvalidInputMessage,
 
