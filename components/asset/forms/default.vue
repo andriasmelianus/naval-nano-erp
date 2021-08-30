@@ -2,8 +2,11 @@
   <v-form @submit.prevent="submitForm" class="pa-4">
     <div class="text-h6">Data Aset Perusahaan</div>
 
-    <!-- To be continued -->
-    <equipment-autocomplete></equipment-autocomplete>
+    <equipment-autocomplete
+      label="Pilih salah satu peralatan"
+      v-model="record.equipment_id"
+      :error-message="invalidInputMessage.equipment_id"
+    ></equipment-autocomplete>
 
     <v-text-field
       label="Merk"
