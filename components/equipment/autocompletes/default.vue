@@ -1,21 +1,19 @@
 <template>
   <v-autocomplete
-    label="Peralatan"
     item-text="name"
     item-value="id"
-    hint="Ketik 3 karakter untuk mulai mencari"
     append-icon=""
+    :hint="hintText"
     :search-input.sync="searchKeyword"
     :loading="isLoading"
-    :error-messages="invalidInputMessage.email"
     :items="records"
-    @change="handleChange"
     clearable
     hide-selected
     no-filter
-    return-object
     hide-no-data
     auto-select-first
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <template v-slot:item="{ parent, item }">
       <div>
@@ -37,6 +35,7 @@
 <script>
 import { Handler } from "./handler";
 export default {
+  inheritAttrs: false,
   mixins: [Handler],
 };
 </script>
