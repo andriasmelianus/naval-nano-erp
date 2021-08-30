@@ -13,16 +13,6 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
-     * Record to be selected in the begining.
-     */
-    record: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-
-    /**
      * URI to fetch data for the autocomplete control.
      * The fourth segement or {?} in the given example of URI: /api/v1/user{?}
      * Default is: /autocomplete.
@@ -46,6 +36,12 @@ export const GlobalAutocompleteHandler = {
   }),
 
   computed: {
+    hintText() {
+      return (
+        "Ketik " + this.minimumCharacters + " karakter untuk mulai mencari"
+      );
+    },
+
     resourceUriForAutocomplete() {
       return this.resourceUri + this.componentUri;
     }
@@ -53,7 +49,7 @@ export const GlobalAutocompleteHandler = {
 
   watch: {
     /**
-     * Emit the input event to provide v-model support.
+     * Begin data search when keyword is typed.
      */
     searchKeyword(newValue, oldValue) {
       let vm = this;
@@ -67,8 +63,6 @@ export const GlobalAutocompleteHandler = {
             });
           }
         }
-
-        vm.$emit("keyword-changed", newValue);
       }, vm.dataFetchTimerDelay);
     },
 
@@ -80,14 +74,6 @@ export const GlobalAutocompleteHandler = {
         this.readRecords();
       },
       deep: true
-    },
-
-    record() {
-      this.invalidInputMessageClear();
-    },
-
-    records() {
-      this.invalidInputMessageClear();
     }
   },
 
@@ -112,14 +98,6 @@ export const GlobalAutocompleteHandler = {
           vm.isLoading = false;
           vm.invalidInputMessageExtract(result);
         });
-    },
-
-    /**
-     * Catch selected item changed event.
-     * @return {void}
-     */
-    handleChange(record) {
-      this.$emit("selected-changed", record);
     }
   }
 };
