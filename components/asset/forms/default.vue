@@ -8,11 +8,11 @@
       :error-message="invalidInputMessage.equipment_id"
     ></equipment-autocomplete>
 
-    <v-text-field
+    <brand-autocomplete
       label="Merk"
       v-model="record.brand_id"
       :error-messages="invalidInputMessage.brand_id"
-    ></v-text-field>
+    ></brand-autocomplete>
 
     <v-text-field
       label="Model"
@@ -64,11 +64,13 @@
 <script>
 import { Handler } from "./handler";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
+import BrandAutocomplete from "~/components/brand/autocompletes/default.vue";
 export default {
   mixins: [Handler],
 
   components: {
     EquipmentAutocomplete,
+    BrandAutocomplete,
   },
 };
 </script>
