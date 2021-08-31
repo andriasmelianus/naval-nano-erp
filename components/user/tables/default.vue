@@ -108,8 +108,8 @@
 </template>
 
 <script>
-import UserDefaultForm from "~/components/user/forms/default.vue";
-import UserExistingFinder from "~/components/user/forms/existing-finder.vue";
+import UserDefaultForm from "../forms/default.vue";
+import UserExistingFinder from "../forms/existing-finder.vue";
 import { Handler } from "./handler";
 export default {
   mixins: [Handler],

@@ -107,7 +107,7 @@
 
 <script>
 import { Handler } from "./handler";
-import CompanyActivationCard from "~/components/company/cards/activation";
+import CompanyActivationCard from "../cards/activation.vue";
 export default {
   mixins: [Handler],
 

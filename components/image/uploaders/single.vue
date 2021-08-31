@@ -34,7 +34,7 @@
 
 <script>
 import { Handler } from "./handler";
-import ImageCardDefault from "~/components/image/cards/default.vue";
+import ImageCardDefault from "../cards/default.vue";
 export default {
   mixins: [Handler],
 

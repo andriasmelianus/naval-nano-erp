@@ -1,5 +1,5 @@
 import { GlobalDataIteratorHandler } from "~/components/_mixins/global-data-iterator-handler";
-import { DefaultRecord } from "~/components/company/record";
+import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalDataIteratorHandler],
 

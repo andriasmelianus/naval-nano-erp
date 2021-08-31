@@ -106,7 +106,7 @@
 
 <script>
 import { Handler } from "./handler";
-import BranchActivationCard from "~/components/branch/cards/activation";
+import BranchActivationCard from "../cards/activation.vue";
 export default {
   mixins: [Handler],
 

@@ -22,7 +22,7 @@
 
 <script>
 import { Handler } from "./handler";
-import UserDefaultAutocomplete from "~/components/user/autocomplete/default.vue";
+import UserDefaultAutocomplete from "../autocompletes/default.vue";
 export default {
   mixins: [Handler],
 

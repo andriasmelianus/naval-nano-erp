@@ -1,5 +1,5 @@
 import { GlobalServerSideDataTableHandler } from "~/components/_mixins/global-server-side-data-table-handler";
-import { DefaultRecord } from "~/components/branch/record";
+import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalServerSideDataTableHandler],
 

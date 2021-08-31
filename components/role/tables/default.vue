@@ -93,7 +93,7 @@
 
 <script>
 import { Handler } from "./handler";
-import RoleForm from "~/components/role/forms/default";
+import RoleForm from "../forms/default.vue";
 export default {
   mixins: [Handler],
 

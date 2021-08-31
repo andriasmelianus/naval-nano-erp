@@ -72,7 +72,7 @@
 
 <script>
 import { Handler } from "./handler";
-import EmployeeDefaultForm from "~/components/employee/forms/default";
+import EmployeeDefaultForm from "../forms/default.vue";
 export default {
   mixins: [Handler],
 

@@ -93,7 +93,7 @@
 
 <script>
 import { Handler } from "./handler";
-import RoomDefaultForm from "~/components/room/forms/default";
+import RoomDefaultForm from "../forms/default.vue";
 export default {
   mixins: [Handler],
 

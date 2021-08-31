@@ -95,8 +95,8 @@
 </template>
 
 <script>
-import { Handler } from "~/components/branch/tables/handler";
-import BranchForm from "~/components/branch/forms/default";
+import { Handler } from "./handler";
+import BranchForm from "../forms/default.vue";
 export default {
   mixins: [Handler],
 

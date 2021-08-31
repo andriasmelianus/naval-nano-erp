@@ -1,8 +1,5 @@
 import { GlobalFormHandler } from "~/components/_mixins/global-form-handler";
-import {
-  DefaultRecord,
-  DefaultInvalidInputMessage
-} from "~/components/employee/record";
+import { DefaultRecord, DefaultInvalidInputMessage } from "../record";
 export const Handler = {
   mixins: [GlobalFormHandler],
 
