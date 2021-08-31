@@ -1,6 +1,6 @@
 export const DefaultRecord = {
   equipment_id: "",
-  brand_id: "",
+  brand: "",
   model: "",
   serial_number: "",
   code: "",
@@ -12,7 +12,7 @@ export const DefaultRecord = {
 
 export const DefaultInvalidInputMessage = {
   equipment_id: [],
-  brand_id: [],
+  brand: [],
   model: [],
   serial_number: [],
   code: [],
