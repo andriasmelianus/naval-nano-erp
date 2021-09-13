@@ -13,6 +13,14 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * Parameter name to send within request.
+     */
+    requestParameterName: {
+      type: String,
+      default: "searchKeyword"
+    },
+
+    /**
      * URI to fetch data for the autocomplete control.
      * The fourth segement or {?} in the given example of URI: /api/v1/user{?}
      * Default is: /autocomplete.
@@ -59,7 +67,7 @@ export const GlobalAutocompleteHandler = {
         if (newValue != null) {
           if (newValue.length >= vm.minimumCharacters) {
             vm.serverParams = Object.assign({}, vm.serverParams, {
-              searchKeyword: newValue
+              [vm.requestParameterName]: newValue
             });
           }
         }
@@ -71,6 +79,9 @@ export const GlobalAutocompleteHandler = {
      */
     serverParams: {
       handler() {
+        this.records = [];
+        this.clearInvalidInputMessage();
+
         this.readRecords();
       },
       deep: true
@@ -98,6 +109,27 @@ export const GlobalAutocompleteHandler = {
           vm.isLoading = false;
           vm.invalidInputMessageExtract(result);
         });
+    },
+
+    /**
+     * Clear extracted invalid input message from input control.
+     * @return {void}
+     */
+    clearInvalidInputMessage() {
+      let vm = this;
+      vm.invalidInputMessage = Object.assign(
+        {},
+        vm.invalidInputMessage,
+        vm.defaultInvalidInputMessage
+      );
+    },
+
+    /**
+     * Capture the selected item change from v-autocomplete control.
+     * @return {void}
+     */
+    handleChange(selectedRecord) {
+      this.$emit("selected-change", selectedRecord);
     }
   }
 };

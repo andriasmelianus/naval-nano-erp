@@ -4,6 +4,11 @@ export const Handler = {
   mixins: [GlobalAutocompleteHandler],
 
   props: {
+    requestParameterName: {
+      type: String,
+      default: "email"
+    },
+
     record: {
       type: Object,
       default: function() {
