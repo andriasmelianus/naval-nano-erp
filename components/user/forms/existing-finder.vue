@@ -3,8 +3,8 @@
     <user-default-autocomplete
       label="Cari berdasarkan email..."
       search-column="email"
-      @selected-changed="handleSelectedChanged"
-      @keyword-changed="handleKeywordChanged"
+      @selected-change="handleSelectedChange"
+      @keyword-changed="handleKeywordChange"
     ></user-default-autocomplete>
 
     <v-text-field
@@ -44,14 +44,14 @@ export default {
     /**
      * Handle user select a user event.
      */
-    handleSelectedChanged(selectedRecord) {
+    handleSelectedChange(selectedRecord) {
       this.recordFound = Object.assign({}, this.recordFound, selectedRecord);
     },
 
     /**
      * Handle user typing the email (keyword).
      */
-    handleKeywordChanged(keyword) {
+    handleKeywordChange(keyword) {
       this.recordFound = {};
     },
 
