@@ -3,7 +3,15 @@ export const GlobalDataTableHandler = {
   mixins: [MessageExtractor],
 
   props: {
-    filter: Object
+    filter: Object,
+
+    /**
+     * Determine whether the table is reloaded after a record is modified.
+     */
+    reloadAfterModification: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data: () => ({
@@ -26,10 +34,7 @@ export const GlobalDataTableHandler = {
 
     // To support operation related to form.
     formIsShown: false,
-    formIsInEditMode: false,
-
-    // If true, table will reload data after a row is modified.
-    reloadAfterModification: false
+    formIsInEditMode: false
   }),
 
   computed: {
