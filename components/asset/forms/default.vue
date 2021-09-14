@@ -32,11 +32,11 @@
       :error-messages="invalidInputMessage.code"
     ></v-text-field>
 
-    <v-text-field
-      label="Tanggal Beli"
+    <date-picker
+      label="Tanggal Pengadaan"
       v-model="record.purchase_date"
       :error-messages="invalidInputMessage.purchase_date"
-    ></v-text-field>
+    ></date-picker>
 
     <v-text-field
       label="Harga"
@@ -65,12 +65,14 @@
 import { Handler } from "./handler";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BrandAutocomplete from "~/components/brand/autocompletes/default.vue";
+import DatePicker from "~/components/_support/global-date-picker.vue";
 export default {
   mixins: [Handler],
 
   components: {
     EquipmentAutocomplete,
     BrandAutocomplete,
+    DatePicker,
   },
 };
 </script>
