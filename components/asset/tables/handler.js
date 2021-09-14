@@ -3,6 +3,13 @@ import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalServerSideDataTableHandler],
 
+  props: {
+    reloadAfterModification: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   data: () => ({
     headers: [
       { text: "Peralatan", value: "equipment_name" },
