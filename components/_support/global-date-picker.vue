@@ -9,12 +9,12 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        :value="dateText"
-        v-mask="mask"
+        v-model="dateText"
         hint="YYYY/MM/DD"
         append-icon="mdi-calendar"
         :label="label"
         persistent-hint
+        v-mask="mask"
         v-bind="attrs"
         v-on="on"
       ></v-text-field>
@@ -57,7 +57,7 @@ export default {
 
   data: (vm) => ({
     isShown: false, // Is the date picker shown?
-    selectedDate: undefined,
+    selectedDate: vm.value,
     dateText: vm.formatDateToEasyToType(vm.value),
   }),
 
@@ -74,6 +74,19 @@ export default {
 
       vm.dateText = vm.formatDateToEasyToType(newDate);
       vm.$emit("input", newDate);
+    },
+
+    dateText(newDateText, oldDateText) {
+      let vm = this;
+
+      if (newDateText.length == 10) {
+        let dateInIso8601Format = vm.formatDateToIso8601(
+          newDateText.replaceAll("/", "-")
+        );
+
+        vm.selectedDate = dateInIso8601Format;
+        vm.$emit("input", dateInIso8601Format);
+      }
     },
   },
 
