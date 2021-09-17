@@ -10,8 +10,8 @@
 
     <brand-autocomplete
       label="Merk"
-      v-model="record.brand_id"
-      :error-messages="invalidInputMessage.brand_id"
+      v-model="record.brand"
+      :error-messages="invalidInputMessage.brand"
     ></brand-autocomplete>
 
     <v-text-field
