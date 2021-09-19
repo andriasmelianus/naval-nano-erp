@@ -2,6 +2,12 @@
   <v-form @submit.prevent="submitForm" class="pa-4">
     <div class="text-h6">Data Aset Perusahaan</div>
 
+    <room-autocomplete
+      label="Ruang menaruh aset"
+      v-model="record.room_id"
+      :error-message="invalidInputMessage.room_id"
+    ></room-autocomplete>
+
     <equipment-autocomplete
       label="Pilih salah satu peralatan"
       v-model="record.equipment_id"
@@ -10,8 +16,8 @@
 
     <brand-autocomplete
       label="Merk"
-      v-model="record.brand_id"
-      :error-messages="invalidInputMessage.brand_id"
+      v-model="record.brand"
+      :error-messages="invalidInputMessage.brand"
     ></brand-autocomplete>
 
     <v-text-field
@@ -63,6 +69,7 @@
 
 <script>
 import { Handler } from "./handler";
+import RoomAutocomplete from "~/components/room/autocompletes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BrandAutocomplete from "~/components/brand/autocompletes/default.vue";
 import DatePicker from "~/components/_support/global-date-picker.vue";
@@ -70,6 +77,7 @@ export default {
   mixins: [Handler],
 
   components: {
+    RoomAutocomplete,
     EquipmentAutocomplete,
     BrandAutocomplete,
     DatePicker,

@@ -4,6 +4,10 @@ export const GlobalAutocompleteHandler = {
   mixins: [MessageExtractor, InvalidInputMessageHandler],
 
   props: {
+    value: {
+      type: [Object, String, Number]
+    },
+
     /**
      * Minimum characters typed to begin search operation.
      */
@@ -13,9 +17,17 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * Parameter name for value to send within request.
+     */
+    valueParameterName: {
+      type: String,
+      default: "value"
+    },
+
+    /**
      * Parameter name to send within request.
      */
-    requestParameterName: {
+    searchKeywordParameterName: {
       type: String,
       default: "searchKeyword"
     },
@@ -57,21 +69,38 @@ export const GlobalAutocompleteHandler = {
 
   watch: {
     /**
+     * Update server params in order to perform request
+     * to retrieve selected record.
+     */
+    value(newValue, oldValue) {
+      let vm = this;
+
+      if (newValue != null) {
+        if (typeof newValue == "object") {
+          vm.updateServerParams({
+            [vm.valueParameterName]: newValue[vm.valueParameterName]
+          });
+        } else {
+          vm.updateServerParams({
+            [vm.valueParameterName]: newValue
+          });
+        }
+      }
+    },
+
+    /**
      * Begin data search when keyword is typed.
      */
     searchKeyword(newValue, oldValue) {
       let vm = this;
 
-      clearTimeout(vm.dataFetchTimerId);
-      vm.dataFetchTimerId = setTimeout(function() {
-        if (newValue != null) {
-          if (newValue.length >= vm.minimumCharacters) {
-            vm.serverParams = Object.assign({}, vm.serverParams, {
-              [vm.requestParameterName]: newValue
-            });
-          }
+      if (newValue != null) {
+        if (newValue.length >= vm.minimumCharacters) {
+          vm.updateServerParams({
+            [vm.searchKeywordParameterName]: newValue
+          });
         }
-      }, vm.dataFetchTimerDelay);
+      }
     },
 
     /**
@@ -89,6 +118,20 @@ export const GlobalAutocompleteHandler = {
   },
 
   methods: {
+    /**
+     * Set the new value for server parameters.
+     * @param {Object} params
+     * @return {void}
+     */
+    updateServerParams(params) {
+      let vm = this;
+
+      clearTimeout(vm.dataFetchTimerId);
+      vm.dataFetchTimerId = setTimeout(function() {
+        vm.serverParams = Object.assign({}, vm.serverParams, params);
+      }, vm.dataFetchTimerDelay);
+    },
+
     /**
      * Fetch data from API server with provided parameters from serverParams.
      * @return {void}

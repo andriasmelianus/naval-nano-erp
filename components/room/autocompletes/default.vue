@@ -2,7 +2,7 @@
   <v-autocomplete
     v-model="value"
     item-text="name"
-    item-value="name"
+    item-value="id"
     append-icon=""
     :hint="hintText"
     :search-input.sync="searchKeyword"
@@ -22,6 +22,7 @@
 import { Handler } from "./handler";
 export default {
   inheritAttrs: false,
+
   mixins: [Handler],
 };
 </script>
