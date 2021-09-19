@@ -1,5 +1,6 @@
 <template>
   <v-autocomplete
+    v-model="value"
     item-text="name"
     item-value="name"
     append-icon=""
