@@ -1,4 +1,5 @@
 export const DefaultRecord = {
+  room_id: undefined,
   equipment_id: undefined,
   brand: undefined,
   model: undefined,
@@ -11,6 +12,7 @@ export const DefaultRecord = {
 };
 
 export const DefaultInvalidInputMessage = {
+  room_id: [],
   equipment_id: [],
   brand: [],
   model: [],
