@@ -88,6 +88,3 @@ sw.*
 
 # Vim swap files
 *.swp
-
-# Pages for testing purpose.
-/pages/test/
