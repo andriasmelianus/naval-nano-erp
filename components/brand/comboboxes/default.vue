@@ -1,7 +1,6 @@
 <template>
   <v-combobox
     item-text="name"
-    item-value="name"
     append-icon=""
     :hint="hintText"
     :search-input.sync="searchKeyword"
