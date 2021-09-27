@@ -3,9 +3,14 @@ import { DefaultRecord, DefaultInvalidInputMessage } from "../record";
 export const Handler = {
   mixins: [GlobalAutocompleteHandler],
 
-  data: () => ({
-    defaultInvalidInputMessage: DefaultInvalidInputMessage,
+  props: {
+    resourceUri: {
+      type: String,
+      default: "/equipment"
+    }
+  },
 
-    resourceUri: "/equipment"
+  data: () => ({
+    defaultInvalidInputMessage: DefaultInvalidInputMessage
   })
 };

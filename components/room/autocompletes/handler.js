@@ -4,6 +4,11 @@ export const Handler = {
   mixins: [GlobalAutocompleteHandler],
 
   props: {
+    resourceUri: {
+      type: String,
+      default: "/room"
+    },
+
     minimumCharacters: {
       type: Number,
       default: 2
@@ -11,8 +16,6 @@ export const Handler = {
   },
 
   data: () => ({
-    defaultInvalidInputMessage: DefaultInvalidInputMessage,
-
-    resourceUri: "/room"
+    defaultInvalidInputMessage: DefaultInvalidInputMessage
   })
 };

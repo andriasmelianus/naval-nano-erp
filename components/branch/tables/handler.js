@@ -3,6 +3,13 @@ import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalServerSideDataTableHandler],
 
+  props: {
+    resourceUri: {
+      type: String,
+      default: "/branch"
+    }
+  },
+
   data: () => ({
     headers: [
       { text: "Nama", value: "name", align: "left" },
