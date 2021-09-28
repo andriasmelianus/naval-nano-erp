@@ -8,6 +8,12 @@ export const GlobalFormHandler = {
 
   props: {
     /**
+     * Resource url to perform RESTful operation.
+     * A value must be set for this data!
+     */
+    resourceUri: String,
+
+    /**
      * Record to be processed with the form.
      */
     record: {
@@ -27,14 +33,6 @@ export const GlobalFormHandler = {
       default: false
     }
   },
-
-  data: () => ({
-    /**
-     * Resource url to perform RESTful operation.
-     * A value must be set for this data!
-     */
-    resourceUri: ""
-  }),
 
   watch: {
     /**

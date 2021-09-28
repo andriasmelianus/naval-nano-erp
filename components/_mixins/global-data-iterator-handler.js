@@ -8,7 +8,14 @@ export const GlobalDataIteratorHandler = {
   mixins: [MessageExtractor],
 
   props: {
-    filter: Object
+    filter: Object,
+
+    resourceUri: String,
+
+    componentUri: {
+      type: String,
+      default: "/vuetify-data-iterator"
+    }
   },
 
   data: () => ({
@@ -28,7 +35,6 @@ export const GlobalDataIteratorHandler = {
     searchKeyword: "",
 
     // API Resource URI.
-    resourceUri: "",
     serverParams: {},
     otherServerParams: {},
 
@@ -152,7 +158,7 @@ export const GlobalDataIteratorHandler = {
      * Provide custom URI to fetch data for v-data-table or v-data-iterator.
      */
     resourceUriForVuetifyServerSideDataTable() {
-      return this.resourceUri + "/vuetify-data-iterator";
+      return this.resourceUri + this.componentUri;
     },
 
     /**

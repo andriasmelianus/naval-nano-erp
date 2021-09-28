@@ -5,6 +5,8 @@ export const GlobalDataTableHandler = {
   props: {
     filter: Object,
 
+    resourceUri: String,
+
     /**
      * Determine whether the table is reloaded after a record is modified.
      */
@@ -28,9 +30,6 @@ export const GlobalDataTableHandler = {
     defaultRecord: {},
     editedRecord: {},
     searchKeyword: "",
-
-    // API Resource URI.
-    resourceUri: "",
 
     // To support operation related to form.
     formIsShown: false,
