@@ -11,6 +11,15 @@ export const Handler = {
     resourceUri: {
       type: String,
       default: "brand"
+    },
+
+    /**
+     * Since the brand column store the plain text of brand name,
+     * then v-model should return the brand name, not brand ID.
+     */
+    itemValue: {
+      type: String,
+      default: "name"
     }
   }
 };

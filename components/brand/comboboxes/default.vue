@@ -1,7 +1,7 @@
 <template>
   <v-combobox
+    v-model="selectedRecord"
     item-text="name"
-    append-icon=""
     :hint="hintText"
     :search-input.sync="searchKeyword"
     :loading="isLoading"
@@ -18,6 +18,7 @@
 <script>
 import { Handler } from "./handler";
 export default {
+  inheritAttrs: false,
   mixins: [Handler],
 };
 </script>
