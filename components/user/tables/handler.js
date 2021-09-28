@@ -3,6 +3,13 @@ import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalServerSideDataTableHandler],
 
+  props: {
+    resourceUri: {
+      type: String,
+      default: "/user"
+    }
+  },
+
   data: () => ({
     headers: [
       { text: "Nama", value: "name", align: "left" },
@@ -21,8 +28,6 @@ export const Handler = {
     singleColumnHeader: [{ text: "Nama", value: "name", align: "left" }],
 
     defaultRecord: DefaultRecord,
-    editedRecord: DefaultRecord,
-
-    resourceUri: "/user"
+    editedRecord: DefaultRecord
   })
 };

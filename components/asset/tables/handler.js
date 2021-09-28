@@ -7,6 +7,11 @@ export const Handler = {
     reloadAfterModification: {
       type: Boolean,
       default: true
+    },
+
+    resourceUri: {
+      type: String,
+      default: "/asset"
     }
   },
 
@@ -30,8 +35,6 @@ export const Handler = {
     singleColumnHeader: [{ text: "Peralatan", value: "equipment_name" }],
 
     defaultRecord: DefaultRecord,
-    editedRecord: DefaultRecord,
-
-    resourceUri: "/asset"
+    editedRecord: DefaultRecord
   })
 };

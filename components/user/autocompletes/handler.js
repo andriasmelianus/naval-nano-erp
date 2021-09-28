@@ -4,6 +4,11 @@ export const Handler = {
   mixins: [GlobalAutocompleteHandler],
 
   props: {
+    resourceUri: {
+      type: String,
+      default: "/user"
+    },
+
     requestParameterName: {
       type: String,
       default: "email"
@@ -18,8 +23,6 @@ export const Handler = {
   },
 
   data: () => ({
-    defaultInvalidInputMessage: DefaultInvalidInputMessage,
-
-    resourceUri: "/user"
+    defaultInvalidInputMessage: DefaultInvalidInputMessage
   })
 };

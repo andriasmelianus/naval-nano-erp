@@ -3,6 +3,13 @@ import { DefaultRecord } from "../record";
 export const Handler = {
   mixins: [GlobalDataIteratorHandler],
 
+  props: {
+    resourceUri: {
+      type: String,
+      default: "/company"
+    }
+  },
+
   data: () => ({
     sortableColumns: [
       { text: "Nama", value: "name" },
@@ -10,8 +17,6 @@ export const Handler = {
     ],
 
     defaultRecord: DefaultRecord,
-    editedRecord: DefaultRecord,
-
-    resourceUri: "/company"
+    editedRecord: DefaultRecord
   })
 };

@@ -63,7 +63,7 @@ export const GlobalComboboxHandler = {
 
   data: vm => ({
     records: [],
-    selectedRecord: undefined,
+    selectedRecord: undefined, // Set to component v-model.
 
     searchKeyword: undefined,
     serverParams: {},
@@ -92,14 +92,16 @@ export const GlobalComboboxHandler = {
     value(newValue, oldValue) {
       let vm = this;
 
-      if (typeof newValue == "object") {
-        vm.updateServerParams({
-          [vm.idRequestParameterName]: newValue[vm.itemValue]
-        });
-      } else {
-        vm.updateServerParams({
-          [vm.searchKeywordRequestParameterName]: newValue
-        });
+      if (newValue) {
+        if (typeof newValue == "object") {
+          vm.updateServerParams({
+            [vm.idRequestParameterName]: newValue[vm.itemValue]
+          });
+        } else {
+          vm.updateServerParams({
+            [vm.searchKeywordRequestParameterName]: newValue
+          });
+        }
       }
     },
 
@@ -115,6 +117,8 @@ export const GlobalComboboxHandler = {
             [vm.searchKeywordRequestParameterName]: newValue
           });
         }
+      } else {
+        vm.selectedRecord = undefined;
       }
     },
 
@@ -147,6 +151,23 @@ export const GlobalComboboxHandler = {
     }
   },
 
+  mounted() {
+    let vm = this;
+    if (vm.value != null || vm.value != "") {
+      if (typeof vm.value == "object") {
+        vm.updateServerParams({
+          [vm.idRequestParameterName]: vm.value[vm.itemValue]
+        });
+
+        vm.selectedRecord = vm.value;
+      } else {
+        vm.updateServerParams({
+          [vm.searchKeywordRequestParameterName]: vm.value
+        });
+      }
+    }
+  },
+
   methods: {
     /**
      * Set the new value for server parameters.
@@ -158,7 +179,7 @@ export const GlobalComboboxHandler = {
 
       clearTimeout(vm.dataFetchTimerId);
       vm.dataFetchTimerId = setTimeout(function() {
-        vm.serverParams = Object.assign({}, vm.serverParams, params);
+        vm.serverParams = Object.assign({}, params);
       }, vm.dataFetchTimerDelay);
     },
 

@@ -4,6 +4,11 @@ export const Handler = {
   mixins: [GlobalFormHandler],
 
   props: {
+    resourceUri: {
+      type: String,
+      default: "/company"
+    },
+
     record: {
       type: Object,
       default: function() {
@@ -13,9 +18,7 @@ export const Handler = {
   },
 
   data: () => ({
-    defaultInvalidInputMessage: DefaultInvalidInputMessage,
-
-    resourceUri: "/company"
+    defaultInvalidInputMessage: DefaultInvalidInputMessage
   }),
 
   methods: {

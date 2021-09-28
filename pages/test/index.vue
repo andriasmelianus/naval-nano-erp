@@ -47,7 +47,12 @@
               <pre>Selected Item: {{ comboboxSelectedItem }}</pre>
               <pre>Selected Item Type: {{ typeof comboboxSelectedItem }}</pre>
 
-              <brand-combobox></brand-combobox>
+              <br />
+              <brand-combobox
+                label="Pilih Merk"
+                v-model="brandComboboxValue"
+              ></brand-combobox>
+              <pre>{{ brandComboboxValue }}</pre>
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -86,6 +91,12 @@ export default {
       { value: 3, name: "Siwabessy" },
     ],
     comboboxSelectedItem: undefined,
+
+    // Brand Combobox
+    brandComboboxValue: {
+      id: 30641266,
+      name: "Acer",
+    },
   }),
 
   watch: {
