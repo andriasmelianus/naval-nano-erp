@@ -25,6 +25,14 @@ export const GlobalComboboxHandler = {
     },
 
     /**
+     * Text field of the selectedRecord object.
+     */
+    itemText: {
+      type: String,
+      default: "name"
+    },
+
+    /**
      * Request parameter name for search keyword.
      */
     searchKeywordRequestParameterName: {
@@ -91,6 +99,17 @@ export const GlobalComboboxHandler = {
      */
     searchKeyword(newValue, oldValue) {
       let vm = this;
+
+      /**
+       * Prevent performing unnecessary request if the this.selectedRecord[this.itemText]
+       * has the same value with this.searchKeyword.
+       */
+      if (vm.selectedRecord != undefined) {
+        // Prevent error while trying to access itemText from null.
+        if (newValue == vm.selectedRecord[vm.itemText]) {
+          return;
+        }
+      }
 
       if (newValue != null) {
         if (newValue.length >= vm.minimumCharacters) {
