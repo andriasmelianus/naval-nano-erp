@@ -7,12 +7,15 @@ export const Handler = {
     minimumCharacters: {
       type: Number,
       default: 2
+    },
+
+    resourceUri: {
+      type: String,
+      default: "/brand"
     }
   },
 
   data: () => ({
-    defaultInvalidInputMessage: DefaultInvalidInputMessage,
-
-    resourceUri: "/brand"
+    defaultInvalidInputMessage: DefaultInvalidInputMessage
   })
 };
