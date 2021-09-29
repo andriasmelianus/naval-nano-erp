@@ -1,7 +1,7 @@
 <template>
   <v-combobox
     v-model="selectedRecord"
-    item-text="name"
+    :item-text="itemText"
     :hint="hintText"
     :search-input.sync="searchKeyword"
     :loading="isLoading"
