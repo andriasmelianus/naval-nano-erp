@@ -26,8 +26,6 @@ export const Handler = {
     singleColumnHeader: [{ text: "Nama", value: "name", align: "left" }],
 
     defaultRecord: DefaultRecord,
-    editedRecord: DefaultRecord,
-
-    resourceUri: "/branch"
+    editedRecord: DefaultRecord
   })
 };
