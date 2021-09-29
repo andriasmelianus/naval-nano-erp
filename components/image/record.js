@@ -1,6 +1,6 @@
 export const DefaultRecord = {
   image: undefined,
-  title: ""
+  title: undefined
 };
 
 export const DefaultInvalidInputMessage = {

@@ -1,11 +1,11 @@
 export const DefaultRecord = {
-  code: "",
-  name: "",
-  phone: "",
-  address: "",
-  city: "",
-  country: "",
-  postal_code: ""
+  code: undefined,
+  name: undefined,
+  phone: undefined,
+  address: undefined,
+  city: undefined,
+  country: undefined,
+  postal_code: undefined
 };
 
 export const DefaultInvalidInputMessage = {

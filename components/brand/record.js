@@ -1,5 +1,5 @@
 export const DefaultRecord = {
-  name: ""
+  name: undefined
 };
 
 export const DefaultInvalidInputMessage = {

@@ -1,7 +1,7 @@
 export const DefaultRecord = {
-  name: "",
-  slug: "",
-  description: ""
+  name: undefined,
+  slug: undefined,
+  description: undefined
 };
 
 export const DefaultInvalidInputMessage = {
