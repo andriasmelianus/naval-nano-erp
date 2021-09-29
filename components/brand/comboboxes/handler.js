@@ -1,6 +1,6 @@
-import { GlobalComboboxHandler } from "~/components/_mixins/global-combobox-handler";
+import { GlobalAutocompleteHandler } from "~/components/_mixins/global-autocomplete-handler";
 export const Handler = {
-  mixins: [GlobalComboboxHandler],
+  mixins: [GlobalAutocompleteHandler],
 
   props: {
     minimumCharacters: {
@@ -20,6 +20,11 @@ export const Handler = {
     itemValue: {
       type: String,
       default: "name"
+    },
+
+    componentUri: {
+      type: String,
+      default: "/combobox"
     }
   }
 };
