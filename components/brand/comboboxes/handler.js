@@ -10,7 +10,7 @@ export const Handler = {
 
     resourceUri: {
       type: String,
-      default: "brand"
+      default: "/brand"
     },
 
     /**
