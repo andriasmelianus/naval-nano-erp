@@ -6,7 +6,7 @@ export const Handler = {
   props: {
     resourceUri: {
       type: String,
-      default: "/asset`"
+      default: "/asset"
     },
 
     record: {

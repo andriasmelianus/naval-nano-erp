@@ -14,11 +14,11 @@
       :error-message="invalidInputMessage.equipment_id"
     ></equipment-autocomplete>
 
-    <brand-autocomplete
+    <brand-combobox
       label="Merk"
       v-model="record.brand"
       :error-messages="invalidInputMessage.brand"
-    ></brand-autocomplete>
+    ></brand-combobox>
 
     <v-text-field
       label="Model"
@@ -71,7 +71,7 @@
 import { Handler } from "./handler";
 import RoomAutocomplete from "~/components/room/autocompletes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
-import BrandAutocomplete from "~/components/brand/autocompletes/default.vue";
+import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import DatePicker from "~/components/_support/global-date-picker.vue";
 export default {
   mixins: [Handler],
@@ -79,7 +79,7 @@ export default {
   components: {
     RoomAutocomplete,
     EquipmentAutocomplete,
-    BrandAutocomplete,
+    BrandCombobox,
     DatePicker,
   },
 };

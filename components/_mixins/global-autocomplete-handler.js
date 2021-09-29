@@ -33,6 +33,16 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * URI to address the entity.
+     * The third segment in the following URI: /api/v1{?}
+     * Default value must be overrided in the handler.
+     */
+    resourceUri: {
+      type: String,
+      default: "/entity"
+    },
+
+    /**
      * URI to fetch data for the autocomplete control.
      * The fourth segement or {?} in the given example of URI: /api/v1/user{?}
      * Default is: /autocomplete.
@@ -44,7 +54,6 @@ export const GlobalAutocompleteHandler = {
   },
 
   data: () => ({
-    resourceUri: "",
     searchKeyword: "",
     serverParams: {},
 

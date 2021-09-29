@@ -25,14 +25,6 @@ export const GlobalComboboxHandler = {
     },
 
     /**
-     * Request parameter name for ID field.
-     */
-    idRequestParameterName: {
-      type: String,
-      default: "id"
-    },
-
-    /**
      * Request parameter name for search keyword.
      */
     searchKeywordRequestParameterName: {
@@ -64,6 +56,7 @@ export const GlobalComboboxHandler = {
   data: vm => ({
     records: [],
     selectedRecord: undefined, // Set to component v-model.
+    isSingleRecordSearch: false,
 
     searchKeyword: undefined,
     serverParams: {},
@@ -90,19 +83,7 @@ export const GlobalComboboxHandler = {
 
   watch: {
     value(newValue, oldValue) {
-      let vm = this;
-
-      if (newValue) {
-        if (typeof newValue == "object") {
-          vm.updateServerParams({
-            [vm.idRequestParameterName]: newValue[vm.itemValue]
-          });
-        } else {
-          vm.updateServerParams({
-            [vm.searchKeywordRequestParameterName]: newValue
-          });
-        }
-      }
+      this.handleValueChanged(newValue);
     },
 
     /**
@@ -113,6 +94,7 @@ export const GlobalComboboxHandler = {
 
       if (newValue != null) {
         if (newValue.length >= vm.minimumCharacters) {
+          vm.isSingleRecordSearch = false;
           vm.updateServerParams({
             [vm.searchKeywordRequestParameterName]: newValue
           });
@@ -152,23 +134,31 @@ export const GlobalComboboxHandler = {
   },
 
   mounted() {
-    let vm = this;
-    if (vm.value != null || vm.value != "") {
-      if (typeof vm.value == "object") {
-        vm.updateServerParams({
-          [vm.idRequestParameterName]: vm.value[vm.itemValue]
-        });
-
-        vm.selectedRecord = vm.value;
-      } else {
-        vm.updateServerParams({
-          [vm.searchKeywordRequestParameterName]: vm.value
-        });
-      }
-    }
+    this.handleValueChanged(this.value);
   },
 
   methods: {
+    /**
+     * Handle operation if value prop is updated/changed.
+     * @param {mixed} newValue Value provided from v-model.
+     */
+    handleValueChanged(newValue) {
+      let vm = this;
+
+      if (newValue == undefined) {
+        vm.selectedRecord = undefined;
+      } else {
+        if (typeof newValue == "object") {
+          vm.selectedRecord = newValue;
+        } else {
+          vm.isSingleRecordSearch = true;
+          vm.updateServerParams({
+            [vm.itemValue]: newValue
+          });
+        }
+      }
+    },
+
     /**
      * Set the new value for server parameters.
      * @param {Object} params
@@ -198,6 +188,18 @@ export const GlobalComboboxHandler = {
         .then(function(result) {
           vm.records = result;
           vm.isLoading = false;
+
+          /**
+           * If user provide value for v-model, this component will search a single record that match the value in v-model.
+           * Request will be sent with parameter defined in the props: itemValue.
+           * If system found the record, it will assign the record as selectedRecord.
+           */
+          if (vm.records.length) {
+            if (vm.isSingleRecordSearch) {
+              // Identify whether the call is from v-model or searchKeyword change event.
+              vm.selectedRecord = vm.records[0];
+            }
+          }
         })
         .catch(function(result) {
           vm.isLoading = false;
