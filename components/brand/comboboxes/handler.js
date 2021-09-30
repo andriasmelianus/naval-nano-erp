@@ -20,11 +20,6 @@ export const Handler = {
     itemValue: {
       type: String,
       default: "name"
-    },
-
-    componentUri: {
-      type: String,
-      default: "/combobox"
     }
   }
 };

@@ -21,6 +21,14 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * Return JavaScript object when true.
+     */
+    returnObject: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
      * Value field of the selectedRecord object.
      */
     itemValue: {
@@ -99,6 +107,32 @@ export const GlobalAutocompleteHandler = {
     },
 
     /**
+     * Emit input event with the value.
+     * @param {mixed} newValue New selected record
+     * @param {mixed} oldValue Old selected record
+     */
+    selectedRecord(newValue, oldValue) {
+      let vm = this;
+      if (typeof newValue == "object") {
+        if (vm.returnObject) {
+          // If the component is returning object.
+          if (JSON.stringify(newValue) != JSON.stringify(vm.value)) {
+            // Make sure component emits the different selectedRecord only.
+            vm.$emit("input", newValue);
+          }
+        } else {
+          // If the component is NOT returning object.
+          if (vm.value != newValue[vm.itemValue]) {
+            // Make sure component emits the different value from object.
+            vm.$emit("input", newValue[vm.itemValue]);
+          }
+        }
+      } else {
+        vm.$emit("input", newValue);
+      }
+    },
+
+    /**
      * Perform API request when search keyword is typed.
      */
     searchKeyword(newValue, oldValue) {
@@ -108,22 +142,28 @@ export const GlobalAutocompleteHandler = {
        * Prevent performing unnecessary request if the this.selectedRecord[this.itemText]
        * has the same value with this.searchKeyword.
        */
-      if (vm.selectedRecord != undefined) {
-        // Prevent error while trying to access itemText from null.
-        if (newValue == vm.selectedRecord[vm.itemText]) {
-          return;
-        }
-      }
-
-      if (newValue != null) {
+      if (newValue != undefined) {
         if (newValue.length >= vm.minimumCharacters) {
-          vm.isSingleRecordSearch = false;
-          vm.updateServerParams({
-            [vm.searchKeywordRequestParameterName]: newValue
-          });
+          vm.isSingleRecordSearch = false; // Ensure the returned data is more than one.
+          if (vm.selectedRecord == undefined) {
+            // If there is no data selected.
+            vm.updateServerParams({
+              [vm.searchKeywordRequestParameterName]: newValue
+            });
+          } else {
+            if (
+              newValue != vm.selectedRecord[vm.itemValue] &&
+              newValue != vm.selectedRecord[vm.itemText]
+            ) {
+              // If the selected data is NOT the same as typed.
+              vm.updateServerParams({
+                [vm.searchKeywordRequestParameterName]: newValue
+              });
+            }
+          }
         }
       } else {
-        vm.selectedRecord = undefined;
+        vm.clear();
       }
     },
 
@@ -138,21 +178,6 @@ export const GlobalAutocompleteHandler = {
         this.readRecords();
       },
       deep: true
-    },
-
-    /**
-     * Emit input event with the value.
-     * @param {mixed} newValue New selected record
-     * @param {mixed} oldValue Old selected record
-     */
-    selectedRecord(newValue, oldValue) {
-      let vm = this;
-
-      if (typeof newValue == "object") {
-        vm.$emit("input", newValue[vm.itemValue]);
-      } else {
-        vm.$emit("input", newValue);
-      }
     }
   },
 
@@ -168,11 +193,15 @@ export const GlobalAutocompleteHandler = {
     handleValueChanged(newValue) {
       let vm = this;
 
-      if (newValue == undefined) {
-        vm.selectedRecord = undefined;
+      if (newValue == undefined || newValue == "") {
+        vm.clear();
       } else {
         if (typeof newValue == "object") {
-          vm.selectedRecord = newValue;
+          if (JSON.stringify(newValue) != JSON.stringify(vm.selectedRecord)) {
+            // If new value is NOT the same with selectedRecord.
+            vm.records = [newValue]; // Populate the items with new record.
+            vm.selectedRecord = newValue; // Select the new record.
+          }
         } else {
           vm.isSingleRecordSearch = true;
           vm.updateServerParams({
@@ -228,6 +257,14 @@ export const GlobalAutocompleteHandler = {
           vm.isLoading = false;
           vm.invalidInputMessageExtract(result);
         });
+    },
+
+    clear() {
+      let vm = this;
+
+      vm.selectedRecord = undefined;
+      vm.searchKeyword = undefined;
+      vm.records = [];
     },
 
     /**
