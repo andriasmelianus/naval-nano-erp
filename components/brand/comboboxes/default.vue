@@ -6,6 +6,7 @@
     :search-input.sync="searchKeyword"
     :loading="isLoading"
     :items="records"
+    :return-object="returnObject"
     clearable
     hide-selected
     no-filter

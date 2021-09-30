@@ -1,12 +1,14 @@
 <template>
   <v-autocomplete
-    item-text="name"
-    item-value="id"
+    v-model="selectedRecord"
     append-icon=""
+    :item-text="itemText"
+    :item-value="itemValue"
     :hint="hintText"
     :search-input.sync="searchKeyword"
     :loading="isLoading"
     :items="records"
+    :return-object="returnObject"
     clearable
     hide-selected
     no-filter

@@ -38,9 +38,9 @@
                 item-text="name"
                 :items="comboboxItems"
                 :search-input.sync="comboboxSearchKeyword"
+                :hide-no-data="!comboboxSearchKeyword"
                 auto-select-first
                 return-object
-                :hide-no-data="!comboboxSearchKeyword"
               ></v-combobox>
 
               <pre>Search keyword: {{ comboboxSearchKeyword }}</pre>
@@ -52,7 +52,15 @@
                 label="Pilih Merk"
                 v-model="brandComboboxValue"
               ></brand-combobox>
-              <pre>{{ brandComboboxValue }}</pre>
+              <pre>Brand combobox value: {{ brandComboboxValue }}</pre>
+
+              <br />
+              <equipment-autocomplete
+                label="Equipment"
+                v-model="equipmentAutocompleteValueAsObject"
+                return-object
+              ></equipment-autocomplete>
+              <pre>{{ equipmentAutocompleteValueAsObject }}</pre>
             </v-card-text>
           </v-card>
         </v-tab-item>
@@ -64,6 +72,7 @@
 <script>
 import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
+import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 export default {
   layout: "default",
 
@@ -73,7 +82,7 @@ export default {
     };
   },
 
-  components: { ImageUploaderMultiple, BrandCombobox },
+  components: { ImageUploaderMultiple, BrandCombobox, EquipmentAutocomplete },
 
   data: () => ({
     // Image manager
@@ -96,6 +105,13 @@ export default {
     brandComboboxValue: {
       id: 30641266,
       name: "Acer",
+    },
+
+    // Equipment autocomplete
+    equipmentAutocompleteValue: 1171049788,
+    equipmentAutocompleteValueAsObject: {
+      id: 1171049788,
+      name: "Laptop",
     },
   }),
 
