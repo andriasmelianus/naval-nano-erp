@@ -57,10 +57,18 @@
               <br />
               <equipment-autocomplete
                 label="Equipment"
-                v-model="equipmentAutocompleteValueAsObject"
-                return-object
+                v-model="equipmentAutocompleteValue"
               ></equipment-autocomplete>
-              <pre>{{ equipmentAutocompleteValueAsObject }}</pre>
+              <pre>Equipment value: {{ equipmentAutocompleteValue }}</pre>
+              <v-btn @click="equipmentAutocompleteValue = 947125174"
+                >Equipment 1</v-btn
+              >
+              <v-btn @click="equipmentAutocompleteValue = 1171049788"
+                >Equipment 2</v-btn
+              >
+              <v-btn @click="equipmentAutocompleteValue = 1277441986"
+                >Equipment 3</v-btn
+              >
             </v-card-text>
           </v-card>
         </v-tab-item>
