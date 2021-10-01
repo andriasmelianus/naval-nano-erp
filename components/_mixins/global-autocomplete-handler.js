@@ -127,7 +127,7 @@ export const GlobalAutocompleteHandler = {
             vm.$emit("input", newValue[vm.itemValue]);
           }
         }
-      } else {
+      } else if (typeof newValue == "string" || typeof newValue == "number") {
         vm.$emit("input", newValue);
       }
     },
