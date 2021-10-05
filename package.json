@@ -18,7 +18,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.18.1",
     "nuxt": "^2.15.8",
-    "v-mask": "^2.2.4"
+    "v-mask": "^2.3.0"
   },
   "devDependencies": {
     "@mdi/font": "^6.1.95",
