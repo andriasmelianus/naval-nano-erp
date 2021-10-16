@@ -1,15 +1,16 @@
 <template>
   <v-data-table
+    v-model="selectedRecords"
+    show-select
+    dense
     :headers="smallHeaders"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
-    show-select
-    dense
-    v-model="selectedRecords"
     :search="searchKeyword"
     :items-per-page="5"
+    @click:row="handleRowClicked"
   >
     <template v-slot:top>
       <v-toolbar short flat>

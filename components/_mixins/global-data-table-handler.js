@@ -8,6 +8,14 @@ export const GlobalDataTableHandler = {
     resourceUri: String,
 
     /**
+     * Click row to select a record.
+     */
+    rowClickToSelect: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
      * Determine whether the table is reloaded after a record is modified.
      */
     reloadAfterModification: {
@@ -101,6 +109,19 @@ export const GlobalDataTableHandler = {
             message: vm.messageErrorExtract(result)
           });
         });
+    },
+
+    /**
+     * Hanlde when a row is clicked.
+     */
+    handleRowClicked(item, row) {
+      if (this.rowClickToSelect) {
+        if (row.isSelected) {
+          row.select(false);
+        } else {
+          row.select(true);
+        }
+      }
     },
 
     /**

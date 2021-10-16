@@ -3,19 +3,41 @@
     v-model="selectedRecords"
     show-select
     single-select
-    :headers="smallHeaders"
+    show-expand
+    :headers="headers"
     :items="records"
     :server-items-length="recordsTotal"
     :options.sync="serverParams"
     :loading="isLoading"
     :search="searchKeyword"
-    :items-per-page="5"
+    :expanded="expandedRows"
     @click:row="handleRowClicked"
     @item-selected="handleRecordSelected"
   >
     <template v-slot:top>
       <v-toolbar short flat>
-        <v-toolbar-title class="text-h6 mr-3">Data Ruangan</v-toolbar-title>
+        <v-toolbar-title class="text-h6 mr-3">Data Cabang</v-toolbar-title>
+
+        <v-btn color="success" icon @click="readRecords"
+          ><v-icon>mdi-refresh</v-icon></v-btn
+        >
+        <v-btn color="primary" icon @click="showForm(false)"
+          ><v-icon>mdi-plus</v-icon></v-btn
+        >
+        <v-btn
+          color="warning"
+          icon
+          :disabled="!selectedRecordExists"
+          @click="showForm(true)"
+          ><v-icon>mdi-pencil</v-icon></v-btn
+        >
+        <v-btn
+          color="error"
+          icon
+          :disabled="!selectedRecordExists"
+          @click="deleteSingleRecord"
+          ><v-icon>mdi-minus</v-icon></v-btn
+        >
 
         <v-text-field
           label="Cari"
@@ -63,25 +85,38 @@
 
       <v-dialog v-model="formIsShown" max-width="500px" ref="formDialog">
         <v-card>
-          <room-default-form
+          <branch-form
             :record="editedRecord"
             :edit-mode="formIsInEditMode"
             @record-created="handleRecordCreated($event)"
             @record-updated="handleRecordUpdated($event)"
-          ></room-default-form>
+          ></branch-form>
         </v-card>
-      </v-dialog> </template
-  ></v-data-table>
+      </v-dialog>
+    </template>
+
+    <template v-slot:expanded-item="{ headers, item }">
+      <td :colspan="headers.length" class="pa-4">
+        <room-default-table></room-default-table>
+      </td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
 import { Handler } from "./handler";
-import RoomDefaultForm from "../forms/default.vue";
+import BranchForm from "../forms/default.vue";
+import RoomDefaultTable from "~/components/room/tables/default.vue";
 export default {
   mixins: [Handler],
 
   components: {
-    RoomDefaultForm,
+    BranchForm,
+    RoomDefaultTable,
   },
+
+  data: () => ({
+    expandedRows: [],
+  }),
 };
 </script>
