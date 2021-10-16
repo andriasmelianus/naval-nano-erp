@@ -12,13 +12,13 @@ export const Handler = {
 
   data: () => ({
     headers: [
+      { text: "Kode", value: "code" },
       { text: "Nama", value: "name", align: "left" },
-      { text: "Deskripsi", value: "description" },
-      { text: "NPWP", value: "tax_id" },
-      { text: "Bisnis", value: "business" },
-      { text: "Industri", value: "industry" },
-      { text: "Web", value: "website" },
-      { text: "Catatan", value: "note" },
+      { text: "Telepon", value: "phone" },
+      { text: "Alamat", value: "address" },
+      { text: "Kota", value: "city" },
+      { text: "Negara", value: "country" },
+      { text: "Kode Pos", value: "postal_code" },
       { text: "Diinput", value: "created_at" },
       { text: "Diupdate", value: "updated_at" }
     ],
