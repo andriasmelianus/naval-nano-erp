@@ -12,6 +12,8 @@
         <v-tab>Image Manager</v-tab>
         <v-tab>Watchers</v-tab>
         <v-tab>Combobox</v-tab>
+        <v-tab>Datatable</v-tab>
+        <v-tab>Mapbox</v-tab>
 
         <v-tab-item>
           <v-card flat>
@@ -72,6 +74,22 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
+
+        <v-tab-item>
+          <v-card flat>
+            <branch-expandable-datatable></branch-expandable-datatable>
+          </v-card>
+        </v-tab-item>
+
+        <v-tab-item>
+          <v-card flat>
+            <mapbox-component
+              latitude="-7.2369549"
+              longitude="112.7898635"
+              height="600px"
+            ></mapbox-component>
+          </v-card>
+        </v-tab-item>
       </v-tabs>
     </v-card>
   </v-container>
@@ -81,6 +99,8 @@
 import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
+import BranchExpandableDatatable from "~/components/branch/tables/expandable-complete.vue";
+import MapboxComponent from "~/components/_support/mapbox.vue";
 export default {
   layout: "default",
 
@@ -90,7 +110,13 @@ export default {
     };
   },
 
-  components: { ImageUploaderMultiple, BrandCombobox, EquipmentAutocomplete },
+  components: {
+    ImageUploaderMultiple,
+    BrandCombobox,
+    EquipmentAutocomplete,
+    BranchExpandableDatatable,
+    MapboxComponent,
+  },
 
   data: () => ({
     // Image manager
