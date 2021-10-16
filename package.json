@@ -17,6 +17,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.18.0",
+    "mapbox-gl": "^2.5.1",
     "nuxt": "^2.15.8",
     "v-mask": "^2.2.4"
   },
