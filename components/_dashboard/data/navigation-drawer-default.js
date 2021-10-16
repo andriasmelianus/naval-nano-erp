@@ -13,16 +13,16 @@ export const items = [
         to: "/company"
       },
       {
+        title: "Aset & Peralatan",
+        to: "/asset"
+      },
+      {
         title: "Role & Permission",
         to: "/role"
       },
       {
         title: "Pengguna",
         to: "/user"
-      },
-      {
-        title: "Aset & Peralatan",
-        to: "/asset"
       }
     ]
   },
