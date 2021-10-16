@@ -9,6 +9,7 @@
     single-select
     v-model="selectedRecords"
     :search="searchKeyword"
+    @click:row="handleRowClicked"
     @item-selected="handleRecordSelected"
   >
     <template v-slot:top>
