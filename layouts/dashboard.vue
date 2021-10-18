@@ -58,8 +58,11 @@ export default {
 
   mounted() {
     let vm = this;
+
+    // Fill up required global variables.
     vm.$store.dispatch("fetchCompany");
     vm.$store.dispatch("fetchBranch");
+    vm.$store.dispatch("fetchMapboxToken");
   },
 
   methods: {

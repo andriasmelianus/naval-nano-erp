@@ -6,7 +6,12 @@ export const state = () => ({
   /**
    * Store the current active branch of logged-in user.
    */
-  branch: {}
+  branch: {},
+  /**
+   * Mapbox token retrieved from API server.
+   * Since implementing environment file is cumbersome in NuxtJS.
+   */
+  mapboxToken: ""
 });
 
 export const mutations = {
@@ -26,6 +31,15 @@ export const mutations = {
    */
   setBranch(state, branch) {
     state.branch = Object.assign({}, state.branch, branch);
+  },
+
+  /**
+   * Define the Mapbox token retrieved from API server.
+   * @param {*} state Store state
+   * @param {*} mapboxToken Mapbox token
+   */
+  setMapboxToken(state, mapboxToken) {
+    state.mapboxToken = mapboxToken;
   }
 };
 
@@ -38,11 +52,12 @@ export const actions = {
       })
       .catch(function(result) {
         context.commit("global-snackbar/show", {
-          message: "Gagal mengambil data.",
+          message: "Gagal mengambil data perusahaan.",
           color: "error"
         });
       });
   },
+
   fetchBranch(context) {
     this.$axios
       .$get("/branch/mine")
@@ -51,7 +66,21 @@ export const actions = {
       })
       .catch(function(result) {
         context.commit("global-snackbar/show", {
-          message: "Gagal mengambil data.",
+          message: "Gagal mengambil data cabang.",
+          color: "error"
+        });
+      });
+  },
+
+  fetchMapboxToken(context) {
+    this.$axios
+      .$get("/support/mapbox-token")
+      .then(function(result) {
+        context.commit("setMapboxToken", result);
+      })
+      .catch(function(result) {
+        context.commit("global-snackbar/show", {
+          message: "Gagal mengambil data token Mapbox.",
           color: "error"
         });
       });
@@ -79,5 +108,16 @@ export const getters = {
    */
   branch(state, getters, rootState) {
     return state.branch;
+  },
+
+  /**
+   * Get the Mapbox token.
+   * @param {*} state Store state
+   * @param {*} getters Store getters
+   * @param {*} rootState Store root state
+   * @returns {String}
+   */
+  mapboxToken(state, getters, rootState) {
+    return state.mapboxToken;
   }
 };
