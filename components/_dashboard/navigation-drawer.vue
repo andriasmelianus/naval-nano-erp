@@ -108,15 +108,15 @@ export default {
 
   computed: {
     companyLogoImageId() {
-      return this.$store.state.company.image_id;
+      return this.$store.getters.company.image_id;
     },
 
     companyName() {
-      return this.$store.state.company.name;
+      return this.$store.getters.company.name;
     },
 
     companyShortDescription() {
-      return this.$store.state.company.short_description;
+      return this.$store.getters.company.short_description;
     },
   },
 
