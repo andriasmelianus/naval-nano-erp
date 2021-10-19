@@ -3,7 +3,7 @@
  */
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import mapboxgl from "mapbox-gl";
-export const Mapbox = {
+export const MapboxDefault = {
   mixins: [MessageExtractor],
 
   props: {
