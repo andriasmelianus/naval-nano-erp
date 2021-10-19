@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import { Mapbox } from "~/components/_mixins/mapbox";
-import mapboxgl from "mapbox-gl";
+import { MapboxDefault } from "~/components/_mixins/mapbox/default";
+import mapboxgl from "mapbox-gl"; // Need to import again to create Marker.
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 export default {
-  mixins: [Mapbox, MessageExtractor],
+  mixins: [MapboxDefault, MessageExtractor],
 
   props: {
     width: {
@@ -34,11 +34,12 @@ export default {
 
   mounted() {
     let vm = this;
+    mapboxgl.accessToken = vm.$store.getters.mapboxToken; // Need to set token for new mapboxgl instance.
 
     // Initialize geocoder.
     vm.map.addControl(
       new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
+        accessToken: vm.$store.getters.mapboxToken,
         mapboxgl: vm.map,
       })
     );
