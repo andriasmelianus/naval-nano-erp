@@ -155,6 +155,10 @@ export default {
     },
   },
 
+  mounted() {
+    this.$store.dispatch("fetchGlobalValues");
+  },
+
   methods: {
     deleteItem(itemId) {
       let vm = this;
