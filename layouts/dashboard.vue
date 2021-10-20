@@ -60,9 +60,7 @@ export default {
     let vm = this;
 
     // Fill up required global variables.
-    vm.$store.dispatch("fetchCompany");
-    vm.$store.dispatch("fetchBranch");
-    vm.$store.dispatch("fetchMapboxToken");
+    vm.$store.dispatch("fetchGlobalValues");
   },
 
   methods: {

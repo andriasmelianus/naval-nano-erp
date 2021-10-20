@@ -84,6 +84,12 @@ export const actions = {
           color: "error"
         });
       });
+  },
+
+  fetchGlobalValues(context) {
+    context.dispatch("fetchCompany");
+    context.dispatch("fetchBranch");
+    context.dispatch("fetchMapboxToken");
   }
 };
 
