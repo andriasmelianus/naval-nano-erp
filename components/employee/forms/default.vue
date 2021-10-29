@@ -13,6 +13,7 @@
         <v-select
           label="Jenis Identitas"
           :items="id_types"
+          item-value="text"
           v-model="record.id_type"
           :error-messages="invalidInputMessage.id_type"
         ></v-select>
