@@ -37,6 +37,20 @@ export const items = [
     ]
   },
   {
+    icon: "mdi-handshake",
+    title: "Pengajuan",
+    children: [
+      {
+        title: "Permohonan",
+        to: "/submission"
+      },
+      {
+        title: "Persetujuan",
+        to: "/submission/approval"
+      }
+    ]
+  },
+  {
     icon: "mdi-help-circle-outline",
     title: "Bantuan",
     children: [
