@@ -7,7 +7,7 @@ export const DefaultRecord = {
   code: undefined,
   purchase_date: undefined,
   price: undefined,
-  is_deprecated: undefined,
+  is_depreciated: undefined,
   depreciation_months_count: undefined,
   deactivation_date: undefined,
   note: undefined
@@ -22,7 +22,7 @@ export const DefaultInvalidInputMessage = {
   code: [],
   purchase_date: [],
   price: [],
-  is_deprecated: [],
+  is_depreciated: [],
   depreciation_months_count: [],
   deactivation_date: [],
   note: []

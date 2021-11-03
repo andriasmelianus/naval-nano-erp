@@ -53,9 +53,9 @@
     <v-row>
       <v-col cols="12" md="5">
         <v-checkbox
-          v-model="record.is_deprecated"
+          v-model="record.is_depreciated"
           label="Aset Terdepresiasi"
-          :error-messages="invalidInputMessage.is_deprecated"
+          :error-messages="invalidInputMessage.is_depreciated"
         ></v-checkbox>
       </v-col>
 
@@ -65,7 +65,7 @@
           hint="Jumlah bulan terjadinya depresiasi aset"
           v-model="record.depreciation_months_count"
           :error-messages="invalidInputMessage.depreciation_months_count"
-          :disabled="!record.is_deprecated"
+          :disabled="!record.is_depreciated"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -100,7 +100,7 @@ export default {
   watch: {
     record: {
       handler: function (newRecord, oldRecord) {
-        if (newRecord.is_deprecated == false) {
+        if (newRecord.is_depreciated == false) {
           this.record.depreciation_months_count = undefined;
         }
       },
