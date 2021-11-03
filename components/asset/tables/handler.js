@@ -22,9 +22,9 @@ export const Handler = {
       { text: "Model", value: "model" },
       { text: "S/N", value: "serial_number" },
       { text: "Kode", value: "code" },
-      { text: "Tgl. Beli", value: "purchase_date_formatted" },
+      { text: "Tgl. Beli", value: "readable_purchase_date" },
       { text: "Harga", value: "price" },
-      { text: "Terdepresiasi", value: "is_deprecated" },
+      { text: "Terdepresiasi", value: "readable_is_depreciated" },
       { text: "Catatan", value: "note" },
       { text: "Diupdate", value: "updated_at" }
     ],
