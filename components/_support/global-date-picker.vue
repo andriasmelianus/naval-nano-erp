@@ -15,7 +15,7 @@
         :label="label"
         persistent-hint
         v-mask="mask"
-        v-bind="attrs"
+        v-bind="$attrs"
         v-on="on"
       ></v-text-field>
     </template>
