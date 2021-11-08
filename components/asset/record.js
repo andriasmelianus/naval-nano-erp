@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const DefaultRecord = {
   room_id: undefined,
   equipment_id: undefined,
@@ -5,7 +7,7 @@ export const DefaultRecord = {
   model: undefined,
   serial_number: undefined,
   code: undefined,
-  purchase_date: undefined,
+  purchase_date: moment().format(),
   price: undefined,
   is_depreciated: undefined,
   depreciation_months_count: undefined,
