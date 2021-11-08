@@ -17,7 +17,7 @@
       </v-col>
 
       <v-col cols="12" md="4" class="flex-grow-1 flex-shrink-0">
-        <v-text-field v-model="title" :label="titlePlaceHolder"></v-text-field>
+        <v-text-field v-model="name" :label="namePlaceHolder"></v-text-field>
       </v-col>
 
       <v-col cols="12" md="2" class="flex-grow-0 flex-shrink-1">
