@@ -47,11 +47,17 @@ export default {
      */
     value: {
       type: String,
-      default: function () {
-        return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-          .toISOString()
-          .substr(0, 10);
-      },
+
+      /**
+       * Setting the default value will display the default value even though initial value set to null/undefined.
+       * Please set initial value within the record.js file. Using moment.js is recommended.
+       * Disable default value also enable user to set the value to null/undefined when untouched.
+       */
+      // default: function () {
+      //   return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      //     .toISOString()
+      //     .substr(0, 10);
+      // },
     },
   },
 
