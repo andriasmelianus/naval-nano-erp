@@ -71,27 +71,36 @@ export default {
     value(newDate, oldDate) {
       let vm = this;
 
-      vm.dateText = vm.formatDateToEasyToType(newDate);
-      vm.selectedDate = vm.formatDateToIso8601(newDate);
+      if (newDate != null) {
+        vm.dateText = vm.formatDateToEasyToType(newDate);
+        vm.selectedDate = vm.formatDateToIso8601(newDate);
+      }
     },
 
     selectedDate(newDate, oldDate) {
       let vm = this;
 
-      vm.dateText = vm.formatDateToEasyToType(newDate);
-      vm.$emit("input", newDate);
+      if (newDate != null) {
+        vm.dateText = vm.formatDateToEasyToType(newDate);
+        vm.$emit("input", newDate);
+      }
     },
 
     dateText(newDateText, oldDateText) {
       let vm = this;
 
-      if (newDateText.length == 10) {
-        let dateInIso8601Format = vm.formatDateToIso8601(
-          newDateText.replaceAll("/", "-")
-        );
+      if (newDateText == "") {
+        vm.selectedDate = undefined;
+        vm.$emit("input", undefined);
+      } else {
+        if (newDateText.length == 10) {
+          let dateInIso8601Format = vm.formatDateToIso8601(
+            newDateText.replaceAll("/", "-")
+          );
 
-        vm.selectedDate = dateInIso8601Format;
-        vm.$emit("input", dateInIso8601Format);
+          vm.selectedDate = dateInIso8601Format;
+          vm.$emit("input", dateInIso8601Format);
+        }
       }
     },
   },
