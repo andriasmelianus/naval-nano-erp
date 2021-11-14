@@ -7,7 +7,7 @@
     :target="target"
     class="text-center justify-center"
   >
-    <v-icon size="64" class="pa-2">{{ icon }}</v-icon>
+    <v-icon :size="iconSize" class="pa-2">{{ icon }}</v-icon>
     <v-card-text>{{ name }}</v-card-text>
   </v-card>
 </template>

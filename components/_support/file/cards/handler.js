@@ -35,13 +35,18 @@ export const Handler = {
     },
 
     width: {
-      type: Number,
+      type: [String, Number],
       default: undefined
     },
 
     height: {
-      type: Number,
+      type: [String, Number],
       default: undefined
+    },
+
+    iconSize: {
+      type: [String, Number],
+      default: 64
     }
   },
 
