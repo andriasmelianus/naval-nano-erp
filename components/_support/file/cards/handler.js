@@ -29,9 +29,14 @@ export const Handler = {
       default: undefined
     },
 
+    downloadable: {
+      type: Boolean,
+      default: true
+    },
+
     deletable: {
       type: Boolean,
-      default: false
+      default: true
     },
 
     width: {
@@ -164,12 +169,59 @@ export const Handler = {
     },
 
     /**
+     * Perform get request to download the file.
+     * @return {void}
+     */
+    handleDownloadButtonClicked() {
+      let vm = this;
+      vm.$emit("download-button-clicked", vm.value);
+      if (vm.downloadable) {
+        vm.$axios
+          .$get(vm.resourceUri + "/download/" + vm.value, {
+            responseType: "blob"
+          })
+          .then(function(result) {
+            /**
+             * Generic way to perform download operation with Axios.
+             * https://stackoverflow.com/a/53230807/7963686
+             */
+            const url = window.URL.createObjectURL(new Blob([result]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", vm.name); //or any other extension
+            document.body.appendChild(link);
+            link.click();
+          })
+          .catch(function(result) {
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.messageErrorExtract(result)
+            });
+          });
+      }
+    },
+
+    /**
      * Perform delete request when delete button is clicked.
      * @return {void}
      */
     handleDeleteButtonClicked() {
       let vm = this;
-      vm.$emit("input", undefined);
+      vm.$emit("delete-button-clicked", vm.value);
+      if (vm.deletable) {
+        vm.$axios
+          .$delete(vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value)
+          .then(function(result) {
+            vm.record = undefined;
+            vm.$emit("input", undefined);
+          })
+          .catch(function(result) {
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.messageErrorExtract(result)
+            });
+          });
+      }
     }
   }
 };
