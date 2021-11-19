@@ -12,6 +12,14 @@ export const Handler = {
     parentResourceUri: String,
 
     /**
+     * If true, pressing delete button will send a DELETE request to API server.
+     */
+    disableDeleteRequest: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
      * Value can be provided with a valid URL or file ID from the datasource.
      * URL will be filled with "url" property from the fetched data.
      */
@@ -210,20 +218,22 @@ export const Handler = {
       vm.$emit("delete-button-clicked", vm.value);
       if (vm.deletable) {
         if (confirm("Anda yakin akan menghapus file yang telah diupload?")) {
-          vm.$axios
-            .$delete(
-              vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value
-            )
-            .then(function(result) {
-              vm.record = undefined;
-              vm.$emit("input", undefined);
-            })
-            .catch(function(result) {
-              vm.$store.commit("global-snackbar/show", {
-                color: "error",
-                message: vm.messageErrorExtract(result)
+          if (!vm.disableDeleteRequest) {
+            vm.$axios
+              .$delete(
+                vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value
+              )
+              .then(function(result) {
+                vm.record = undefined;
+                vm.$emit("input", undefined);
+              })
+              .catch(function(result) {
+                vm.$store.commit("global-snackbar/show", {
+                  color: "error",
+                  message: vm.messageErrorExtract(result)
+                });
               });
-            });
+          }
         }
       }
     }
