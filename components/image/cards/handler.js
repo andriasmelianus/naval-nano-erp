@@ -20,7 +20,7 @@ export const Handler = {
     },
 
     /**
-     * If false, clicking the delete button will send DELETE request to API server.
+     * If false, clicking the delete button WILL NOT send DELETE request to API server.
      */
     disableDeleteRequest: {
       type: Boolean,
