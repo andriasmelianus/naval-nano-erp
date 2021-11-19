@@ -41,7 +41,7 @@ export const Handler = {
 
     width: {
       type: [String, Number],
-      default: undefined
+      default: 200
     },
 
     height: {
@@ -209,18 +209,22 @@ export const Handler = {
       let vm = this;
       vm.$emit("delete-button-clicked", vm.value);
       if (vm.deletable) {
-        vm.$axios
-          .$delete(vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value)
-          .then(function(result) {
-            vm.record = undefined;
-            vm.$emit("input", undefined);
-          })
-          .catch(function(result) {
-            vm.$store.commit("global-snackbar/show", {
-              color: "error",
-              message: vm.messageErrorExtract(result)
+        if (confirm("Anda yakin akan menghapus file yang telah diupload?")) {
+          vm.$axios
+            .$delete(
+              vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value
+            )
+            .then(function(result) {
+              vm.record = undefined;
+              vm.$emit("input", undefined);
+            })
+            .catch(function(result) {
+              vm.$store.commit("global-snackbar/show", {
+                color: "error",
+                message: vm.messageErrorExtract(result)
+              });
             });
-          });
+        }
       }
     }
   }

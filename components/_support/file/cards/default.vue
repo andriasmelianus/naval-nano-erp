@@ -5,18 +5,27 @@
     :height="height ? height : undefined"
   >
     <div class="text-center justify-center">
-      <v-icon :size="iconSize" class="pa-2">{{ icon }}</v-icon>
+      <v-icon
+        :size="iconSize"
+        class="pa-2"
+        @click="handleDownloadButtonClicked"
+        >{{ icon }}</v-icon
+      >
     </div>
-    <v-card-text class="text-center justify-center">{{ name }}</v-card-text>
+    <v-card-text
+      class="text-center justify-center"
+      @click="handleDownloadButtonClicked"
+      >{{ name }}</v-card-text
+    >
 
     <v-card-actions>
-      <v-spacer></v-spacer>
-
-      <v-btn icon @click="handleDownloadButtonClicked" v-show="downloadable">
-        <v-icon>mdi-download</v-icon>
-      </v-btn>
-
-      <v-btn icon @click="handleDeleteButtonClicked" v-show="deletable">
+      <v-btn
+        block
+        @click="handleDeleteButtonClicked"
+        v-show="deletable"
+        elevation="0"
+        rounded
+      >
         <v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-card-actions>
