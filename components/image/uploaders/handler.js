@@ -18,6 +18,10 @@ export const Handler = {
       default: "image"
     },
 
+    /**
+     * Useful for delete operation without sending DELETE request.
+     * Usually used by single image upload, where delete means set the ID to undefined only.
+     */
     disableDeleteRequest: {
       type: Boolean,
       default: false
