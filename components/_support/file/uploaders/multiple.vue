@@ -28,7 +28,7 @@
     </v-row>
 
     <v-row v-if="hasMultipleValues">
-      <v-col cols="4" v-for="id in value" :key="id">
+      <v-col cols="12" sm="12" md="6" lg="4" v-for="id in value" :key="id">
         <default-file-card
           :value="id"
           :parent-resource-uri="parentResourceUri"
