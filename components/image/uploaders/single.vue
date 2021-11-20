@@ -25,7 +25,7 @@
           :disable-delete-request="disableDeleteRequest"
           :width="width"
           :height="height"
-          @delete-button-clicked="handleDeleteButtonClicked"
+          @delete-button-clicked="handleDeleteButtonClicked(value)"
         ></image-card-default>
       </v-col>
     </v-row>
