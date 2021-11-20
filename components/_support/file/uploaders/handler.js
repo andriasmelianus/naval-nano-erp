@@ -42,6 +42,11 @@ export const Handler = {
       default: "file"
     },
 
+    prependIcon: {
+      type: String,
+      default: "mdi-file"
+    },
+
     /**
      * Card width of the uploaded file.
      */

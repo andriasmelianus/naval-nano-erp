@@ -6,8 +6,8 @@
           v-model="fileToBeUploaded"
           :label="placeHolder"
           :accept="accept"
+          :prepend-icon="preprendIcon"
           show-size
-          prepend-icon="mdi-file"
         ></v-file-input>
       </v-col>
 
