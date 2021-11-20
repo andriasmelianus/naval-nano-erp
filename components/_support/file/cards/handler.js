@@ -215,9 +215,10 @@ export const Handler = {
      */
     handleDeleteButtonClicked() {
       let vm = this;
-      vm.$emit("delete-button-clicked", vm.value);
-      if (vm.deletable) {
-        if (confirm("Anda yakin akan menghapus file yang telah diupload?")) {
+      if (confirm("Anda yakin akan menghapus file yang telah diupload?")) {
+        if (vm.deletable) {
+          vm.$emit("delete-button-clicked", vm.value);
+
           if (!vm.disableDeleteRequest) {
             vm.$axios
               .$delete(
@@ -234,6 +235,11 @@ export const Handler = {
                 });
               });
           }
+        } else {
+          vm.$store.commit("global-snackbar/show", {
+            color: "error",
+            message: "Fasilitas penghapusan telah dinonaktifkan."
+          });
         }
       }
     }
