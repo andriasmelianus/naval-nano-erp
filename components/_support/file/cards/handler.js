@@ -49,7 +49,7 @@ export const Handler = {
 
     width: {
       type: [String, Number],
-      default: 200
+      default: undefined
     },
 
     height: {
@@ -116,12 +116,18 @@ export const Handler = {
     extension() {
       let vm = this;
       if (vm.isValidUrl(vm.value)) {
-        return vm.value.split(".").pop();
+        return vm.value
+          .split(".")
+          .pop()
+          .toLowerCase();
       } else {
         if (vm.record == undefined) {
           return undefined;
         } else {
-          return vm.record.name.split(".").pop();
+          return vm.record.name
+            .split(".")
+            .pop()
+            .toLowerCase();
         }
       }
     },
