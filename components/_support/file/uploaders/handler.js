@@ -88,10 +88,7 @@ export const Handler = {
      * @param {Number|String} idToDelete
      */
     handleDeleteButtonClicked(idToDelete) {
-      let vm = this;
-      if (!vm.deletable) {
-        vm.$emit("delete-button-clicked", idToDelete);
-      }
+      this.$emit("delete-button-clicked", idToDelete);
     }
   }
 };
