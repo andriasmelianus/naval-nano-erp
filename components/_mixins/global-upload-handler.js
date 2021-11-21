@@ -267,6 +267,27 @@ export const GlobalUploadHandler = {
     },
 
     /**
+     * Delete a uploaded file by its' ID.
+     * @param {Number|String} idToDelete File ID emitted by file card.
+     */
+    deleteFileById(idToDelete) {
+      let vm = this;
+
+      if (vm.hasSingleValue) {
+        vm.$emit("input", undefined);
+      } else if (vm.hasMultipleValues) {
+        for (let valueIndex = 0; valueIndex < vm.value.length; valueIndex++) {
+          const valueRow = vm.value[valueIndex];
+          if (valueRow == idToDelete) {
+            vm.value.splice(valueIndex, 1);
+            valueIndex--;
+          }
+        }
+        vm.$emit("input", vm.value);
+      }
+    },
+
+    /**
      * Reset the control state to the begining.
      * @return {void}
      */
