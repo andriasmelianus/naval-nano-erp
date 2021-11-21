@@ -34,9 +34,13 @@
           :parent-resource-uri="parentResourceUri"
           :resource-uri="resourceUri"
           :disable-delete-request="disableDeleteRequest"
+          :downloadable="downloadable"
+          :deletable="deletable"
           :width="cardWidth"
           :height="cardHeight"
-          @delete-button-clicked="handleDeleteButtonClicked(id)"
+          :iconSize="iconSize"
+          @delete-button-clicked="handleDeleteButtonClicked"
+          @file-deleted="deleteFileById"
         ></default-file-card>
       </v-col>
     </v-row>
@@ -48,9 +52,13 @@
           :parent-resource-uri="parentResourceUri"
           :resource-uri="resourceUri"
           :disable-delete-request="disableDeleteRequest"
+          :downloadable="downloadable"
+          :deletable="deletable"
           :width="cardWidth"
           :height="cardHeight"
-          @delete-button-clicked="handleDeleteButtonClicked(value)"
+          :iconSize="iconSize"
+          @delete-button-clicked="handleDeleteButtonClicked"
+          @file-deleted="deleteFileById"
         ></default-file-card>
       </v-col>
     </v-row>
