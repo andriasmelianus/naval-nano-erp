@@ -29,6 +29,7 @@
           :height="cardHeight"
           :iconSize="iconSize"
           @delete-button-clicked="handleDeleteButtonClicked"
+          @file-deleted="deleteFileById"
         ></default-file-card>
       </v-col>
     </v-row>
