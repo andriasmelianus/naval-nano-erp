@@ -232,6 +232,7 @@ export const Handler = {
               )
               .then(function(result) {
                 vm.record = undefined;
+                vm.$emit("file-deleted", vm.value);
                 vm.$emit("input", undefined);
               })
               .catch(function(result) {
@@ -241,6 +242,7 @@ export const Handler = {
                 });
               });
           } else {
+            vm.$emit("file-deleted", vm.value);
             vm.$emit("input", undefined);
           }
         } else {
