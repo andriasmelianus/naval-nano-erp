@@ -84,8 +84,8 @@ export const Handler = {
 
   methods: {
     /**
-     * Transfer event fired from file card to the parent component.
-     * @param {Number|String} idToDelete
+     * Transfer emitted delete-button-clicked event from file card to parent component.
+     * @param {String|Number} idToDelete File ID emitted by file card.
      */
     handleDeleteButtonClicked(idToDelete) {
       this.$emit("delete-button-clicked", idToDelete);
