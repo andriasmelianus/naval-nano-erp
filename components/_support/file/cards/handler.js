@@ -240,6 +240,8 @@ export const Handler = {
                   message: vm.messageErrorExtract(result)
                 });
               });
+          } else {
+            vm.$emit("input", undefined);
           }
         } else {
           vm.$store.commit("global-snackbar/show", {
