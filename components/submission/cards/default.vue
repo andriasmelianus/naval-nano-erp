@@ -1,16 +1,17 @@
 <template>
   <v-card max-width="300" hover>
     <v-card-title @click="handleCardClicked"> {{ record.title }} </v-card-title>
-    <v-card-subtitle>{{ record.entity }}</v-card-subtitle>
+    <v-card-subtitle @click="handleCardClicked">{{
+      record.entity
+    }}</v-card-subtitle>
     <v-card-text @click="handleCardClicked">
       {{ record.description }}
+      <br />
+      <v-icon small>mdi-calendar</v-icon>&nbsp;&nbsp;{{
+        $moment(record.date).format("DD-MMM-YYYY")
+      }}
     </v-card-text>
     <v-card-actions>
-      <v-chip outlined>
-        <v-icon small>mdi-calendar</v-icon>&nbsp;&nbsp;{{
-          $moment(record.date).format("DD-MMM-YYYY")
-        }}
-      </v-chip>
       <!-- Additional buttons go here -->
       <v-spacer></v-spacer>
       <v-menu offset-x v-if="!!record[attachmentsIndex].length">
