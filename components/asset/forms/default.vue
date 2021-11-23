@@ -50,11 +50,25 @@
       :error-messages="invalidInputMessage.price"
     ></v-text-field>
 
-    <v-checkbox
-      v-model="record.is_deprecated"
-      label="Aset Terdepresiasi"
-      :error-messages="invalidInputMessage.is_deprecated"
-    ></v-checkbox>
+    <v-row>
+      <v-col cols="12" md="5">
+        <v-checkbox
+          v-model="record.is_depreciated"
+          label="Aset Terdepresiasi"
+          :error-messages="invalidInputMessage.is_depreciated"
+        ></v-checkbox>
+      </v-col>
+
+      <v-col cols="12" md="7">
+        <v-text-field
+          label="Jangka Depresiasi"
+          hint="Jumlah bulan terjadinya depresiasi aset"
+          v-model="record.depreciation_months_count"
+          :error-messages="invalidInputMessage.depreciation_months_count"
+          :disabled="!record.is_depreciated"
+        ></v-text-field>
+      </v-col>
+    </v-row>
 
     <v-textarea
       label="Catatan"
@@ -81,6 +95,17 @@ export default {
     EquipmentAutocomplete,
     BrandCombobox,
     DatePicker,
+  },
+
+  watch: {
+    record: {
+      handler: function (newRecord, oldRecord) {
+        if (newRecord.is_depreciated == false) {
+          this.record.depreciation_months_count = undefined;
+        }
+      },
+      deep: true,
+    },
   },
 };
 </script>

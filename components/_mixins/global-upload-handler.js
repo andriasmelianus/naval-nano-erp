@@ -52,7 +52,8 @@ export const GlobalUploadHandler = {
      * This URI needed to form the deletion process.
      * If this component is used by product component,
      * then the deletion URI cannot be /image/{image_id},
-     * but it should /product/image/{image_id}.
+     * but it should be /product/image/{image_id},
+     * whether the /product is the parent.
      */
     parentResourceUri: {
       type: String,
@@ -262,6 +263,27 @@ export const GlobalUploadHandler = {
           color: "warning",
           message: vm.uploadPartiallySuccessMessage + ": " + vm.errorMessage
         });
+      }
+    },
+
+    /**
+     * Delete a uploaded file by its' ID.
+     * @param {Number|String} idToDelete File ID emitted by file card.
+     */
+    deleteFileById(idToDelete) {
+      let vm = this;
+
+      if (vm.hasSingleValue) {
+        vm.$emit("input", undefined);
+      } else if (vm.hasMultipleValues) {
+        for (let valueIndex = 0; valueIndex < vm.value.length; valueIndex++) {
+          const valueRow = vm.value[valueIndex];
+          if (valueRow == idToDelete) {
+            vm.value.splice(valueIndex, 1);
+            valueIndex--;
+          }
+        }
+        vm.$emit("input", vm.value);
       }
     },
 

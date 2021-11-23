@@ -20,7 +20,7 @@ export const Handler = {
     },
 
     /**
-     * If false, clicking the delete button will send DELETE request to API server.
+     * If false, clicking the delete button WILL NOT send DELETE request to API server.
      */
     disableDeleteRequest: {
       type: Boolean,
@@ -75,7 +75,10 @@ export const Handler = {
             vm.$emit("image-retrieved", vm.value);
           })
           .catch(function(result) {
-            console.error(result);
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.messageErrorExtract(result)
+            });
           });
       }
     },

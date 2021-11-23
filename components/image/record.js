@@ -1,9 +1,9 @@
 export const DefaultRecord = {
   image: undefined,
-  title: undefined
+  name: undefined
 };
 
 export const DefaultInvalidInputMessage = {
   image: [],
-  title: []
+  name: []
 };

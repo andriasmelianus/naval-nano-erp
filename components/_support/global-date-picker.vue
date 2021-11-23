@@ -15,7 +15,7 @@
         :label="label"
         persistent-hint
         v-mask="mask"
-        v-bind="attrs"
+        v-bind="$attrs"
         v-on="on"
       ></v-text-field>
     </template>
@@ -47,11 +47,17 @@ export default {
      */
     value: {
       type: String,
-      default: function () {
-        return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-          .toISOString()
-          .substr(0, 10);
-      },
+
+      /**
+       * Setting the default value will display the default value even though initial value set to null/undefined.
+       * Please set initial value within the record.js file. Using moment.js is recommended.
+       * Disable default value also enable user to set the value to null/undefined when untouched.
+       */
+      // default: function () {
+      //   return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      //     .toISOString()
+      //     .substr(0, 10);
+      // },
     },
   },
 
@@ -65,27 +71,36 @@ export default {
     value(newDate, oldDate) {
       let vm = this;
 
-      vm.dateText = vm.formatDateToEasyToType(newDate);
-      vm.selectedDate = vm.formatDateToIso8601(newDate);
+      if (newDate != null) {
+        vm.dateText = vm.formatDateToEasyToType(newDate);
+        vm.selectedDate = vm.formatDateToIso8601(newDate);
+      }
     },
 
     selectedDate(newDate, oldDate) {
       let vm = this;
 
-      vm.dateText = vm.formatDateToEasyToType(newDate);
-      vm.$emit("input", newDate);
+      if (newDate != null) {
+        vm.dateText = vm.formatDateToEasyToType(newDate);
+        vm.$emit("input", newDate);
+      }
     },
 
     dateText(newDateText, oldDateText) {
       let vm = this;
 
-      if (newDateText.length == 10) {
-        let dateInIso8601Format = vm.formatDateToIso8601(
-          newDateText.replaceAll("/", "-")
-        );
+      if (newDateText == "") {
+        vm.selectedDate = undefined;
+        vm.$emit("input", undefined);
+      } else {
+        if (newDateText.length == 10) {
+          let dateInIso8601Format = vm.formatDateToIso8601(
+            newDateText.replaceAll("/", "-")
+          );
 
-        vm.selectedDate = dateInIso8601Format;
-        vm.$emit("input", dateInIso8601Format);
+          vm.selectedDate = dateInIso8601Format;
+          vm.$emit("input", dateInIso8601Format);
+        }
       }
     },
   },

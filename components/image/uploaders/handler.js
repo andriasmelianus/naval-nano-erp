@@ -18,6 +18,10 @@ export const Handler = {
       default: "image"
     },
 
+    /**
+     * Useful for delete operation without sending DELETE request.
+     * Usually used by single image upload, where delete means set the ID to undefined only.
+     */
     disableDeleteRequest: {
       type: Boolean,
       default: false
@@ -28,7 +32,7 @@ export const Handler = {
       default: "image"
     },
 
-    titlePlaceHolder: {
+    namePlaceHolder: {
       type: String,
       default: "Judul Gambar"
     },
@@ -49,15 +53,15 @@ export const Handler = {
   },
 
   data: () => ({
-    title: ""
+    name: ""
   }),
 
   watch: {
     /**
-     * Set the title to additionalData, so it will appended to form data before upload.
+     * Set the name to additionalData, so it will appended to form data before upload.
      */
-    title(newTitle, oldTitle) {
-      this.additionalData[0] = { title: newTitle };
+    name(newName, oldName) {
+      this.additionalData[0] = { name: newName };
     }
   },
 
