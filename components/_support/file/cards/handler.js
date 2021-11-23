@@ -1,7 +1,8 @@
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import { URL } from "~/components/_mixins/url";
+import { Downloader } from "~/components/_mixins/downloader";
 export const Handler = {
-  mixins: [MessageExtractor, URL],
+  mixins: [MessageExtractor, URL, Downloader],
 
   props: {
     resourceUri: {
@@ -190,28 +191,7 @@ export const Handler = {
       let vm = this;
       vm.$emit("download-button-clicked", vm.value);
       if (vm.downloadable) {
-        vm.$axios
-          .$get(vm.resourceUri + "/download/" + vm.value, {
-            responseType: "blob"
-          })
-          .then(function(result) {
-            /**
-             * Generic way to perform download operation with Axios.
-             * https://stackoverflow.com/a/53230807/7963686
-             */
-            const url = window.URL.createObjectURL(new Blob([result]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", vm.name); //or any other extension
-            document.body.appendChild(link);
-            link.click();
-          })
-          .catch(function(result) {
-            vm.$store.commit("global-snackbar/show", {
-              color: "error",
-              message: vm.messageErrorExtract(result)
-            });
-          });
+        vm.beginDownload(vm.resourceUri + "/download/" + vm.value, vm.name);
       }
     },
 
