@@ -12,35 +12,27 @@ export const Handler = {
       }
     },
 
+    /**
+     * Since keyword "file/files" causing keyword conflicts with Laravel Request,
+     * field name sent from NuxtJS will be attachments,
+     * but received field name is still files.
+     * This props will catch submission data which contains "files" field within.
+     * This props also give flexibility if field name change is made in the server side.
+     */
+    attachmentsIndex: {
+      type: String,
+      default: "files"
+    },
+
+    /**
+     * A file resource URI to perform download operation.
+     * Since here is a submission domain, calling resourceUri will return an URI for submission.
+     * So we need to add resourceUri for attachment particularly.
+     */
     attachmentResourceUri: {
       type: String,
       default: "file"
     }
-  },
-
-  data: vm => ({
-    attachmentsData: []
-  }),
-
-  mounted() {
-    let vm = this,
-      attachmentRequests = [];
-    vm.record.attachments.forEach(fileId => {
-      attachmentRequests.push(
-        vm.$axios
-          .$get(vm.attachmentResourceUri + "/" + fileId)
-          .then(function(result) {
-            return result;
-          })
-          .catch(function(result) {
-            return result;
-          })
-      );
-    });
-
-    Promise.all(attachmentRequests).then(function(result) {
-      vm.attachmentsData = result;
-    });
   },
 
   methods: {

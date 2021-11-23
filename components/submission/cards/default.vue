@@ -7,11 +7,13 @@
     </v-card-text>
     <v-card-actions>
       <v-chip outlined>
-        <v-icon small>mdi-calendar</v-icon>&nbsp;&nbsp;{{ record.date }}
+        <v-icon small>mdi-calendar</v-icon>&nbsp;&nbsp;{{
+          $moment(record.date).format("DD-MMM-YYYY")
+        }}
       </v-chip>
       <!-- Additional buttons go here -->
       <v-spacer></v-spacer>
-      <v-menu offset-x v-if="!!record.attachments.length">
+      <v-menu offset-x v-if="!!record[attachmentsIndex].length">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" v-on="on" icon>
             <v-icon>mdi-download</v-icon>
@@ -19,7 +21,7 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="attachment in attachmentsData"
+            v-for="attachment in record[attachmentsIndex]"
             :key="attachment.id"
             @click="downloadAttachment(attachment.id, attachment.name)"
           >
