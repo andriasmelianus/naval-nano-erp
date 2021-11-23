@@ -52,7 +52,9 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    ["@nuxtjs/vuetify", { iconfont: "mdi" }]
+    ["@nuxtjs/vuetify", { iconfont: "mdi" }],
+    // https://www.npmjs.com/package/@nuxtjs/moment
+    "@nuxtjs/moment"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
