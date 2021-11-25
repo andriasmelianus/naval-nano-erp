@@ -1,8 +1,6 @@
-import moment from "moment";
-
 export const DefaultRecord = {
   entity: undefined,
-  date: moment().format(),
+  date: undefined,
   title: undefined,
   description: undefined,
   // Please don't use "file"/"files" for naming field. Because it will conflict the reserved Laravel request field.
