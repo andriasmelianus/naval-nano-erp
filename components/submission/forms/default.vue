@@ -2,47 +2,41 @@
   <v-form @submit.prevent="submitForm" class="pa-4">
     <div class="text-h6">Data Permohonan</div>
 
-    <v-row>
-      <v-col cols="12" lg="8">
-        <v-select
-          v-model="record.entity"
-          label="Entitas"
-          :items="entities"
-          :error-messages="invalidInputMessage.id_type"
-        ></v-select>
+    <v-select
+      v-model="record.entity"
+      label="Entitas"
+      :items="entities"
+      :error-messages="invalidInputMessage.id_type"
+    ></v-select>
 
-        <date-picker
-          v-model="record.date"
-          label="Tanggal"
-          :error-messages="invalidInputMessage.date"
-        ></date-picker>
+    <date-picker
+      v-model="record.date"
+      label="Tanggal"
+      :error-messages="invalidInputMessage.date"
+    ></date-picker>
 
-        <v-text-field
-          v-model="record.title"
-          label="Judul"
-          :error-messages="invalidInputMessage.title"
-        ></v-text-field>
+    <v-text-field
+      v-model="record.title"
+      label="Judul"
+      :error-messages="invalidInputMessage.title"
+    ></v-text-field>
 
-        <v-textarea
-          label="Deskripsi"
-          v-model="record.description"
-          :error-messages="invalidInputMessage.description"
-          rows="3"
-        ></v-textarea>
+    <v-textarea
+      label="Deskripsi"
+      v-model="record.description"
+      :error-messages="invalidInputMessage.description"
+      rows="3"
+    ></v-textarea>
 
-        <v-btn color="success" type="submit">Simpan</v-btn>
-      </v-col>
+    <!-- File uploader goes here. -->
+    <multiple-file-uploader
+      v-model="record.attachments"
+      :error-messages="invalidInputMessage.attachments"
+      :parent-resource-uri="resourceUri"
+      disable-delete-request
+    ></multiple-file-uploader>
 
-      <v-col cols="12" lg="4">
-        <!-- File uploader goes here. -->
-        <multiple-file-uploader
-          v-model="record.attachments"
-          :error-messages="invalidInputMessage.attachments"
-          :parent-resource-uri="resourceUri"
-          disable-delete-request
-        ></multiple-file-uploader>
-      </v-col>
-    </v-row>
+    <v-btn color="success" type="submit">Simpan</v-btn>
   </v-form>
 </template>
 

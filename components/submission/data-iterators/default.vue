@@ -12,18 +12,14 @@
       <!-- Data Iterator Header -->
       <template v-slot:header>
         <v-toolbar class="mb-4" flat>
-          <v-toolbar-title class="text-h6 mr-3"
-            >Pilih Perusahaan</v-toolbar-title
-          >
+          <v-toolbar-title class="text-h6 mr-3">Permohonan</v-toolbar-title>
 
-          <div class="ma-2">
-            <v-btn color="success" class="ml-2" @click="readRecords">
-              <v-icon left>mdi-refresh</v-icon>&nbsp;Refresh
-            </v-btn>
-            <v-btn color="primary" class="mr-2" @click="showForm(false)">
-              <v-icon left>mdi-plus</v-icon>&nbsp;Baru
-            </v-btn>
-          </div>
+          <v-btn color="success" class="mx-2" @click="readRecords">
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+          <v-btn color="primary" class="mr-2" @click="showForm(false)">
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
 
           <v-text-field
             prepend-icon="mdi-magnify"
@@ -49,6 +45,18 @@
             <v-btn icon value="true"><v-icon>mdi-sort-variant</v-icon></v-btn>
           </v-btn-toggle>
         </v-toolbar>
+
+        <!-- Form -->
+        <v-dialog v-model="formIsShown" max-width="800px" ref="formDialog">
+          <v-card>
+            <submission-form
+              :record="editedRecord"
+              :edit-mode="formIsInEditMode"
+              @record-created="handleRecordCreated($event)"
+              @record-updated="handleRecordUpdated($event)"
+            ></submission-form>
+          </v-card>
+        </v-dialog>
       </template>
 
       <!-- Data Iterator Content -->
@@ -68,18 +76,6 @@
             ></submission-default-card>
           </v-col>
         </v-row>
-
-        <!-- Form -->
-        <v-dialog v-model="formIsShown" max-width="1024px" ref="formDialog">
-          <v-card>
-            <submission-form
-              :record="editedRecord"
-              :edit-mode="formIsInEditMode"
-              @record-created="handleRecordCreated($event)"
-              @record-updated="handleRecordUpdated($event)"
-            ></submission-form>
-          </v-card>
-        </v-dialog>
       </template>
     </v-data-iterator>
   </div>
