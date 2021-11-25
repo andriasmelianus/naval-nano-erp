@@ -47,7 +47,7 @@
         </v-toolbar>
 
         <!-- Form -->
-        <v-dialog v-model="formIsShown" max-width="1024px" ref="formDialog">
+        <v-dialog v-model="formIsShown" max-width="800px" ref="formDialog">
           <v-card>
             <submission-form
               :record="editedRecord"
