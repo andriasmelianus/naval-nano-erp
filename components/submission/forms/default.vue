@@ -30,8 +30,8 @@
 
     <!-- File uploader goes here. -->
     <multiple-file-uploader
-      v-model="record.attachments"
-      :error-messages="invalidInputMessage.attachments"
+      v-model="record.files"
+      :error-messages="invalidInputMessage.files"
       :parent-resource-uri="resourceUri"
       disable-delete-request
     ></multiple-file-uploader>

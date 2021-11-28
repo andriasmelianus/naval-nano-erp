@@ -3,8 +3,7 @@ export const DefaultRecord = {
   date: undefined,
   title: undefined,
   description: undefined,
-  // Please don't use "file"/"files" for naming field. Because it will conflict the reserved Laravel request field.
-  attachments: []
+  files: []
 };
 
 export const DefaultInvalidInputMessage = {
@@ -12,5 +11,5 @@ export const DefaultInvalidInputMessage = {
   date: [],
   title: [],
   description: [],
-  attachments: []
+  files: []
 };
