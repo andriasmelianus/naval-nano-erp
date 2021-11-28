@@ -23,9 +23,16 @@ export const Handler = {
     /**
      * Value can be provided with a valid URL or file ID from the datasource.
      * URL will be filled with "url" property from the fetched data.
+     * Object with ID property can also be passed to this control.
+     * System will fetch the file data from datasource by its' ID.
      */
     value: {
-      type: [String, Number]
+      type: [String, Number, Object]
+    },
+
+    idIndex: {
+      type: String,
+      default: "id"
     },
 
     defaultEmptyUrl: {
@@ -88,10 +95,23 @@ export const Handler = {
   }),
 
   computed: {
+    /**
+     * IMPORTANT!!!
+     * Since the v-model supports object as the data type,
+     * we need to access the primitive value for data processing.
+     */
+    primitiveValue() {
+      if (typeof this.value == "object") {
+        return this.value[this.idIndex];
+      } else {
+        return this.value;
+      }
+    },
+
     url() {
       let vm = this;
-      if (vm.isValidUrl(vm.value)) {
-        return vm.value;
+      if (vm.isValidUrl(vm.primitiveValue)) {
+        return vm.primitiveValue;
       } else {
         if (vm.record == undefined) {
           return vm.defaultEmptyUrl;
@@ -103,8 +123,8 @@ export const Handler = {
 
     name() {
       let vm = this;
-      if (vm.isValidUrl(vm.value)) {
-        return vm.value.split("/").pop();
+      if (vm.isValidUrl(vm.primitiveValue)) {
+        return vm.primitiveValue.split("/").pop();
       } else {
         if (vm.record == undefined) {
           return "?";
@@ -116,8 +136,8 @@ export const Handler = {
 
     extension() {
       let vm = this;
-      if (vm.isValidUrl(vm.value)) {
-        return vm.value
+      if (vm.isValidUrl(vm.primitiveValue)) {
+        return vm.primitiveValue
           .split(".")
           .pop()
           .toLowerCase();
@@ -165,13 +185,13 @@ export const Handler = {
      */
     getFile() {
       let vm = this;
-      if (vm.value != null && vm.value != "") {
-        if (!vm.isValidUrl(vm.value)) {
+      if (vm.primitiveValue != null && vm.primitiveValue != "") {
+        if (!vm.isValidUrl(vm.primitiveValue)) {
           vm.$axios
-            .$get(vm.resourceUri + "/" + vm.value)
+            .$get(vm.resourceUri + "/" + vm.primitiveValue)
             .then(function(result) {
               vm.record = result;
-              vm.$emit("file-retrieved", vm.value);
+              vm.$emit("file-retrieved", vm.primitiveValue);
             })
             .catch(function(result) {
               vm.$store.commit("global-snackbar/show", {
@@ -189,9 +209,12 @@ export const Handler = {
      */
     handleDownloadButtonClicked() {
       let vm = this;
-      vm.$emit("download-button-clicked", vm.value);
+      vm.$emit("download-button-clicked", vm.primitiveValue);
       if (vm.downloadable) {
-        vm.beginDownload(vm.resourceUri + "/download/" + vm.value, vm.name);
+        vm.beginDownload(
+          vm.resourceUri + "/download/" + vm.primitiveValue,
+          vm.name
+        );
       }
     },
 
@@ -203,16 +226,20 @@ export const Handler = {
       let vm = this;
       if (confirm("Anda yakin akan menghapus file yang telah diupload?")) {
         if (vm.deletable) {
-          vm.$emit("delete-button-clicked", vm.value);
+          vm.$emit("delete-button-clicked", vm.primitiveValue);
 
           if (!vm.disableDeleteRequest) {
             vm.$axios
               .$delete(
-                vm.parentResourceUri + "/" + vm.resourceUri + "/" + vm.value
+                vm.parentResourceUri +
+                  "/" +
+                  vm.resourceUri +
+                  "/" +
+                  vm.primitiveValue
               )
               .then(function(result) {
                 vm.record = undefined;
-                vm.$emit("file-deleted", vm.value);
+                vm.$emit("file-deleted", vm.primitiveValue);
                 vm.$emit("input", undefined);
               })
               .catch(function(result) {
@@ -222,7 +249,7 @@ export const Handler = {
                 });
               });
           } else {
-            vm.$emit("file-deleted", vm.value);
+            vm.$emit("file-deleted", vm.primitiveValue);
             vm.$emit("input", undefined);
           }
         } else {
