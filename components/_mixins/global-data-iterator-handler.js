@@ -15,6 +15,18 @@ export const GlobalDataIteratorHandler = {
     componentUri: {
       type: String,
       default: "/vuetify-data-iterator"
+    },
+
+    // If true, table will reload data after a row is modified.
+    reloadAfterModification: {
+      type: Boolean,
+      default: true
+    },
+
+    // Delay while typing in search textbox.
+    dataFetchTimerDelay: {
+      type: Number,
+      default: 300
     }
   },
 
@@ -42,12 +54,8 @@ export const GlobalDataIteratorHandler = {
     formIsShown: false,
     formIsInEditMode: false,
 
-    // If true, table will reload data after a row is modified.
-    reloadAfterModification: false,
-
     // Other supporting data
     dataFetchTimerId: undefined,
-    dataFetchTimerDelay: 300,
     isLoading: false
   }),
 
