@@ -255,13 +255,15 @@ export const GlobalDataIteratorHandler = {
     },
 
     /**
-     * Emit a "record-selected" event when a record is selected.
+     * Emit a "record-selected" event when an element is clicked.
      * Vuetify Data Iterator uses card as its content.
      * Clicking a card will trigger edit the selected data.
      * @param {Object} record
      */
     handleRecordSelected(record) {
       this.$emit("record-selected", record);
+      // Clicking an element is equivalent with select a row in v-data-table.
+      this.selectedRecord = Object.assign({}, record, this.selectedRecord);
       this.setEditedRecord(record);
       this.showForm(true);
     },
