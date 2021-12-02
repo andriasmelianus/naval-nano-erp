@@ -6,10 +6,12 @@
  * 1. place-holder {String}
  * 2. accept {String}
  * 3. parent-resource-uri {String}
- * 4. upload-success-message {String}
- * 5. upload-partially-success-message {String}
- * 6. upload-failed-message {String}
- * 7. no-file-to-upload-message {String}
+ * 4. return-id {Boolean}
+ * 5. id-index {String}
+ * 6. upload-success-message {String}
+ * 7. upload-partially-success-message {String}
+ * 8. upload-failed-message {String}
+ * 9. no-file-to-upload-message {String}
  *
  * Data
  * 1. filesToBeUploaded {Array}
@@ -58,6 +60,23 @@ export const GlobalUploadHandler = {
     parentResourceUri: {
       type: String,
       required: true
+    },
+
+    /**
+     * API server will respond with an object containing file data.
+     * Setting this props to true, will emit identity only to the parent component.
+     */
+    returnId: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+     * Property name of the uploaded file considered as identity.
+     */
+    idIndex: {
+      type: String,
+      default: "id"
     },
 
     /**
@@ -140,25 +159,58 @@ export const GlobalUploadHandler = {
 
   watch: {
     /**
+     * Register ID(s) contained in the value.
+     */
+    value(newValue, oldValue) {
+      let vm = this;
+      if (typeof newValue == "object") {
+        for (let valueIndex = 0; valueIndex < newValue.length; valueIndex++) {
+          const newValueRow = newValue[valueIndex];
+          if (typeof newValueRow == "object") {
+            vm.existingFileIds.push(newValueRow[vm.idIndex]);
+          } else {
+            vm.existingFileIds.push(newValueRow);
+          }
+        }
+      } else {
+        vm.existingFileId = newValue;
+      }
+    },
+
+    /**
      * Send the uploaded file ID to the parent component.
      */
     successfulUploadResult(resultAfter, resultBefore) {
-      let vm = this;
-      vm.$emit("input", resultAfter.id);
+      if (this.returnId) {
+        this.$emit("input", resultAfter[this.idIndex]);
+      } else {
+        this.$emit("input", resultAfter);
+      }
     },
+
     /**
-     * Every successful of multiple uploads will add the existing file IDs,
-     * and send it to the parent component.
+     * To emit files uploaded successfully event and send the received data
+     * from the API server to the parent component.
      */
     successfulUploadResults(resultsAfter, resultsBefore) {
       if (!!resultsAfter.length) {
         let vm = this,
-          existingFileIdsCount = vm.existingFileIds.length;
-        if (existingFileIdsCount == 0) {
-          vm.existingFileIds = vm.value;
+          updatedValues = vm.value;
+        for (
+          let resultIndex = 0;
+          resultIndex < resultsAfter.length;
+          resultIndex++
+        ) {
+          const result = resultsAfter[resultIndex];
+          updatedValues.push(result);
+          vm.existingFileIds.push(result[vm.idIndex]);
         }
-        vm.existingFileIds.push(resultsAfter.pop().id);
-        vm.$emit("input", vm.existingFileIds);
+
+        if (vm.returnId) {
+          vm.$emit("input", vm.existingFileIds);
+        } else {
+          vm.$emit("input", updatedValues);
+        }
       }
     }
   },
