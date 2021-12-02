@@ -14,6 +14,11 @@ export const Handler = {
       default: function() {
         return DefaultRecord;
       }
+    },
+
+    returnIdForMultipleValues: {
+      type: Boolean,
+      default: true
     }
   },
 
