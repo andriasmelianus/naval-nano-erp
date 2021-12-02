@@ -45,9 +45,6 @@ export const GlobalDataIteratorHandler = {
     // Data.
     records: undefined,
     recordsTotal: undefined,
-    selectedRecords: [],
-    selectedRecord: {},
-    selectedRecordIndex: undefined,
     defaultRecord: {},
     editedRecord: {},
     searchKeyword: "",
@@ -99,33 +96,6 @@ export const GlobalDataIteratorHandler = {
       this.otherServerParams = Object.assign({}, this.otherServerParams, {
         sortDesc: newSortDescValue
       });
-    },
-
-    /**
-     * When multiple records are selected.
-     * The first record will be assigned to selectedRecord.
-     * @param {Object} newSelectedRecords
-     * @param {Object} oldSelectedRecords
-     */
-    selectedRecords(newSelectedRecords, oldSelectedRecords) {
-      this.selectedRecord = Object.assign(
-        {},
-        this.selectedRecord,
-        newSelectedRecords[0]
-      );
-
-      for (
-        let recordIndex = 0;
-        recordIndex < this.records.length;
-        recordIndex++
-      ) {
-        const record = this.records[recordIndex];
-        if (
-          this.selectedRecord[this.recordIdIndex] == record[this.recordIdIndex]
-        ) {
-          this.selectedRecordIndex = recordIndex;
-        }
-      }
     },
 
     /**
@@ -185,14 +155,6 @@ export const GlobalDataIteratorHandler = {
      */
     resourceUriForVuetifyServerSideDataTable() {
       return this.resourceUri + this.componentUri;
-    },
-
-    /**
-     * Return true when record is selected.
-     * @returns boolean
-     */
-    selectedRecordExists() {
-      return this.selectedRecords.length > 0;
     }
   },
 
@@ -308,15 +270,14 @@ export const GlobalDataIteratorHandler = {
     /**
      * Delete the first selected record.
      */
-    deleteSingleRecord() {
+    deleteSingleRecord(record) {
       if (confirm("Anda yakin akan menghapus data tersebut?")) {
         let vm = this;
 
         vm.$axios
-          .$delete(vm.resourceUri + "/" + vm.selectedRecord.id)
+          .$delete(vm.resourceUri + "/" + record[vm.recordIdIndex])
           .then(function(result) {
             vm.readRecords();
-            vm.selectedRecords = [];
 
             vm.$emit("record-selected", []);
 
@@ -339,11 +300,11 @@ export const GlobalDataIteratorHandler = {
      * This function will send the IDs to be deleted.
      * Parameter name will be: ids.
      */
-    deleteMultipleRecords() {
+    deleteMultipleRecords(selectedRecords) {
       if (confirm("Anda yakin akan menghapus data tersebut?")) {
         let vm = this,
-          selectedIds = vm.selectedRecords.map(function(selectedRecords) {
-            return selectedRecords["id"];
+          selectedIds = selectedRecords.map(function(selectedRecords) {
+            return selectedRecords[vm.recordIdIndex];
           });
 
         vm.$axios
@@ -354,7 +315,6 @@ export const GlobalDataIteratorHandler = {
           })
           .then(function(result) {
             vm.readRecords();
-            vm.selectedRecords = [];
 
             vm.$emit("record-selected", []);
 
