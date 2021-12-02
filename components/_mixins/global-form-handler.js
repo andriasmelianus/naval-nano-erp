@@ -3,8 +3,9 @@
  */
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import { InvalidInputMessageHandler } from "./form/invalid-input-message-handler";
+import { IdExtractor } from "./id-extractor";
 export const GlobalFormHandler = {
-  mixins: [MessageExtractor, InvalidInputMessageHandler],
+  mixins: [MessageExtractor, InvalidInputMessageHandler, IdExtractor],
 
   props: {
     /**
@@ -31,6 +32,24 @@ export const GlobalFormHandler = {
     editMode: {
       type: Boolean,
       default: false
+    },
+
+    /**
+     * When a field contains multiple values (array of objects), it will converted to array of IDs.
+     * Since the array can containing some objects, setting this props to true will cause
+     * the form extract the identity value first from the object before sending to API server.
+     */
+    returnIdForMultipleValues: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+     * The property name of an object considered as identity within multiple values.
+     */
+    idIndexWithinMultipleValues: {
+      type: String,
+      default: "id"
     }
   },
 
@@ -59,13 +78,44 @@ export const GlobalFormHandler = {
     },
 
     /**
+     * Perform record sanitation mechanisms before sending to API server.
+     * @param {Object} recordToBeSanitized Record to be sanitized before sent to API server.
+     * @returns {Object}
+     */
+    sanitizeRecord(recordToBeSanitized) {
+      let recordKeys = Object.keys(recordToBeSanitized),
+        sanitizedRecord = recordToBeSanitized;
+
+      // Loop to all of available properties in a record.
+      for (let keyIndex = 0; keyIndex < recordKeys.length; keyIndex++) {
+        const key = recordKeys[keyIndex];
+        // Sanitation mechanisms should be performed within this looping scope.
+        // Current property can be accessed by: recordToBeSanitized[key].
+
+        // Sanitation #1: Convert array of objects to array of IDs for multiple values field.
+        if (this.returnIdForMultipleValues) {
+          if (typeof recordToBeSanitized[key] == "object") {
+            sanitizedRecord[key] = this.extractIdsFromArray(
+              recordToBeSanitized[key],
+              this.idIndexWithinMultipleValues
+            );
+          }
+        }
+      }
+
+      return sanitizedRecord;
+    },
+
+    /**
      * Send the POST request to the server.
      * @param {Object} newRecord The new record input by user
      */
     createRecord(newRecord) {
-      let vm = this;
+      let vm = this,
+        sanitizedRecord = vm.sanitizeRecord(newRecord);
+
       vm.$axios
-        .$post(vm.resourceUri, newRecord)
+        .$post(vm.resourceUri, sanitizedRecord)
         .then(function(result) {
           vm.$emit("record-created", result);
 
@@ -84,9 +134,11 @@ export const GlobalFormHandler = {
      * @param {Object} updatedRecord Record updated from user
      */
     updateRecord(updatedRecord) {
-      let vm = this;
+      let vm = this,
+        sanitizedRecord = vm.sanitizeRecord(updatedRecord);
+
       vm.$axios
-        .$put(vm.resourceUri + "/" + updatedRecord.id, updatedRecord)
+        .$put(vm.resourceUri + "/" + sanitizedRecord.id, sanitizedRecord)
         .then(function(result) {
           vm.$emit("record-updated", result);
 

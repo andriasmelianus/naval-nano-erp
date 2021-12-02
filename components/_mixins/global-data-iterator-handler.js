@@ -15,6 +15,24 @@ export const GlobalDataIteratorHandler = {
     componentUri: {
       type: String,
       default: "/vuetify-data-iterator"
+    },
+
+    // If true, table will reload data after a row is modified.
+    reloadAfterModification: {
+      type: Boolean,
+      default: true
+    },
+
+    // Delay while typing in search textbox.
+    dataFetchTimerDelay: {
+      type: Number,
+      default: 300
+    },
+
+    // Record's property name which considered as identity.
+    recordIdIndex: {
+      type: String,
+      default: "id"
     }
   },
 
@@ -42,12 +60,8 @@ export const GlobalDataIteratorHandler = {
     formIsShown: false,
     formIsInEditMode: false,
 
-    // If true, table will reload data after a row is modified.
-    reloadAfterModification: false,
-
     // Other supporting data
     dataFetchTimerId: undefined,
-    dataFetchTimerDelay: 300,
     isLoading: false
   }),
 
@@ -99,7 +113,19 @@ export const GlobalDataIteratorHandler = {
         this.selectedRecord,
         newSelectedRecords[0]
       );
-      this.selectedRecordIndex = this.records.indexOf(newSelectedRecords[0]);
+
+      for (
+        let recordIndex = 0;
+        recordIndex < this.records.length;
+        recordIndex++
+      ) {
+        const record = this.records[recordIndex];
+        if (
+          this.selectedRecord[this.recordIdIndex] == record[this.recordIdIndex]
+        ) {
+          this.selectedRecordIndex = recordIndex;
+        }
+      }
     },
 
     /**
@@ -213,6 +239,28 @@ export const GlobalDataIteratorHandler = {
     },
 
     /**
+     * Get index of a record within records data.
+     * @param {Object} record
+     * @return {Number}
+     */
+    getRecordIndex(record) {
+      let theIndex = undefined;
+
+      for (
+        let recordIndex = 0;
+        recordIndex < this.records.length;
+        recordIndex++
+      ) {
+        const currentRecord = this.records[recordIndex];
+        if (currentRecord[this.recordIdIndex] == record[this.recordIdIndex]) {
+          theIndex = recordIndex;
+        }
+      }
+
+      return theIndex;
+    },
+
+    /**
      * Handle the create record operation.
      * @param {Object} createdRecord Created record received from API
      */
@@ -226,12 +274,11 @@ export const GlobalDataIteratorHandler = {
      * @param {Object} updatedRecord Updated record received from API
      */
     handleRecordUpdated(updatedRecord) {
-      this.selectedRecord = Object.assign(
-        {},
-        this.selectedRecord,
+      this.records.splice(
+        this.getRecordIndex(updatedRecord.data),
+        1,
         updatedRecord.data
       );
-      this.records.splice(this.selectedRecordIndex, 1, updatedRecord.data);
       if (this.reloadAfterModification) {
         this.readRecords();
       }
@@ -247,7 +294,7 @@ export const GlobalDataIteratorHandler = {
     },
 
     /**
-     * Emit a "record-selected" event when a record is selected.
+     * Emit a "record-selected" event when an element is clicked.
      * Vuetify Data Iterator uses card as its content.
      * Clicking a card will trigger edit the selected data.
      * @param {Object} record
