@@ -27,6 +27,12 @@ export const GlobalDataIteratorHandler = {
     dataFetchTimerDelay: {
       type: Number,
       default: 300
+    },
+
+    // Record's property name which considered as identity.
+    recordIdIndex: {
+      type: String,
+      default: "id"
     }
   },
 
@@ -107,7 +113,19 @@ export const GlobalDataIteratorHandler = {
         this.selectedRecord,
         newSelectedRecords[0]
       );
-      this.selectedRecordIndex = this.records.indexOf(newSelectedRecords[0]);
+
+      for (
+        let recordIndex = 0;
+        recordIndex < this.records.length;
+        recordIndex++
+      ) {
+        const record = this.records[recordIndex];
+        if (
+          this.selectedRecord[this.recordIdIndex] == record[this.recordIdIndex]
+        ) {
+          this.selectedRecordIndex = recordIndex;
+        }
+      }
     },
 
     /**
@@ -264,6 +282,8 @@ export const GlobalDataIteratorHandler = {
       this.$emit("record-selected", record);
       // Clicking an element is equivalent with select a row in v-data-table.
       this.selectedRecord = Object.assign({}, record, this.selectedRecord);
+      // selectedRecords need to be assigned, in order to set a value for selectedRecordIndex.
+      this.selectedRecords = [record];
       this.setEditedRecord(record);
       this.showForm(true);
     },
