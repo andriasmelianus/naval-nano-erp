@@ -239,6 +239,28 @@ export const GlobalDataIteratorHandler = {
     },
 
     /**
+     * Get index of a record within records data.
+     * @param {Object} record
+     * @return {Number}
+     */
+    getRecordIndex(record) {
+      let theIndex = undefined;
+
+      for (
+        let recordIndex = 0;
+        recordIndex < this.records.length;
+        recordIndex++
+      ) {
+        const currentRecord = this.records[recordIndex];
+        if (currentRecord[this.recordIdIndex] == record[this.recordIdIndex]) {
+          theIndex = recordIndex;
+        }
+      }
+
+      return theIndex;
+    },
+
+    /**
      * Handle the create record operation.
      * @param {Object} createdRecord Created record received from API
      */
@@ -252,12 +274,11 @@ export const GlobalDataIteratorHandler = {
      * @param {Object} updatedRecord Updated record received from API
      */
     handleRecordUpdated(updatedRecord) {
-      this.selectedRecord = Object.assign(
-        {},
-        this.selectedRecord,
+      this.records.splice(
+        this.getRecordIndex(updatedRecord.data),
+        1,
         updatedRecord.data
       );
-      this.records.splice(this.selectedRecordIndex, 1, updatedRecord.data);
       if (this.reloadAfterModification) {
         this.readRecords();
       }
@@ -280,10 +301,6 @@ export const GlobalDataIteratorHandler = {
      */
     handleRecordSelected(record) {
       this.$emit("record-selected", record);
-      // Clicking an element is equivalent with select a row in v-data-table.
-      this.selectedRecord = Object.assign({}, record, this.selectedRecord);
-      // selectedRecords need to be assigned, in order to set a value for selectedRecordIndex.
-      this.selectedRecords = [record];
       this.setEditedRecord(record);
       this.showForm(true);
     },
