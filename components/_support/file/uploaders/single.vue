@@ -16,7 +16,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="hasSingleValue">
+    <v-row v-if="isValueSet && hasSingleValue">
       <v-col cols="12">
         <default-file-card
           v-model="value"

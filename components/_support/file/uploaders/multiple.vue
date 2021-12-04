@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="hasMultipleValues">
+    <v-row v-if="isValueSet && hasMultipleValues">
       <v-col
         cols="12"
         sm="12"
@@ -56,7 +56,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-else-if="hasSingleValue">
+    <v-row v-else-if="isValueSet && hasSingleValue">
       <v-col cols="12">
         <default-file-card
           :value="value"

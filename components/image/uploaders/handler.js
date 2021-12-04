@@ -27,6 +27,11 @@ export const Handler = {
       default: false
     },
 
+    returnId: {
+      type: Boolean,
+      default: true
+    },
+
     fieldName: {
       type: String,
       default: "image"
