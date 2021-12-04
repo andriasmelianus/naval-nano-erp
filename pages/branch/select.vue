@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import PageContent from "~/components/_support/page-content.vue";
+import PageContent from "~/components/_generic/page-content.vue";
 import BranchDataIteratorSelector from "~/components/branch/data-iterators/selector.vue";
 export default {
   layout: "dashboard",

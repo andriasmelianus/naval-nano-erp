@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import PageContent from "~/components/_support/page-content.vue";
+import PageContent from "~/components/_generic/page-content.vue";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import CompanyForm from "~/components/company/forms/default.vue";
 import BranchTable from "~/components/branch/tables/default.vue";

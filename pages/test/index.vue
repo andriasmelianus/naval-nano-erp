@@ -100,7 +100,7 @@ import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BranchExpandableDatatable from "~/components/branch/tables/expandable-complete.vue";
-import MapboxComponent from "~/components/_support/mapbox.vue";
+import MapboxComponent from "~/components/_generic/mapbox.vue";
 export default {
   layout: "default",
 

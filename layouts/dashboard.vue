@@ -38,7 +38,7 @@ import ApplicationBar from "~/components/_dashboard/application-bar";
 import NavigationDrawer from "~/components/_dashboard/navigation-drawer";
 import FooterSection from "~/components/_dashboard/footer";
 
-import GlobalSnackbar from "~/components/_support/global-snackbar";
+import GlobalSnackbar from "~/components/_generic/global-snackbar";
 export default {
   components: {
     ApplicationBar,

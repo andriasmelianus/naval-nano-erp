@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import PageContent from "~/components/_support/page-content.vue";
+import PageContent from "~/components/_generic/page-content.vue";
 import UserDefaultForm from "~/components/user/forms/default.vue";
 import RoleUserList from "~/components/role/lists/role-user.vue";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
