@@ -10,6 +10,7 @@
 
       <v-tabs vertical>
         <v-tab>Image Manager</v-tab>
+        <v-tab>Date Picker</v-tab>
         <v-tab>Watchers</v-tab>
         <v-tab>Combobox</v-tab>
         <v-tab>Datatable</v-tab>
@@ -21,6 +22,16 @@
               v-model="imageIds"
               parent-resource-uri="test"
             ></image-uploader-multiple>
+          </v-card>
+        </v-tab-item>
+
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <date-picker v-model="dateValue"></date-picker>
+            </v-card-text>
+
+            <v-card-text> Value: {{ dateValue }} </v-card-text>
           </v-card>
         </v-tab-item>
 
@@ -97,6 +108,7 @@
 
 <script>
 import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
+import DatePicker from "~/components/_generic/global-date-picker.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BranchExpandableDatatable from "~/components/branch/tables/expandable-complete.vue";
@@ -112,6 +124,7 @@ export default {
 
   components: {
     ImageUploaderMultiple,
+    DatePicker,
     BrandCombobox,
     EquipmentAutocomplete,
     BranchExpandableDatatable,
@@ -121,6 +134,9 @@ export default {
   data: () => ({
     // Image manager
     imageIds: [],
+
+    // Date Picker
+    dateValue: undefined,
 
     // Watcher.
     ages: [24, 31, 27, 60],
