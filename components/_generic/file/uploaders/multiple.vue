@@ -27,12 +27,14 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="hasMultipleValues">
+    <v-row v-if="isValueSet && hasMultipleValues">
       <v-col
         cols="12"
-        sm="12"
-        md="6"
+        xs="12"
+        sm="6"
+        md="4"
         lg="4"
+        xl="3"
         v-for="singleFileValue in value"
         :key="
           typeof singleFileValue == 'object'
@@ -56,7 +58,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-else-if="hasSingleValue">
+    <v-row v-else-if="isValueSet && hasSingleValue">
       <v-col cols="12">
         <default-file-card
           :value="value"

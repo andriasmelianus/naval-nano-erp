@@ -94,32 +94,7 @@ export const Handler = {
      * @param {String|Number} idToDelete File ID emitted by file card.
      */
     handleDeleteButtonClicked(idToDelete) {
-      let vm = this,
-        newValues = vm.value;
-
-      if (vm.hasMultipleValues) {
-        let valueIndexToDelete = undefined;
-
-        for (let valueIndex = 0; valueIndex < newValues.length; valueIndex++) {
-          const valueRow = newValues[valueIndex];
-          if (typeof valueRow == "object") {
-            if (idToDelete == valueRow[vm.idIndex]) {
-              valueIndexToDelete = valueIndex;
-            }
-          } else {
-            if (idToDelete == valueRow) {
-              valueIndexToDelete = valueIndex;
-            }
-          }
-        }
-
-        if (valueIndexToDelete != undefined) {
-          newValues.splice(valueIndexToDelete, 1);
-          vm.$emit("input", newValues);
-        }
-      }
-
-      vm.$emit("delete-button-clicked", idToDelete);
+      this.$emit("delete-button-clicked", idToDelete);
     }
   }
 };

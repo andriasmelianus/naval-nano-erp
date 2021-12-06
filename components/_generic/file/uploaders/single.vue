@@ -16,7 +16,7 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="hasSingleValue">
+    <v-row v-if="isValueSet && hasSingleValue">
       <v-col cols="12">
         <default-file-card
           v-model="value"
@@ -38,7 +38,7 @@
 
 <script>
 import { Handler } from "./handler";
-import DefaultFileCard from "~/components/_support/file/cards/default.vue";
+import DefaultFileCard from "../cards/default.vue";
 export default {
   mixins: [Handler],
 

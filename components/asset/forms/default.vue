@@ -86,7 +86,7 @@ import { Handler } from "./handler";
 import RoomAutocomplete from "~/components/room/autocompletes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
-import DatePicker from "~/components/_support/global-date-picker.vue";
+import DatePicker from "~/components/_generic/global-date-picker.vue";
 export default {
   mixins: [Handler],
 

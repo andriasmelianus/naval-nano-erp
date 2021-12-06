@@ -1,6 +1,6 @@
 /**
  * Provide the minimal properties for upload control.
- * v-model accepts file IDs from database.
+ * v-model accepts file ID(s) in a String/Number/Array and an file object (data from API server containing ID field).
  *
  * Props
  * 1. place-holder {String}
@@ -21,19 +21,26 @@
  * 5. errorMessage {String}
  *
  * Methods
- * 1. beginUploadFiles {void}
+ * 1. beginUploadFile {void}
+ * 2. beginUploadFiles {void}
+ * 3. showNotificationAfterUpload {void}
+ * 4. deleteFileById {void}
+ * 5. resetState {void}
  */
 import { MessageExtractor } from "./message-extractor";
+import { TypeDetector } from "./type-detector";
 import { Uploader } from "./uploader";
 export const GlobalUploadHandler = {
-  mixins: [MessageExtractor, Uploader],
+  mixins: [MessageExtractor, TypeDetector, Uploader],
 
   props: {
     /**
      * Enable v-model directive support.
+     * Value can be a single or multiple file IDs.
+     *
      */
     value: {
-      type: [String, Number, Array]
+      type: [String, Number, Object, Array]
     },
 
     /**
@@ -122,34 +129,45 @@ export const GlobalUploadHandler = {
   computed: {
     /**
      * Detect whether value is set or not.
+     * @returns {Boolean}
      */
     isValueSet() {
       let vm = this;
-      if (typeof vm.value == "object") {
-        return !!vm.value.length;
-      } else if (typeof vm.value == "string" || typeof vm.value == "number") {
-        return !!vm.value;
-      } else {
+      if (vm.value == null || vm.value == undefined) {
         return false;
+      } else {
+        if (vm.value instanceof Array) {
+          // Value is an array.
+          return !!vm.value.length;
+        } else if (typeof vm.value == "object") {
+          // Value is an object.
+          return !!Object.keys(vm.value).length;
+        } else {
+          // Value is a primitive.
+          return !!vm.value;
+        }
       }
     },
 
     /**
      * Detect whether the value is a single value and present.
+     * Array with a single element is considered as single value.
+     * @returns {Boolean}
      */
     hasSingleValue() {
-      if (typeof this.value == "string" || typeof this.value == "number") {
-        return !!this.value;
+      if (this.isArray(this.value)) {
+        return this.value.length == 1;
       } else {
-        return false;
+        return true;
       }
     },
 
     /**
      * Detect whether the value is multiple and present.
+     * @returns {Boolean}
      */
     hasMultipleValues() {
-      if (typeof this.value == "object") {
+      if (this.isArray(this.value)) {
         return !!this.value.length;
       } else {
         return false;
@@ -323,19 +341,32 @@ export const GlobalUploadHandler = {
      * @param {Number|String} idToDelete File ID emitted by file card.
      */
     deleteFileById(idToDelete) {
-      let vm = this;
+      let vm = this,
+        newValues = vm.value;
 
       if (vm.hasSingleValue) {
         vm.$emit("input", undefined);
       } else if (vm.hasMultipleValues) {
-        for (let valueIndex = 0; valueIndex < vm.value.length; valueIndex++) {
-          const valueRow = vm.value[valueIndex];
-          if (valueRow == idToDelete) {
-            vm.value.splice(valueIndex, 1);
-            valueIndex--;
+        let valueIndexToDelete = undefined;
+
+        for (let valueIndex = 0; valueIndex < newValues.length; valueIndex++) {
+          const valueRow = newValues[valueIndex];
+
+          if (vm.isObject(valueRow)) {
+            if (idToDelete == valueRow[vm.idIndex]) {
+              valueIndexToDelete = valueIndex;
+            }
+          } else {
+            if (idToDelete == valueRow) {
+              valueIndexToDelete = valueIndex;
+            }
           }
         }
-        vm.$emit("input", vm.value);
+
+        if (valueIndexToDelete != undefined) {
+          newValues.splice(valueIndexToDelete, 1);
+          vm.$emit("input", newValues);
+        }
       }
     },
 

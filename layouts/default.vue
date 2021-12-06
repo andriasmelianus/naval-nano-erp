@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import GlobalSnackbar from "~/components/_support/global-snackbar";
+import GlobalSnackbar from "~/components/_generic/global-snackbar";
 export default {
   components: {
     GlobalSnackbar,

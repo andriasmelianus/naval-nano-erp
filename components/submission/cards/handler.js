@@ -32,6 +32,11 @@ export const Handler = {
     attachmentResourceUri: {
       type: String,
       default: "file"
+    },
+
+    maxWidth: {
+      type: [String, Number],
+      default: 600
     }
   },
 
