@@ -66,12 +66,15 @@
             v-for="item in items"
             :key="item.id"
             cols="12"
+            xs="12"
             sm="6"
             md="4"
-            lg="2"
+            lg="3"
+            xl="3"
           >
             <submission-default-card
               :record="item"
+              :max-width="itemsMaxWidth"
               @card-clicked="handleRecordSelected"
             ></submission-default-card>
           </v-col>

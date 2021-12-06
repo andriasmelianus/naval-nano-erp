@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="300" hover>
+  <v-card :max-width="maxWidth" hover>
     <v-card-title @click="handleCardClicked"> {{ record.title }} </v-card-title>
     <v-card-subtitle @click="handleCardClicked">{{
       record.entity

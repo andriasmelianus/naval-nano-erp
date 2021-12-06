@@ -33,6 +33,14 @@ export const GlobalDataIteratorHandler = {
     recordIdIndex: {
       type: String,
       default: "id"
+    },
+
+    /**
+     * Maximum width of v-data-iterator items (usually cards).
+     */
+    itemsMaxWidth: {
+      type: [String, Number],
+      default: 600
     }
   },
 
