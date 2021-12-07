@@ -3,7 +3,7 @@ export const DefaultRecord = {
   date: undefined,
   title: undefined,
   description: undefined,
-  files: []
+  files: undefined
 };
 
 export const DefaultInvalidInputMessage = {
