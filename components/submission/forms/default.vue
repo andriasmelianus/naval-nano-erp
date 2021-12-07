@@ -43,7 +43,7 @@
 <script>
 import { Handler } from "./handler";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
-import DatePicker from "~/components/_generic/global-date-picker.vue";
+import DatePicker from "~/components/_generic/global-date-picker/default.vue";
 import MultipleFileUploader from "~/components/_generic/file/uploaders/multiple.vue";
 
 export default {

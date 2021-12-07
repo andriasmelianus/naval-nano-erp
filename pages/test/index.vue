@@ -119,7 +119,7 @@
 
 <script>
 import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
-import DatePicker from "~/components/_generic/global-date-picker.vue";
+import DatePicker from "~/components/_generic/global-date-picker/default.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
 import BranchExpandableDatatable from "~/components/branch/tables/expandable-complete.vue";
@@ -147,7 +147,7 @@ export default {
     imageIds: [],
 
     // Date Picker
-    dateValue: undefined,
+    dateValue: "2021-04-05",
     dateFormat: "DD/MM/YYYY",
     momentjsFormattedValue: undefined,
 
