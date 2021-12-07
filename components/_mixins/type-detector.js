@@ -24,6 +24,15 @@ export const TypeDetector = {
     },
 
     /**
+     * Check whether a value is undefined.
+     * @param {Any} theValue
+     * @returns {Boolean}
+     */
+    isUndefined(theValue) {
+      return this.getType(theValue) == undefined;
+    },
+
+    /**
      * Check whether a value is a string.
      * @param {Any} theValue
      * @returns {Boolean}
