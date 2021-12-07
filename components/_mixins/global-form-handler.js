@@ -58,8 +58,11 @@ export const GlobalFormHandler = {
      * Reset invalid input message when record is changed.
      * @param {Object} newRecord newly record from reactivity.
      */
-    record(newRecord) {
-      this.invalidInputMessageClear();
+    record: {
+      handler: function(newRecord) {
+        this.invalidInputMessageClear();
+      },
+      deep: true // Since the passed record is possible to contains a nested object.
     }
   },
 

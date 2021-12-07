@@ -6,7 +6,7 @@
           v-model="filesToBeUploaded"
           :label="placeHolder"
           :accept="accept"
-          :multiple="typeof value == 'object'"
+          :multiple="true"
           :prepend-icon="prependIcon"
         >
           <template v-slot:selection="{ text }">

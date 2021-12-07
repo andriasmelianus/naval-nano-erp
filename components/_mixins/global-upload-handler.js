@@ -133,17 +133,14 @@ export const GlobalUploadHandler = {
      */
     isValueSet() {
       let vm = this;
-      if (vm.value == null || vm.value == undefined) {
+      if (vm.isUndefined(vm.value)) {
         return false;
       } else {
-        if (vm.value instanceof Array) {
-          // Value is an array.
+        if (vm.isArray(vm.value)) {
           return !!vm.value.length;
-        } else if (typeof vm.value == "object") {
-          // Value is an object.
+        } else if (vm.isObject(vm.value)) {
           return !!Object.keys(vm.value).length;
         } else {
-          // Value is a primitive.
           return !!vm.value;
         }
       }
@@ -181,17 +178,26 @@ export const GlobalUploadHandler = {
      */
     value(newValue, oldValue) {
       let vm = this;
-      if (typeof newValue == "object") {
-        for (let valueIndex = 0; valueIndex < newValue.length; valueIndex++) {
-          const newValueRow = newValue[valueIndex];
-          if (typeof newValueRow == "object") {
-            vm.existingFileIds.push(newValueRow[vm.idIndex]);
+      if (vm.isUndefined(newValue)) {
+        vm.existingFileId = undefined;
+        vm.existingFileIds = [];
+      } else {
+        if (vm.isArray(newValue)) {
+          for (let valueIndex = 0; valueIndex < newValue.length; valueIndex++) {
+            const newValueRow = newValue[valueIndex];
+            if (vm.isObject(newValueRow)) {
+              vm.existingFileIds.push(newValueRow[vm.idIndex]);
+            } else {
+              vm.existingFileIds.push(newValueRow);
+            }
+          }
+        } else {
+          if (vm.isObject(newValue)) {
+            vm.existingFileId = newValue[vm.idIndex];
           } else {
-            vm.existingFileIds.push(newValueRow);
+            vm.existingFileId = newValue;
           }
         }
-      } else {
-        vm.existingFileId = newValue;
       }
     },
 
@@ -213,7 +219,7 @@ export const GlobalUploadHandler = {
     successfulUploadResults(resultsAfter, resultsBefore) {
       if (!!resultsAfter.length) {
         let vm = this,
-          updatedValues = vm.value;
+          updatedValues = vm.isUndefined(vm.value) ? [] : vm.value;
         for (
           let resultIndex = 0;
           resultIndex < resultsAfter.length;
