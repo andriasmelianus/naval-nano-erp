@@ -6,7 +6,7 @@
       v-model="record.entity"
       label="Entitas"
       :items="entities"
-      :error-messages="invalidInputMessage.id_type"
+      :error-messages="invalidInputMessage.entity"
     ></v-select>
 
     <date-picker
