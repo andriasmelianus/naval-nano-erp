@@ -2,30 +2,31 @@
  * Provide the minimal properties for upload control.
  * v-model accepts file ID(s) in a String/Number/Array and an file object (data from API server containing ID field).
  *
- * Props
- * 1. place-holder {String}
- * 2. accept {String}
- * 3. parent-resource-uri {String}
- * 4. return-id {Boolean}
- * 5. id-index {String}
- * 6. upload-success-message {String}
- * 7. upload-partially-success-message {String}
- * 8. upload-failed-message {String}
- * 9. no-file-to-upload-message {String}
+ * PROPS:
+ * place-holder {String}
+ * accept {String}
+ * multiple {Boolean}
+ * parent-resource-uri {String}
+ * return-id {Boolean}
+ * id-index {String}
+ * upload-success-message {String}
+ * upload-partially-success-message {String}
+ * upload-failed-message {String}
+ * no-file-to-upload-message {String}
  *
- * Data
- * 1. filesToBeUploaded {Array}
- * 2. additionalData {Array}
- * 3. existingFileIds {Array}
- * 4. successfulUploadResults {Array}
- * 5. errorMessage {String}
+ * DATA:
+ * filesToBeUploaded {Array}
+ * additionalData {Array}
+ * existingFileIds {Array}
+ * successfulUploadResults {Array}
+ * errorMessage {String}
  *
- * Methods
- * 1. beginUploadFile {void}
- * 2. beginUploadFiles {void}
- * 3. showNotificationAfterUpload {void}
- * 4. deleteFileById {void}
- * 5. resetState {void}
+ * METHODS:
+ * beginUploadFile {void}
+ * beginUploadFiles {void}
+ * showNotificationAfterUpload {void}
+ * deleteFileById {void}
+ * resetState {void}
  */
 import { MessageExtractor } from "./message-extractor";
 import { TypeDetector } from "./type-detector";
@@ -57,11 +58,19 @@ export const GlobalUploadHandler = {
     accept: String,
 
     /**
+     * Decide whether the control accepts multiple files upload.
+     */
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
      * API URI of the parent component.
      * This URI needed to form the deletion process.
      * If this component is used by product component,
-     * then the deletion URI cannot be /image/{image_id},
-     * but it should be /product/image/{image_id},
+     * then the deletion URI cannot be /file/{file_id},
+     * but it should be /product/file/{file_id},
      * whether the /product is the parent.
      */
     parentResourceUri: {
@@ -81,7 +90,7 @@ export const GlobalUploadHandler = {
     /**
      * Property name of the uploaded file considered as identity.
      */
-    idIndex: {
+    idProperty: {
       type: String,
       default: "id"
     },
@@ -109,19 +118,15 @@ export const GlobalUploadHandler = {
   },
 
   data: () => ({
-    // Single file upload.
-    fileToBeUploaded: null,
     // Multiple file upload.
     filesToBeUploaded: [],
     // Should contains array of objects.
     additionalData: [],
 
     // File ID retrieved from value and successful upload process.
-    existingFileId: "", // To support single file.
     existingFileIds: [], // To support multiple file.
 
     // Supporting data.
-    successfulUploadResult: null, // To support single file.
     successfulUploadResults: [], // To support multiple file.
     errorMessage: ""
   }),
@@ -165,7 +170,7 @@ export const GlobalUploadHandler = {
      */
     hasMultipleValues() {
       if (this.isArray(this.value)) {
-        return !!this.value.length;
+        return this.value.length > 1;
       } else {
         return false;
       }
@@ -174,93 +179,77 @@ export const GlobalUploadHandler = {
 
   watch: {
     /**
-     * Register ID(s) contained in the value.
-     */
-    value(newValue, oldValue) {
-      let vm = this;
-      if (vm.isUndefined(newValue)) {
-        vm.existingFileId = undefined;
-        vm.existingFileIds = [];
-      } else {
-        if (vm.isArray(newValue)) {
-          for (let valueIndex = 0; valueIndex < newValue.length; valueIndex++) {
-            const newValueRow = newValue[valueIndex];
-            if (vm.isObject(newValueRow)) {
-              vm.existingFileIds.push(newValueRow[vm.idIndex]);
-            } else {
-              vm.existingFileIds.push(newValueRow);
-            }
-          }
-        } else {
-          if (vm.isObject(newValue)) {
-            vm.existingFileId = newValue[vm.idIndex];
-          } else {
-            vm.existingFileId = newValue;
-          }
-        }
-      }
-    },
-
-    /**
-     * Send the uploaded file ID to the parent component.
-     */
-    successfulUploadResult(resultAfter, resultBefore) {
-      if (this.returnId) {
-        this.$emit("input", resultAfter[this.idIndex]);
-      } else {
-        this.$emit("input", resultAfter);
-      }
-    },
-
-    /**
      * To emit files uploaded successfully event and send the received data
      * from the API server to the parent component.
      */
-    successfulUploadResults(resultsAfter, resultsBefore) {
-      if (!!resultsAfter.length) {
+    successfulUploadResults(newUploadResults, oldUploadResults) {
+      if (!!newUploadResults.length) {
         let vm = this,
-          updatedValues = vm.isUndefined(vm.value) ? [] : vm.value;
+          newValues = vm.isUndefined(vm.value)
+            ? []
+            : vm.isArray(vm.value)
+            ? vm.value
+            : [vm.value];
+
         for (
-          let resultIndex = 0;
-          resultIndex < resultsAfter.length;
-          resultIndex++
+          let newUploadResultsIndex = 0;
+          newUploadResultsIndex < newUploadResults.length;
+          newUploadResultsIndex++
         ) {
-          const result = resultsAfter[resultIndex];
-          updatedValues.push(result);
-          vm.existingFileIds.push(result[vm.idIndex]);
+          const result = newUploadResults[newUploadResultsIndex];
+
+          vm.existingFileIds.push(result[vm.idProperty]);
+          newValues.push(result);
         }
 
-        if (vm.returnId) {
-          vm.$emit("input", vm.existingFileIds);
+        if (vm.multiple) {
+          vm.$emit("input", vm.returnId ? vm.existingFileIds : newValues);
         } else {
-          vm.$emit("input", updatedValues);
+          let indexLastExistingFileIds = vm.existingFileIds.length - 1,
+            indexLastNewValues = newValues.length - 1;
+
+          vm.$emit(
+            "input",
+            vm.returnId
+              ? vm.existingFileIds[indexLastExistingFileIds]
+              : newValues[indexLastNewValues]
+          );
         }
       }
     }
   },
 
+  mounted() {
+    this.loadExistingFileIds();
+  },
+
   methods: {
     /**
-     * Begin transmitting a file to API server.
-     * @returns void
+     * Load existing file ID(s) passed from v-model/value props.
+     * @returns {void}
      */
-    beginUploadFile() {
+    loadExistingFileIds() {
       let vm = this;
-
-      vm.upload(vm.fileToBeUploaded, vm.additionalData)
-        .then(function(result) {
-          vm.successfulUploadResult = result;
-          vm.$emit("file-uploaded", result);
-        })
-        .catch(function(result) {
-          vm.$store.commit("global-snackbar/show", {
-            color: "error",
-            message: vm.invalidInputMessageExtractToText(result)
-          });
-        })
-        .finally(function() {
-          vm.resetState();
-        });
+      if (vm.isUndefined(vm.value)) {
+        vm.existingFileIds = [];
+      } else {
+        if (vm.isArray(vm.value)) {
+          for (let valueIndex = 0; valueIndex < vm.value.length; valueIndex++) {
+            const newValueRow = vm.value[valueIndex];
+            if (vm.isObject(newValueRow)) {
+              vm.existingFileIds.push(newValueRow[vm.idProperty]);
+            } else {
+              vm.existingFileIds.push(newValueRow);
+            }
+          }
+        } else {
+          if (vm.isObject(vm.value)) {
+            vm.existingFileIds.push(vm.value[vm.idProperty]);
+          } else {
+            vm.existingFileIds.push(vm.value);
+          }
+        }
+      }
     },
 
     /**
@@ -288,13 +277,17 @@ export const GlobalUploadHandler = {
 
       Promise.all(uploaderStatuses)
         .then(function(results) {
+          let tmpValidResults = [];
+
           results.forEach(result => {
-            if (result != null) {
-              vm.successfulUploadResults.push(result);
+            if (!vm.isUndefined(result)) {
+              tmpValidResults.push(result);
               vm.$emit("file-uploaded", result);
             }
           });
 
+          // Merge newly successful results with successfulUploadResults.
+          vm.successfulUploadResults = tmpValidResults;
           // Emit files-uploaded event.
           vm.$emit("files-uploaded", vm.successfulUploadResults);
           vm.showNotificationAfterUpload();
@@ -359,7 +352,7 @@ export const GlobalUploadHandler = {
           const valueRow = newValues[valueIndex];
 
           if (vm.isObject(valueRow)) {
-            if (idToDelete == valueRow[vm.idIndex]) {
+            if (idToDelete == valueRow[vm.idProperty]) {
               valueIndexToDelete = valueIndex;
             }
           } else {
@@ -382,7 +375,6 @@ export const GlobalUploadHandler = {
      */
     resetState() {
       let vm = this;
-      vm.fileToBeUploaded = null;
       vm.filesToBeUploaded = [];
       vm.additionalData = [];
       vm.successfulUploadResults = [];
