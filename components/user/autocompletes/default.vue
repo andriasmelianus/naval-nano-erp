@@ -7,7 +7,7 @@
     :loading="isLoading"
     :error-messages="invalidInputMessage.email"
     :items="records"
-    @change="handleChange"
+    @change="handleSelectedChange"
     no-filter
     return-object
     hide-no-data

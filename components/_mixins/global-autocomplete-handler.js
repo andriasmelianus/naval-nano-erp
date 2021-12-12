@@ -259,6 +259,15 @@ export const GlobalAutocompleteHandler = {
         });
     },
 
+    /**
+     * Handle the selected-changed of the v-autocomplete control.
+     * @param {Object} selectedRecord
+     * @returns {void}
+     */
+    handleSelectedChange(selectedRecord) {
+      this.$emit("selected-change", selectedRecord);
+    },
+
     clear() {
       let vm = this;
 

@@ -24,16 +24,5 @@ export const Handler = {
 
   data: () => ({
     defaultInvalidInputMessage: DefaultInvalidInputMessage
-  }),
-
-  methods: {
-    /**
-     * Handle the selected-changed of the v-autocomplete control.
-     * @param {Object} selectedRecord
-     * @returns {void}
-     */
-    handleChange(selectedRecord) {
-      this.$emit("selected-change", selectedRecord);
-    }
-  }
+  })
 };
