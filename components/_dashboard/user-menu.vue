@@ -11,11 +11,11 @@
       <v-card-text>
         <v-row>
           <v-col cols="12" class="d-flex justify-center">
-            <image-card-simple
+            <image-card-default
               :height="100"
               :width="100"
               :value="user_image_id"
-            ></image-card-simple>
+            ></image-card-default>
           </v-col>
 
           <v-col cols="12" class="text-center">
@@ -48,13 +48,13 @@
 </template>
 
 <script>
-import ImageCardSimple from "~/components/image/cards/simple.vue";
+import ImageCardDefault from "~/components/_generic/file/cards/image-default.vue";
 import { UserData } from "~/components/_mixins/user-data";
 export default {
   mixins: [UserData],
 
   components: {
-    ImageCardSimple,
+    ImageCardDefault,
   },
 };
 </script>
