@@ -18,10 +18,16 @@
 
         <v-tab-item>
           <v-card flat>
-            <image-uploader-multiple
-              v-model="imageIds"
-              parent-resource-uri="test"
-            ></image-uploader-multiple>
+            <v-card-text>
+              <image-uploader
+                v-model="imageIds"
+                parent-resource-uri="/user"
+                :card-height="250"
+                disable-delete-request
+                multiple
+                return-id
+              ></image-uploader>
+            </v-card-text>
           </v-card>
         </v-tab-item>
 
@@ -118,7 +124,7 @@
 </template>
 
 <script>
-import ImageUploaderMultiple from "~/components/image/uploaders/multiple.vue";
+import ImageUploader from "~/components/_generic/file/uploaders/image.vue";
 import DatePicker from "~/components/_generic/global-date-picker/default.vue";
 import BrandCombobox from "~/components/brand/comboboxes/default.vue";
 import EquipmentAutocomplete from "~/components/equipment/autocompletes/default.vue";
@@ -134,7 +140,7 @@ export default {
   },
 
   components: {
-    ImageUploaderMultiple,
+    ImageUploader,
     DatePicker,
     BrandCombobox,
     EquipmentAutocomplete,
@@ -144,7 +150,7 @@ export default {
 
   data: (vm) => ({
     // Image manager
-    imageIds: [],
+    imageIds: [2146412477],
 
     // Date Picker
     dateValue: "2021-04-05",

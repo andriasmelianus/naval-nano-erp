@@ -6,7 +6,7 @@
       v-model="record.entity"
       label="Entitas"
       :items="entities"
-      :error-messages="invalidInputMessage.id_type"
+      :error-messages="invalidInputMessage.entity"
     ></v-select>
 
     <date-picker
@@ -29,12 +29,13 @@
     ></v-textarea>
 
     <!-- File uploader goes here. -->
-    <multiple-file-uploader
+    <file-uploader
       v-model="record.files"
       :error-messages="invalidInputMessage.files"
       :parent-resource-uri="resourceUri"
+      multiple
       disable-delete-request
-    ></multiple-file-uploader>
+    ></file-uploader>
 
     <v-btn color="success" type="submit">Simpan</v-btn>
   </v-form>
@@ -44,14 +45,14 @@
 import { Handler } from "./handler";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
 import DatePicker from "~/components/_generic/global-date-picker/default.vue";
-import MultipleFileUploader from "~/components/_generic/file/uploaders/multiple.vue";
+import FileUploader from "~/components/_generic/file/uploaders/default.vue";
 
 export default {
   mixins: [Handler, MessageExtractor],
 
   components: {
     DatePicker,
-    MultipleFileUploader,
+    FileUploader,
   },
 };
 </script>

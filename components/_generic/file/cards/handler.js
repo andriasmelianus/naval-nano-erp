@@ -1,8 +1,8 @@
+import { TypeDetector } from "~/components/_mixins/type-detector";
 import { MessageExtractor } from "~/components/_mixins/message-extractor";
-import { URL } from "~/components/_mixins/url";
 import { Downloader } from "~/components/_mixins/downloader";
 export const Handler = {
-  mixins: [MessageExtractor, URL, Downloader],
+  mixins: [MessageExtractor, Downloader, TypeDetector],
 
   props: {
     resourceUri: {
@@ -30,7 +30,7 @@ export const Handler = {
       type: [String, Number, Object]
     },
 
-    idIndex: {
+    idProperty: {
       type: String,
       default: "id"
     },
@@ -43,6 +43,14 @@ export const Handler = {
     target: {
       type: String,
       default: undefined
+    },
+
+    /**
+     * Determines whether the card is for image display purpose.
+     */
+    image: {
+      type: Boolean,
+      default: false
     },
 
     downloadable: {
@@ -73,6 +81,7 @@ export const Handler = {
 
   data: () => ({
     record: undefined,
+    imageSource: undefined,
 
     documentExtensions: [
       "doc",
@@ -101,10 +110,15 @@ export const Handler = {
      * we need to access the primitive value for data processing.
      */
     primitiveValue() {
-      if (typeof this.value == "object") {
-        return this.value[this.idIndex];
+      let vm = this;
+      if (vm.isUndefined(vm.value)) {
+        return undefined;
       } else {
-        return this.value;
+        if (vm.isObject(vm.value)) {
+          return vm.value[vm.idProperty];
+        } else {
+          return vm.value;
+        }
       }
     },
 
@@ -113,7 +127,7 @@ export const Handler = {
       if (vm.isValidUrl(vm.primitiveValue)) {
         return vm.primitiveValue;
       } else {
-        if (vm.record == undefined) {
+        if (vm.isUndefined(vm.record)) {
           return vm.defaultEmptyUrl;
         } else {
           return vm.record.url;
@@ -126,7 +140,7 @@ export const Handler = {
       if (vm.isValidUrl(vm.primitiveValue)) {
         return vm.primitiveValue.split("/").pop();
       } else {
-        if (vm.record == undefined) {
+        if (vm.isUndefined(vm.record)) {
           return "?";
         } else {
           return vm.record.name;
@@ -142,7 +156,7 @@ export const Handler = {
           .pop()
           .toLowerCase();
       } else {
-        if (vm.record == undefined) {
+        if (vm.isUndefined(vm.record)) {
           return undefined;
         } else {
           return vm.record.name
@@ -170,28 +184,30 @@ export const Handler = {
 
   watch: {
     value(newValue, oldValue) {
-      this.getFile();
-    }
-  },
+      if (this.isObject(newValue)) {
+        this.record = newValue;
+      } else {
+        this.getFileData();
+      }
+    },
 
-  mounted() {
-    this.getFile();
-  },
-
-  methods: {
-    /**
-     * Fetch file data from datasource.
-     * @return {void}
-     */
-    getFile() {
+    record(newRecord, oldRecord) {
       let vm = this;
-      if (vm.primitiveValue != null && vm.primitiveValue != "") {
-        if (!vm.isValidUrl(vm.primitiveValue)) {
+      if (!vm.isUndefined(newRecord)) {
+        if (vm.image) {
           vm.$axios
-            .$get(vm.resourceUri + "/" + vm.primitiveValue)
+            .$get(
+              vm.resourceUri + "/base64-image/" + newRecord[vm.idProperty],
+              {
+                params: {
+                  width: vm.width,
+                  height: vm.height
+                }
+              }
+            )
             .then(function(result) {
-              vm.record = result;
-              vm.$emit("file-retrieved", vm.primitiveValue);
+              vm.imageSource = result;
+              vm.$emit("image-retrieved", newRecord[vm.idProperty]);
             })
             .catch(function(result) {
               vm.$store.commit("global-snackbar/show", {
@@ -200,6 +216,40 @@ export const Handler = {
               });
             });
         }
+      }
+    }
+  },
+
+  mounted() {
+    this.getFileData();
+  },
+
+  methods: {
+    /**
+     * Fetch file data from datasource.
+     * @return {void}
+     */
+    getFileData() {
+      let vm = this;
+      if (vm.isObject(vm.value)) {
+        vm.record = vm.value;
+      } else if (vm.isValidUrl(vm.value)) {
+        if (vm.image) {
+          vm.imageSource = vm.value;
+        }
+      } else if (vm.value != "") {
+        vm.$axios
+          .$get(vm.resourceUri + "/" + vm.value)
+          .then(function(result) {
+            vm.record = result;
+            vm.$emit("file-retrieved", result);
+          })
+          .catch(function(result) {
+            vm.$store.commit("global-snackbar/show", {
+              color: "error",
+              message: vm.messageErrorExtract(result)
+            });
+          });
       }
     },
 
@@ -229,14 +279,10 @@ export const Handler = {
           vm.$emit("delete-button-clicked", vm.primitiveValue);
 
           if (!vm.disableDeleteRequest) {
+            let deleteUri =
+              vm.parentResourceUri + vm.resourceUri + "/" + vm.primitiveValue;
             vm.$axios
-              .$delete(
-                vm.parentResourceUri +
-                  "/" +
-                  vm.resourceUri +
-                  "/" +
-                  vm.primitiveValue
-              )
+              .$delete(deleteUri)
               .then(function(result) {
                 vm.record = undefined;
                 vm.$emit("file-deleted", vm.primitiveValue);

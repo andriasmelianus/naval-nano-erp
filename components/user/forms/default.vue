@@ -64,26 +64,28 @@
       :error-messages="invalidInputMessage.postal_code"
     ></v-text-field>
 
-    <image-uploader-single
+    <image-uploader
       v-model="record.image_id"
       :parent-resource-uri="resourceUri"
-      :width="250"
+      :card-width="250"
+      :card-height="250"
+      return-id
       disable-delete-request
       @delete-button-clicked="handleImageDeleteButtonClicked"
-    ></image-uploader-single>
+    ></image-uploader>
 
     <v-btn type="submit" color="success">Simpan</v-btn>
   </v-form>
 </template>
 
 <script>
-import ImageUploaderSingle from "~/components/image/uploaders/single.vue";
 import { Handler } from "./handler";
+import ImageUploader from "~/components/_generic/file/uploaders/image.vue";
 export default {
   mixins: [Handler],
 
   components: {
-    ImageUploaderSingle,
+    ImageUploader,
   },
 };
 </script>

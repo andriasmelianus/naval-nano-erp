@@ -9,7 +9,7 @@ export const Handler = {
       default: "/user"
     },
 
-    requestParameterName: {
+    searchKeywordRequestParameterName: {
       type: String,
       default: "email"
     },

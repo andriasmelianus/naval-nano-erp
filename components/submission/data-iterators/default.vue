@@ -6,8 +6,8 @@
       :server-items-length.sync="recordsTotal"
       :options.sync="serverParams"
       :loading="isLoading"
-      :items-per-page="12"
-      :footer-props="{ 'items-per-page-options': [8, 16] }"
+      :items-per-page="itemsPerPage"
+      :footer-props="{ 'items-per-page-options': itemsPerPageOptions }"
     >
       <!-- Data Iterator Header -->
       <template v-slot:header>

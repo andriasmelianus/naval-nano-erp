@@ -41,6 +41,24 @@ export const GlobalDataIteratorHandler = {
     itemsMaxWidth: {
       type: [String, Number],
       default: 600
+    },
+
+    /**
+     * Determine how many items showed in a page.
+     */
+    itemsPerPage: {
+      type: [String, Number],
+      default: 8
+    },
+
+    /**
+     * Give user options how many items will be displayed in a page.
+     */
+    itemsPerPageOptions: {
+      type: Array,
+      default: function() {
+        return [8, 16, 32, 64];
+      }
     }
   },
 
