@@ -3,11 +3,11 @@
     <v-list>
       <v-list-item class="px-2 justify-center">
         <v-list-item-avatar :size="companyLogoWidthHeight" :tile="true">
-          <image-card-default
+          <image-card-simple
             :value="companyLogoImageId"
             :width="companyLogoWidthHeight"
             :height="companyLogoWidthHeight"
-          ></image-card-default>
+          ></image-card-simple>
         </v-list-item-avatar>
       </v-list-item>
 
@@ -82,10 +82,10 @@
 
 <script>
 import { items } from "./data/navigation-drawer-default";
-import ImageCardDefault from "~/components/_generic/file/cards/image-default.vue";
+import ImageCardSimple from "~/components/_generic/file/cards/image-simple.vue";
 export default {
   components: {
-    ImageCardDefault,
+    ImageCardSimple,
   },
 
   props: {

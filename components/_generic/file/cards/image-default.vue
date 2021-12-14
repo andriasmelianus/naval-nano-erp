@@ -16,5 +16,13 @@
 import { Handler } from "./handler";
 export default {
   mixins: [Handler],
+
+  props: {
+    // Override props for file by default.
+    image: {
+      type: Boolean,
+      default: true,
+    },
+  },
 };
 </script>
