@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import ImageCardSimple from "~/components/image/cards/simple.vue";
+import ImageCardSimple from "~/components/_generic/file/cards/image-simple.vue";
 import { UserData } from "~/components/_mixins/user-data";
 export default {
   mixins: [UserData],

@@ -82,7 +82,7 @@
 
 <script>
 import { items } from "./data/navigation-drawer-default";
-import ImageCardSimple from "~/components/image/cards/simple.vue";
+import ImageCardSimple from "~/components/_generic/file/cards/image-simple.vue";
 export default {
   components: {
     ImageCardSimple,

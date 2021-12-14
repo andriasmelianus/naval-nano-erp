@@ -12,6 +12,30 @@ export const Handler = {
     resourceUri: {
       type: String,
       default: "/asset"
+    },
+
+    // Equipment for filtering purpose.
+    equipment: {
+      type: Object,
+      default: function() {
+        return { id: 0 };
+      }
+    }
+  },
+
+  watch: {
+    equipment(newEquipment, previousEquipment) {
+      let vm = this,
+        equipment_id = 0;
+
+      if (newEquipment.id != undefined) {
+        equipment_id = newEquipment.id;
+      }
+
+      vm.selectedRecords = [];
+      vm.otherServerParams = Object.assign({}, vm.otherServerParams, {
+        equipment_id: equipment_id
+      });
     }
   },
 
