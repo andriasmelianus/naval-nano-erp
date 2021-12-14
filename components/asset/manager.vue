@@ -2,7 +2,9 @@
   <v-card>
     <v-row>
       <v-col cols="12" md="5">
-        <equipment-default-table></equipment-default-table>
+        <equipment-default-table
+          @record-selected="handleEquipmentSelected"
+        ></equipment-default-table>
         <p class="pa-3 text-caption">
           Data peralatan di sini dapat berupa jenis/satuan barang seperti CPU,
           monitor, printer, scanner dan sebagainya.<br />
@@ -12,7 +14,9 @@
         </p>
       </v-col>
       <v-col cols="12" md="7">
-        <asset-default-table></asset-default-table>
+        <asset-default-table
+          :equipment="selectedEquipment"
+        ></asset-default-table>
       </v-col>
     </v-row>
   </v-card>
@@ -25,6 +29,20 @@ export default {
   components: {
     EquipmentDefaultTable,
     AssetDefaultTable,
+  },
+
+  data: (vm) => ({
+    selectedEquipment: undefined,
+  }),
+
+  methods: {
+    handleEquipmentSelected(record) {
+      if (record.value) {
+        this.selectedEquipment = record.item;
+      } else {
+        this.selectedEquipment = {};
+      }
+    },
   },
 };
 </script>
