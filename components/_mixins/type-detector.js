@@ -9,14 +9,12 @@ export const TypeDetector = {
      * @param {Any} theValue
      * @returns {undefined|String}
      */
-    getType(theValue) {
+    detectDataType(theValue) {
       if (theValue == null || theValue == undefined) {
         return undefined;
       } else {
         if (theValue instanceof Array) {
           return "array";
-        } else if (typeof theValue == "object") {
-          return "object";
         } else {
           return typeof theValue;
         }
@@ -29,7 +27,7 @@ export const TypeDetector = {
      * @returns {Boolean}
      */
     isUndefined(theValue) {
-      return this.getType(theValue) == undefined;
+      return this.detectDataType(theValue) == undefined;
     },
 
     /**
@@ -38,7 +36,7 @@ export const TypeDetector = {
      * @returns {Boolean}
      */
     isString(theValue) {
-      return this.getType(theValue) == "string";
+      return this.detectDataType(theValue) == "string";
     },
 
     /**
@@ -47,7 +45,7 @@ export const TypeDetector = {
      * @returns {Boolean}
      */
     isNumber(theValue) {
-      return this.getType(theValue) == "number";
+      return this.detectDataType(theValue) == "number";
     },
 
     /**
@@ -56,7 +54,7 @@ export const TypeDetector = {
      * @returns {Boolean}
      */
     isArray(theValue) {
-      return this.getType(theValue) == "array";
+      return this.detectDataType(theValue) == "array";
     },
 
     /**
@@ -65,7 +63,7 @@ export const TypeDetector = {
      * @returns {Boolean}
      */
     isObject(theValue) {
-      return this.getType(theValue) == "object";
+      return this.detectDataType(theValue) == "object";
     },
 
     /**
