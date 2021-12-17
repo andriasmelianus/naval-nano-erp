@@ -231,13 +231,7 @@ export const Handler = {
      */
     getFileData() {
       let vm = this;
-      if (vm.isObject(vm.value)) {
-        vm.record = vm.value;
-      } else if (vm.isValidUrl(vm.value)) {
-        if (vm.image) {
-          vm.imageSource = vm.value;
-        }
-      } else if (vm.value != "") {
+      if (vm.isString(vm.value) || vm.isNumber(vm.value)) {
         vm.$axios
           .$get(vm.resourceUri + "/" + vm.value)
           .then(function(result) {
@@ -250,6 +244,12 @@ export const Handler = {
               message: vm.messageErrorExtract(result)
             });
           });
+      } else if (vm.isObject(vm.value)) {
+        vm.record = vm.value;
+      } else if (vm.isValidUrl(vm.value)) {
+        if (vm.image) {
+          vm.imageSource = vm.value;
+        }
       }
     },
 

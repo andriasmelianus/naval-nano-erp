@@ -7,6 +7,29 @@ export const Handler = {
     resourceUri: {
       type: String,
       default: "/room"
+    },
+
+    // Branch for filtering purpose.
+    branch: {
+      type: Object,
+      default: function() {
+        return { id: 0 };
+      }
+    }
+  },
+
+  watch: {
+    branch(newBranch, oldBranch) {
+      let vm = this,
+        branch_id = 0;
+
+      if (newBranch.id != undefined) {
+        branch_id = newBranch.id;
+      }
+
+      vm.otherServerParams = Object.assign({}, vm.otherServerParams, {
+        branch_id: branch_id
+      });
     }
   },
 
