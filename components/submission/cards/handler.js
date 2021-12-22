@@ -40,6 +40,49 @@ export const Handler = {
     }
   },
 
+  computed: {
+    progressColor() {
+      let vm = this,
+        value = "success";
+
+      switch (vm.record.last_stage) {
+        case "Ditolak":
+          value = "error";
+          break;
+        case "Dibatalkan":
+          value = "warning";
+          break;
+      }
+
+      return value;
+    },
+
+    progressValue() {
+      let vm = this,
+        value = 0;
+
+      switch (vm.record.last_stage) {
+        case "Baru":
+          value = 10;
+          break;
+        case "Revisi Dibutuhkan":
+          value = 35;
+          break;
+        case "Disetujui":
+          value = 75;
+          break;
+        case "Diproses":
+          value = 90;
+          break;
+        case "Selesai":
+          value = 100;
+          break;
+      }
+
+      return value;
+    }
+  },
+
   methods: {
     /**
      * Catch click event and transfer it to the parent component.
