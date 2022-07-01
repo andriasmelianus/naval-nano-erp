@@ -23,7 +23,7 @@
     "v-mask": "^2.2.4"
   },
   "devDependencies": {
-    "@mdi/font": "^6.1.95",
+    "@mdi/font": "^6.9.96",
     "@nuxtjs/moment": "^1.6.1",
     "@nuxtjs/vuetify": "^1.12.3",
     "@vue/test-utils": "^1.3.0",
