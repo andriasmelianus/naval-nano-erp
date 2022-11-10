@@ -45,7 +45,7 @@
       </v-toolbar>
     </template>
 
-    <template v-slot:header.data-table-select>
+    <template v-slot:[`header.data-table-select`]>
       <v-menu offset-y open-on-hover>
         <template v-slot:activator="{ on }">
           <v-btn small icon v-on="on">
